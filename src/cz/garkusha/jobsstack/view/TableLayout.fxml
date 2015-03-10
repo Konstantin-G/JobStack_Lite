@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobsstack.view.TableLayoutController">
+   <children>
+      <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="35.0" minHeight="35.0" prefHeight="35.0" prefWidth="800.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" maxHeight="35.0" minHeight="35.0" prefHeight="35.0" prefWidth="800.0" spacing="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Hyperlink onAction="#handleHyperlink" text="Job Description" />
+                        <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
+                        <Button mnemonicParsing="false" onAction="#handleNewPerson" text="New..." />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit..." />
+                        <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="365.0" prefHeight="365.0" prefWidth="798.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <TableView fx:id="positionTable" minHeight="365.0" prefHeight="365.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
+                      <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="result" />
+                        <TableColumn fx:id="companyColumn" maxWidth="300.0" minWidth="200.0" prefWidth="250.0" text="company" />
+                        <TableColumn fx:id="jobTitleColumn" maxWidth="500.0" minWidth="200.0" prefWidth="300.0" text="job title" />
+                        <TableColumn fx:id="jobTitlePDFColumn" prefWidth="75.0" text="job titlePDF" visible="false" />
+                        <TableColumn fx:id="locationColumn" maxWidth="300.0" minWidth="100.0" prefWidth="200.0" text="location" />
+                        <TableColumn fx:id="webColumn" maxWidth="300.0" minWidth="100.0" prefWidth="150.0" text="web" />
+                        <TableColumn fx:id="personColumn" maxWidth="300.0" minWidth="150.0" prefWidth="200.0" text="person" />
+                        <TableColumn fx:id="requestSentDateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" text="requests ent" />
+                        <TableColumn fx:id="answerDateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" text="answer" />
+                        <TableColumn fx:id="conversationColumn" maxWidth="100.0" minWidth="50.0" text="conversation" visible="false" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

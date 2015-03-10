@@ -1,0 +1,10 @@
+# Intellij
+.idea/
+*.iml
+src/META-INF
+
+# Maven
+out/
+
+data
+derby.log
