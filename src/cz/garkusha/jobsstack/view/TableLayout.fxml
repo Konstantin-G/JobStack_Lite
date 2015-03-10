@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobsstack.view.TableLayoutController">
    <children>
       <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -36,6 +40,8 @@
                         <TableColumn fx:id="locationColumn" maxWidth="300.0" minWidth="100.0" prefWidth="200.0" text="location" />
                         <TableColumn fx:id="webColumn" maxWidth="300.0" minWidth="100.0" prefWidth="150.0" text="web" />
                         <TableColumn fx:id="personColumn" maxWidth="300.0" minWidth="150.0" prefWidth="200.0" text="person" />
+                        <TableColumn fx:id="phoneColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="phone" />
+                        <TableColumn fx:id="emailColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="email" />
                         <TableColumn fx:id="requestSentDateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" text="requests ent" />
                         <TableColumn fx:id="answerDateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="150.0" text="answer" />
                         <TableColumn fx:id="conversationColumn" maxWidth="100.0" minWidth="50.0" text="conversation" visible="false" />

@@ -28,12 +28,14 @@ public class Position {
     private final StringProperty location;
     private final StringProperty web;
     private final StringProperty person;
+    private final StringProperty phone;
+    private final StringProperty email;
     private final ObjectProperty<LocalDate> requestSentDate;
     private final ObjectProperty<LocalDate> answerDate;
     private final StringProperty conversation;
 
     public Position() {
-        this(0, null, null, null, null, null, null, null, null, null, null);
+        this(0, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     /**
@@ -46,7 +48,7 @@ public class Position {
 
     public Position(int id, String result, String company,
                     String jobTitle, String jobTitlePDF, String location,
-                    String web, String person, String requestSentDate, String answerDate, String conversation) {
+                    String web, String person, String phone, String email, String requestSentDate, String answerDate, String conversation) {
 
         this.id                 = new SimpleIntegerProperty(id);
         this.result             = new SimpleStringProperty(result);
@@ -56,6 +58,8 @@ public class Position {
         this.location           = new SimpleStringProperty(location);
         this.web                = new SimpleStringProperty(web);
         this.person             = new SimpleStringProperty(person);
+        this.phone              = new SimpleStringProperty(phone);
+        this.email              = new SimpleStringProperty(email);
         this.requestSentDate    = requestSentDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(requestSentDate))
                                                             : new SimpleObjectProperty<>();
         this.answerDate         = requestSentDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(answerDate))
@@ -157,6 +161,30 @@ public class Position {
 
     public void setPerson(String person) {
         this.person.set(person);
+    }
+
+    public String getPhone() {
+        return phone.get();
+    }
+
+    public StringProperty phoneProperty() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone.set(phone);
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 
     public LocalDate getRequestSentDate() {

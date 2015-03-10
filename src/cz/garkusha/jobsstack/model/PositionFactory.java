@@ -20,7 +20,7 @@ public class PositionFactory {
         PDFConverter pdfConverter = new PDFConverter(URLToJob, htmlParser.getTitle());
         int id = getPositionsSize() + 1;
         return new Position(id , null, htmlParser.getCompany(), htmlParser.getJobTitle(), pdfConverter.getRelativeReferenceToJobPDF(),
-                                htmlParser.getLocation(), URLToJob, htmlParser.getPerson(), null, null, null);
+                                htmlParser.getLocation(), URLToJob, htmlParser.getPerson(), htmlParser.getPhone(), htmlParser.getEmail(), null, null, null);
     }
 
 }

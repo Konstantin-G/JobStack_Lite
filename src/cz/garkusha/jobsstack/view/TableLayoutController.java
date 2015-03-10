@@ -36,6 +36,10 @@ public class TableLayoutController {
     @FXML
     private TableColumn<Position, String> personColumn;
     @FXML
+    private TableColumn<Position, String> phoneColumn;
+    @FXML
+    private TableColumn<Position, String> emailColumn;
+    @FXML
     private TableColumn<Position, LocalDate> requestSentDateColumn;
     @FXML
     private TableColumn<Position, LocalDate> answerDateColumn;
@@ -69,6 +73,8 @@ public class TableLayoutController {
         locationColumn.setCellValueFactory(cellData -> cellData.getValue().locationProperty());
         webColumn.setCellValueFactory(cellData -> cellData.getValue().webProperty());
         personColumn.setCellValueFactory(cellData -> cellData.getValue().personProperty());
+        phoneColumn.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
+        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         requestSentDateColumn.setCellValueFactory(cellData -> cellData.getValue().requestSentDateProperty());
         answerDateColumn.setCellValueFactory(cellData -> cellData.getValue().answerDateProperty());
         conversationColumn.setCellValueFactory(cellData -> cellData.getValue().conversationProperty());
@@ -97,6 +103,7 @@ public class TableLayoutController {
             if (pdfFile.exists()) {
 
                 if (Desktop.isDesktopSupported()) {
+                    /*TODO don't work correctly in Linux(make application freezes), need to fix*/
                     Desktop.getDesktop().open(pdfFile);
                 } else {
                     System.out.println("Awt Desktop is not supported!");

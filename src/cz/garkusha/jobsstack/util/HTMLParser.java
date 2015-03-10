@@ -19,6 +19,8 @@ public class HTMLParser {
     private String location;
     private String person;
     private String title;
+    private String phone;
+    private String email;
 
     public HTMLParser(String url){
         readInformationFromWeb(url);
@@ -44,7 +46,19 @@ public class HTMLParser {
         return person;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     private void readInformationFromWeb(String url) {
+        readInformationFromM_JODS_CZ(url);
+    }
+
+    private void readInformationFromM_JODS_CZ(String url) {
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
@@ -55,26 +69,26 @@ public class HTMLParser {
         try {
             //noinspection ConstantConditions
             this.company = doc.body().select("p.c2-za").first().text();
-        } catch (NullPointerException ignore) {
-            System.out.println("input company name manually");
-        }
+        } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
             this.jobTitle = doc.body().select("h1.job-title").first().text();
-        } catch (NullPointerException ignore) {
-            System.out.println("input job title manually");
-        }
+        } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
             this.location = doc.body().select("p.c2-mi").first().text();
-        } catch (NullPointerException ignore) {
-            System.out.println("input location manually");
-        }
+        } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
             this.person = doc.body().select("p.c2-ko").first().text();
-        } catch (Exception ignore) {
-            System.out.println("input person");
-        }
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.phone = doc.body().select("p.c2-te").first().text();
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.email = doc.body().select("p.c2-em").first().text();
+        } catch (Exception ignore) { }
     }
 }

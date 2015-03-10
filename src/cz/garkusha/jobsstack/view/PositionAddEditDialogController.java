@@ -35,6 +35,10 @@ public class PositionAddEditDialogController {
     @FXML
     private TextField personField;
     @FXML
+    private TextField phoneField;
+    @FXML
+    private TextField emailField;
+    @FXML
     private DatePicker requestSentDateField;
     @FXML
     private DatePicker answerDateField;
@@ -90,6 +94,8 @@ public class PositionAddEditDialogController {
         locationField.setText(position.getLocation());
         webField.setText(position.getWeb());
         personField.setText(position.getPerson());
+        phoneField.setText(position.getPhone());
+        emailField.setText(position.getEmail());
         requestSentDateField.setValue(position.getRequestSentDate());
         requestSentDateField.setShowWeekNumbers(false);
         requestSentDateField.setPromptText("dd.mm.yyyy");
@@ -117,6 +123,10 @@ public class PositionAddEditDialogController {
         webField.setText(filledPosition.getWeb());
         personField.setText(filledPosition.getPerson());
         personField.setPromptText("Can't find contact person, You can to fill this field manually");
+        phoneField.setText(filledPosition.getPhone());
+        phoneField.setPromptText("Can't find persons phone, You can to fill this field manually");
+        emailField.setText(filledPosition.getEmail());
+        emailField.setPromptText("Can't find persons email, You can to fill this field manually");
         requestSentDateField.setValue(filledPosition.getRequestSentDate());
         requestSentDateField.setPromptText("dd.mm.yyyy");
         answerDateField.setValue(filledPosition.getAnswerDate());
@@ -149,6 +159,8 @@ public class PositionAddEditDialogController {
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
+            position.setPerson(phoneField.getText());
+            position.setPerson(emailField.getText());
             position.setRequestSentDate(requestSentDateField.getValue());
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
@@ -191,7 +203,7 @@ public class PositionAddEditDialogController {
         if (jobTitleField.getText() == null || jobTitleField.getText().length() == 0) {
             errorMessage += "No valid jo title!\n";
         }
-        /** TODO  file cheeking*/
+        /** TODO  file checking*/
         if (pathToThePDFField.getText() == null || pathToThePDFField.getText().length() == 0) {
             errorMessage += "No valid postal code!\n";
         }
@@ -201,6 +213,7 @@ public class PositionAddEditDialogController {
         if (webField.getText() == null || webField.getText().length() == 0) {
             errorMessage += "No valid url!\n";
         }
+        /**TODO phone checking*/
         if (errorMessage.length() == 0) {
             return true;
         } else {
