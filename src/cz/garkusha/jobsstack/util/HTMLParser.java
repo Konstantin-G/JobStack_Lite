@@ -8,6 +8,9 @@ import java.io.IOException;
 /**
  * Model class for parsing a html file from url.
  *
+ * +--------------------------------------------------------------------+
+ * |  For while working ONLY with mobile version of JOBS.CZ (m.jobs.cz) |
+ * +--------------------------------------------------------------------+
  * @author Konstantin Garkusha
  */
 public class HTMLParser {
