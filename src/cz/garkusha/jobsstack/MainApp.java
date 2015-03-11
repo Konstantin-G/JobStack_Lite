@@ -30,7 +30,7 @@ public class MainApp extends Application {
     private DBCommunication dbCommunication;
 
     /**
-     * The data as an observable list of Persons.
+     * The data as an observable list of Positions.
      */
     private ObservableList<Position> positions = FXCollections.observableArrayList();
 
@@ -43,8 +43,8 @@ public class MainApp extends Application {
     }
 
      /**
-     * Returns the data as an observable list of Persons.
-     * @return
+     * Returns the data as an observable list of Positions.
+     * @return list of Positions
      */
     public ObservableList<Position> getPositions() {
         return positions;
