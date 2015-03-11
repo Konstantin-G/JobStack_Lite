@@ -159,8 +159,8 @@ public class PositionAddEditDialogController {
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
-            position.setPerson(phoneField.getText());
-            position.setPerson(emailField.getText());
+            position.setPhone(phoneField.getText());
+            position.setEmail(emailField.getText());
             position.setRequestSentDate(requestSentDateField.getValue());
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
@@ -184,8 +184,11 @@ public class PositionAddEditDialogController {
      */
     @FXML
     private void handleFill() {
+        int newId = mainApp.getPositionsMaxId();
+        int id = Integer.parseInt(idField.getText());
+        id = id != 0 ? id : newId;
         String url = webField.getText();
-        Position filledPosition = PositionFactory.getNewPosition(url);
+        Position filledPosition = PositionFactory.getNewPosition(id + 1, url);
         setFilledPosition(filledPosition);
     }
 

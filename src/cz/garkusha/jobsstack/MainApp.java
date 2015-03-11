@@ -24,7 +24,6 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 public class MainApp extends Application {
-    public static int listSize;/*TODO now count only by list size*/
     private boolean isDataChanged;
     private Stage primaryStage;
     private BorderPane rootLayout;
@@ -41,7 +40,6 @@ public class MainApp extends Application {
     public MainApp() {
         this.dbCommunication = new DBCommunication(positions);
         this.isDataChanged = false;
-        listSize  = positions.size();
     }
 
      /**
@@ -52,16 +50,20 @@ public class MainApp extends Application {
         return positions;
     }
 
-    public static int getListSize() {
-        return listSize;
-    }
-
     public void setDataChanged(boolean isDataChanged) {
         this.isDataChanged = isDataChanged;
     }
 
     public void saveToDB(){
         dbCommunication.writePositionsToDB();
+    }
+
+    public int getPositionsMaxId(){
+        int max = 0;
+        for (Position p : positions){
+            max = p.getId() > max ? p.getId() : max;
+        }
+        return max;
     }
 
     @Override
@@ -83,11 +85,15 @@ public class MainApp extends Application {
                 if (response == Dialog.ACTION_YES) {
                     saveToDB();
                     primaryStage.close();
+                    System.exit(0);
                 } else if (response == Dialog.ACTION_NO) {
                     primaryStage.close();
+                    System.exit(0);
                 }
-            } else
+            } else {
                 primaryStage.close();
+                System.exit(0);
+            }
         });
     }
 

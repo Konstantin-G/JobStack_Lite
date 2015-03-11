@@ -55,10 +55,10 @@ public class HTMLParser {
     }
 
     private void readInformationFromWeb(String url) {
-        readInformationFromM_JODS_CZ(url);
+        readInformationFrom_M_JODS_CZ(url);
     }
 
-    private void readInformationFromM_JODS_CZ(String url) {
+    private void readInformationFrom_M_JODS_CZ(String url) {
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
@@ -68,27 +68,29 @@ public class HTMLParser {
         }
         try {
             //noinspection ConstantConditions
-            this.company = doc.body().select("p.c2-za").first().text();
+            this.company = doc.body().select("p.c2-za").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ").trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.jobTitle = doc.body().select("h1.job-title").first().text();
+            this.jobTitle = doc.body().select("h1.job-title").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ").trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.location = doc.body().select("p.c2-mi").first().text();
+            this.location = doc.body().select("p.c2-mi").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.person = doc.body().select("p.c2-ko").first().text();
+            this.person = doc.body().select("p.c2-ko").first().text().trim();
         } catch (Exception ignore) { }
         try {
             //noinspection ConstantConditions
-            this.phone = doc.body().select("p.c2-te").first().text();
+            this.phone = doc.body().select("p.c2-te").first().text().trim();
         } catch (Exception ignore) { }
         try {
             //noinspection ConstantConditions
-            this.email = doc.body().select("p.c2-em").first().text();
+            this.email = doc.body().select("p.c2-em").first().text().trim();
         } catch (Exception ignore) { }
     }
 }

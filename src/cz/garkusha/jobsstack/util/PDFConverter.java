@@ -20,12 +20,11 @@ public class PDFConverter {
     private static final String ABSOLUTE_JOB_DESCRIPTION_PATH = System.getProperty("user.dir") + File.separator + RELATIVE_JOB_DESCRIPTION_PATH;
     private String relativeReferenceToJobPDF;
     private String absoluteReferenceToJobPDF;
-    private String title;
 
-    public PDFConverter(String url, String title) {
-        this.title = title;
-        this.relativeReferenceToJobPDF = RELATIVE_JOB_DESCRIPTION_PATH + getPDFFileName();
-        this.absoluteReferenceToJobPDF = ABSOLUTE_JOB_DESCRIPTION_PATH + getPDFFileName();
+
+    public PDFConverter(String url, String company, String jobTitle) {
+        this.relativeReferenceToJobPDF = RELATIVE_JOB_DESCRIPTION_PATH + getPDFFileName(company, jobTitle);
+        this.absoluteReferenceToJobPDF = ABSOLUTE_JOB_DESCRIPTION_PATH + getPDFFileName(company, jobTitle);
         savePDF(url);
     }
 
@@ -33,13 +32,10 @@ public class PDFConverter {
         return relativeReferenceToJobPDF;
     }
 
-    private String getPDFFileName() {
+    private String getPDFFileName( String company, String jobTitle) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        return simpleDateFormat.format(new Date()) + "_" + this.title.replaceAll("[\\/:\"]", "-")
-                                                            .replaceAll("[:*?<>|]", "").replaceAll("[ ]{2,}"," ") + ".pdf";
+        return simpleDateFormat.format(new Date()) + "_" + company + "_" + jobTitle + ".pdf";
     }
-
-
 
     void savePDF(String url) {
         // contains configuration properties

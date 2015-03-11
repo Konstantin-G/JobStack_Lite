@@ -132,7 +132,7 @@ public class TableLayoutController {
 
     /**
      * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new person.
+     * details for a new position.
      */
     @FXML
     private void handleNewPerson() {
@@ -140,13 +140,12 @@ public class TableLayoutController {
         boolean okClicked = mainApp.showPositionAddEditDialog(tempPosition);
         if (okClicked) {
             mainApp.getPositions().add(tempPosition);
-            MainApp.listSize++;
         }
     }
 
     /**
      * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
+     * details for the selected position.
      */
     @FXML
     private void handleEditPerson() {
@@ -157,8 +156,8 @@ public class TableLayoutController {
             // Nothing selected.
             Dialogs.create()
                     .title("No Selection")
-                    .masthead("No Person Selected")
-                    .message("Please select a person in the table.")
+                    .masthead("No Position Selected")
+                    .message("Please select a position in the table.")
                     .showWarning();
         }
     }
