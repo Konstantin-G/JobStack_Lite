@@ -64,7 +64,7 @@ public class PositionAddEditDialogController {
     /**
      * Is called by the TableControllerLayout to give a reference to mainApp.
      *
-     * @param mainApp
+     * @param mainApp instance of main class
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -73,7 +73,7 @@ public class PositionAddEditDialogController {
     /**
      * Sets the stage of this dialog.
      *
-     * @param dialogStage
+     * @param dialogStage to sets the stage
      */
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -82,7 +82,7 @@ public class PositionAddEditDialogController {
     /**
      * Sets the position to be edited in the dialog.
      *
-     * @param position
+     * @param position for editing
      */
     public void setPosition(Position position) {
         this.position = position;
@@ -108,7 +108,7 @@ public class PositionAddEditDialogController {
     /**
      * Sets the new position in the fill dialog.
      *
-     * @param filledPosition
+     * @param filledPosition new position with filled from web page
      */
     void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
@@ -139,17 +139,17 @@ public class PositionAddEditDialogController {
     /**
      * Returns true if the user clicked Save, false otherwise.
      *
-     * @return
+     * @return true or false
      */
     public boolean isSaveClicked() {
         return saveClicked;
     }
 
     /**
-     * Called when the user clicks ok.
+     * Called when the user clicks Save.
      */
     @FXML
-    private void handleOk() {
+    private void handleSave() {
         if (isInputValid()) {
             position.setId(Integer.parseInt(idField.getText()));
             position.setResult(resultField.getText());
@@ -186,10 +186,21 @@ public class PositionAddEditDialogController {
     private void handleFill() {
         int newId = mainApp.getPositionsMaxId();
         int id = Integer.parseInt(idField.getText());
-        id = id != 0 ? id : newId;
+        id = id != 0 ? id : newId + 1;
         String url = webField.getText();
-        Position filledPosition = PositionFactory.getNewPosition(id + 1, url);
+        Position filledPosition = PositionFactory.getNewPosition(id, url);
         setFilledPosition(filledPosition);
+    }
+
+    /**
+     * Called when connection to internet in parsing time was lost.
+     */
+    public static void connectionError() {
+        Dialogs.create()
+                .title("Error")
+                .masthead("Connection to internet was lost")
+                .message("Try again, or fill fields manually")
+                .showError();
     }
 
     /**

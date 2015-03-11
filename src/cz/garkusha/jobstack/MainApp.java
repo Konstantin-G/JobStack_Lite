@@ -34,9 +34,6 @@ public class MainApp extends Application {
      */
     private ObservableList<Position> positions = FXCollections.observableArrayList();
 
-    /**
-     * Constructor
-     */
     public MainApp() {
         this.dbCommunication = new DBCommunication(positions);
         this.isDataChanged = false;
@@ -44,7 +41,7 @@ public class MainApp extends Application {
 
      /**
      * Returns the data as an observable list of Positions.
-     * @return list of Positions
+     * @return observable list of Positions
      */
     public ObservableList<Position> getPositions() {
         return positions;
@@ -73,6 +70,7 @@ public class MainApp extends Application {
 
         initRootLayout();
         showTableLayout();
+        // Dialog when you press close button
         this.primaryStage.setOnCloseRequest(event -> {
             event.consume();
             if (isDataChanged){
@@ -121,12 +119,12 @@ public class MainApp extends Application {
      */
     void showTableLayout() {
         try {
-            // Load person overview.
+            // Load table layout.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/TableLayout.fxml"));
             AnchorPane tableLayout = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
+            // Set table layout into the center of root layout.
             rootLayout.setCenter(tableLayout);
 
             // Give the controller access to the main app.
@@ -138,8 +136,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns the main stage.
-     * @return
+     * @return the main stage.
      */
     public Stage getPrimaryStage() {
         return primaryStage;

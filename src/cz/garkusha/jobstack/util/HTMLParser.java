@@ -1,5 +1,6 @@
 package cz.garkusha.jobstack.util;
 
+import cz.garkusha.jobstack.view.PositionAddEditDialogController;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -65,6 +66,7 @@ public class HTMLParser {
             this.title = doc.title();
         } catch (IOException e) {
             e.printStackTrace();
+            PositionAddEditDialogController.connectionError();
         }
         try {
             //noinspection ConstantConditions

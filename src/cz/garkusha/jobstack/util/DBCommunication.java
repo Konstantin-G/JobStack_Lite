@@ -61,6 +61,7 @@ public class DBCommunication {
     public void writePositionsToDB(){
         try {
             db.executeUpdate("DELETE FROM stepOne");
+            System.out.println("DB was cleared");
             for (Position p : positions){
                 String id               = String.valueOf(p.getId());
                 String result           = p.getResult() != null ? p.getResult() : "";
@@ -70,8 +71,8 @@ public class DBCommunication {
                 String location         = p.getLocation();
                 String web              = p.getWeb();
                 String person           = p.getPerson() != null ? p.getPerson() : "";
-                String phone           = p.getPhone() != null ? p.getPhone() : "";
-                String email           = p.getEmail() != null ? p.getEmail() : "";
+                String phone            = p.getPhone() != null ? p.getPhone() : "";
+                String email            = p.getEmail() != null ? p.getEmail() : "";
                 String requestSentDate  = DateUtil.toString(p.getRequestSentDate()) != null ? DateUtil.toString(p.getRequestSentDate()) : "";
                 String answerDate       = DateUtil.toString(p.getAnswerDate()) != null ? DateUtil.toString(p.getAnswerDate()) : "";
                 String conversation     = p.getConversation() != null ? p.getConversation() : "";
@@ -80,6 +81,7 @@ public class DBCommunication {
                                                     id, result, company, jobTitle, jobTitlePDF, location, web, person, phone, email, requestSentDate, answerDate, conversation);
                 db.executeUpdate(newRowQuery);
             }
+            System.out.println("Information was saved to DB");
         } catch (SQLException e) {
             e.printStackTrace();
         }

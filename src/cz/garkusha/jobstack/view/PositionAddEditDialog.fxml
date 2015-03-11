@@ -149,7 +149,7 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" layoutX="226.0" layoutY="340.0" prefHeight="45.0" prefWidth="690.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="80.0" text="Save">
+            <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="80.0" text="Save">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
