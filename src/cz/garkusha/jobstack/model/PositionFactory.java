@@ -1,8 +1,7 @@
-package cz.garkusha.jobsstack.model;
+package cz.garkusha.jobstack.model;
 
-import cz.garkusha.jobsstack.MainApp;
-import cz.garkusha.jobsstack.util.HTMLParser;
-import cz.garkusha.jobsstack.util.PDFConverter;
+import cz.garkusha.jobstack.util.HTMLParser;
+import cz.garkusha.jobstack.util.PDFConverter;
 
 /**
  * Model class for new Position.

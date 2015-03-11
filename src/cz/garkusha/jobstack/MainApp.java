@@ -1,4 +1,4 @@
-package cz.garkusha.jobsstack;
+package cz.garkusha.jobstack;
 /**
  *  Main application javaFX class.
  *
@@ -6,10 +6,10 @@ package cz.garkusha.jobsstack;
  */
 import java.io.IOException;
 
-import cz.garkusha.jobsstack.model.Position;
-import cz.garkusha.jobsstack.util.DBCommunication;
-import cz.garkusha.jobsstack.view.PositionAddEditDialogController;
-import cz.garkusha.jobsstack.view.TableLayoutController;
+import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.util.DBCommunication;
+import cz.garkusha.jobstack.view.PositionAddEditDialogController;
+import cz.garkusha.jobstack.view.TableLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

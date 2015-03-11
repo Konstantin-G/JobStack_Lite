@@ -1,4 +1,4 @@
-package cz.garkusha.jobsstack.util;
+package cz.garkusha.jobstack.util;
 
 import org.allcolor.yahp.converter.CYaHPConverter;
 import org.allcolor.yahp.converter.IHtmlToPdfTransformer;

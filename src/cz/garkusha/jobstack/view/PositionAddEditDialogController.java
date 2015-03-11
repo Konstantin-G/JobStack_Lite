@@ -1,4 +1,4 @@
-package cz.garkusha.jobsstack.view;
+package cz.garkusha.jobstack.view;
 
 /**
  * Controller class to create new or edit details of a position.
@@ -6,9 +6,9 @@ package cz.garkusha.jobsstack.view;
  * @author Konstantin Garkusha
  */
 
-import cz.garkusha.jobsstack.MainApp;
-import cz.garkusha.jobsstack.model.Position;
-import cz.garkusha.jobsstack.model.PositionFactory;
+import cz.garkusha.jobstack.MainApp;
+import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.model.PositionFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;

@@ -1,11 +1,11 @@
-package cz.garkusha.jobsstack.model;
+package cz.garkusha.jobstack.model;
 
 /**
  * Created by konstantin on 3/8/15.
  */
 import java.time.LocalDate;
 
-import cz.garkusha.jobsstack.util.DateUtil;
+import cz.garkusha.jobstack.util.DateUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;

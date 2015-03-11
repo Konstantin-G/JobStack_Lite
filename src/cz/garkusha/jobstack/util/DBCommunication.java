@@ -1,6 +1,6 @@
-package cz.garkusha.jobsstack.util;
+package cz.garkusha.jobstack.util;
 
-import cz.garkusha.jobsstack.model.Position;
+import cz.garkusha.jobstack.model.Position;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package cz.garkusha.jobsstack.util;
+package cz.garkusha.jobstack.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

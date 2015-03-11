@@ -1,12 +1,12 @@
-package cz.garkusha.jobsstack.view;
+package cz.garkusha.jobstack.view;
 
 /**
  *  * Controller class show details of a positions.
  *
  * @author Konstantin Garkusha
  */
-import cz.garkusha.jobsstack.MainApp;
-import cz.garkusha.jobsstack.model.Position;
+import cz.garkusha.jobstack.MainApp;
+import cz.garkusha.jobstack.model.Position;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
