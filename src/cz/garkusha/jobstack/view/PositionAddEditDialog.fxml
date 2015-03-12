@@ -88,10 +88,6 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <TextField fx:id="resultField" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></TextField>
             <TextField fx:id="companyField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -145,6 +141,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
+            <ChoiceBox fx:id="resultChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="CENTER_RIGHT" layoutX="226.0" layoutY="340.0" prefHeight="45.0" prefWidth="690.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">

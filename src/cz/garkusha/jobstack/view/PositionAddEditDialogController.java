@@ -9,18 +9,16 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class PositionAddEditDialogController {
     @FXML
     private TextField idField;
     @FXML
-    private TextField resultField;
+    private ChoiceBox resultChoiceBox;
     @FXML
     private TextField companyField;
     @FXML
@@ -57,7 +55,7 @@ public class PositionAddEditDialogController {
      */
     @FXML
     private void initialize() {
-
+        resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "CANCELED", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
     }
 
     /**
@@ -86,7 +84,7 @@ public class PositionAddEditDialogController {
     public void setPosition(Position position) {
         this.position = position;
         idField.setText(String.valueOf(position.getId()));
-        resultField.setText(position.getResult());
+        resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
         jobTitleField.setText(position.getJobTitle());
         pathToThePDFField.setText(position.getJobTitlePDF());
@@ -111,26 +109,38 @@ public class PositionAddEditDialogController {
      */
     void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
-        resultField.setText(filledPosition.getResult());
-        companyField.setText(filledPosition.getCompany());
+        if (null != filledPosition.getResult())
+            resultChoiceBox.setValue(filledPosition.getResult());
+        if (null != filledPosition.getCompany())
+            companyField.setText(filledPosition.getCompany());
         companyField.setPromptText("Can't find company name, need to fill this field manually");
-        jobTitleField.setText(filledPosition.getJobTitle());
+        if (null != filledPosition.getJobTitle())
+            jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
-        pathToThePDFField.setText(filledPosition.getJobTitlePDF());
-        locationField.setText(filledPosition.getLocation());
+        if (null != filledPosition.getJobTitlePDF())
+            pathToThePDFField.setText(filledPosition.getJobTitlePDF());
+        if (null != filledPosition.getLocation())
+            locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
-        webField.setText(filledPosition.getWeb());
-        personField.setText(filledPosition.getPerson());
+        if (null != filledPosition.getWeb())
+            webField.setText(filledPosition.getWeb());
+        if (null != filledPosition.getPerson())
+            personField.setText(filledPosition.getPerson());
         personField.setPromptText("Can't find contact person, You can to fill this field manually");
-        phoneField.setText(filledPosition.getPhone());
+        if (null != filledPosition.getPhone())
+            phoneField.setText(filledPosition.getPhone());
         phoneField.setPromptText("Can't find persons phone, You can to fill this field manually");
-        emailField.setText(filledPosition.getEmail());
+        if (null != filledPosition.getEmail())
+            emailField.setText(filledPosition.getEmail());
         emailField.setPromptText("Can't find persons email, You can to fill this field manually");
-        requestSentDateField.setValue(filledPosition.getRequestSentDate());
+        if (null != filledPosition.getRequestSentDate())
+            requestSentDateField.setValue(filledPosition.getRequestSentDate());
         requestSentDateField.setPromptText("dd.mm.yyyy");
-        answerDateField.setValue(filledPosition.getAnswerDate());
+        if (null != filledPosition.getAnswerDate())
+            answerDateField.setValue(filledPosition.getAnswerDate());
         answerDateField.setPromptText("dd.mm.yyyy");
-        conversationArea.setText(filledPosition.getConversation());
+        if (null != filledPosition.getConversation())
+            conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");
     }
 
@@ -151,7 +161,7 @@ public class PositionAddEditDialogController {
     private void handleSave() {
         if (isInputValid()) {
             position.setId(Integer.parseInt(idField.getText()));
-            position.setResult(resultField.getText());
+            position.setResult(String.valueOf(resultChoiceBox.getValue()));
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
             position.setJobTitlePDF(pathToThePDFField.getText());
