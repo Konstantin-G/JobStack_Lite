@@ -16,28 +16,8 @@ import java.util.*;
  * @author Konstantin Garkusha
  */
 public class PDFConverter {
-    private static final String RELATIVE_JOB_DESCRIPTION_PATH = "data" + File.separator + DBCommunication.getDBName() + File.separator + "jobsDescription" + File.separator ;
-    private static final String ABSOLUTE_JOB_DESCRIPTION_PATH = System.getProperty("user.dir") + File.separator + RELATIVE_JOB_DESCRIPTION_PATH;
-    private String relativeReferenceToJobPDF;
-    private String absoluteReferenceToJobPDF;
 
-
-    public PDFConverter(String url, String company, String jobTitle) {
-        this.relativeReferenceToJobPDF = RELATIVE_JOB_DESCRIPTION_PATH + getPDFFileName(company, jobTitle);
-        this.absoluteReferenceToJobPDF = ABSOLUTE_JOB_DESCRIPTION_PATH + getPDFFileName(company, jobTitle);
-        savePDF(url);
-    }
-
-    public String getRelativeReferenceToJobPDF() {
-        return relativeReferenceToJobPDF;
-    }
-
-    private String getPDFFileName( String company, String jobTitle) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        return simpleDateFormat.format(new Date()) + "_" + company + "_" + jobTitle + ".pdf";
-    }
-
-    void savePDF(String url) {
+    public PDFConverter(String url, String absoluteReferenceToJobPDF) {
         // contains configuration properties
         Map<String, String> properties = new HashMap<>();
         // list containing header/footer
@@ -49,16 +29,18 @@ public class PDFConverter {
         headerFooterList.add(new IHtmlToPdfTransformer.CHeaderFooter("2015 Konstantin Garkusha", IHtmlToPdfTransformer.CHeaderFooter.FOOTER));
 
         properties.put(IHtmlToPdfTransformer.PDF_RENDERER_CLASS, IHtmlToPdfTransformer.FLYINGSAUCER_PDF_RENDERER);
+
+        //properties to change font
 //        properties.put(IHtmlToPdfTransformer.FOP_TTF_FONT_PATH, null);
         // new converter
         CYaHPConverter converter = new CYaHPConverter();
-        File makeDirectory = new File(ABSOLUTE_JOB_DESCRIPTION_PATH);
+        File makeDirectory = new File(Path.getAbsoluteProgramPath());
         if (!makeDirectory.exists()) {
             //noinspection ResultOfMethodCallIgnored
             makeDirectory.mkdir();
         }
         // save pdf in outfile
-        File filePDF = new File(this.absoluteReferenceToJobPDF);
+        File filePDF = new File(absoluteReferenceToJobPDF);
 
         try (FileOutputStream out = new FileOutputStream(filePDF)){
             converter.convertToPdf(new URL(url), IHtmlToPdfTransformer.A4P, headerFooterList, out, properties);

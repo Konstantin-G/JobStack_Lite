@@ -1,6 +1,5 @@
 package cz.garkusha.jobstack.util;
 
-import java.io.File;
 import java.sql.*;
 
 /**
@@ -12,16 +11,13 @@ import java.sql.*;
 class DerbyDBManager {
     private static Connection con = null ;
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver" ;
-    private static final String URL = "jdbc:derby:" + System.getProperty("user.dir") + File.separator + "data" + File.separator; // jdbc:derby:/home/user/dreby/mydb
-    private String dbName;
 
-    public DerbyDBManager(String dbName) {
-        this.dbName=dbName;
+    public DerbyDBManager() {
         if(!dbExists()) {
             try {
                 Class.forName(DRIVER) ;
                 // Connect to DB create new DB
-                con = DriverManager.getConnection(URL + dbName + ";create=true");
+                con = DriverManager.getConnection(Path.getPathToDbFile() + ";create=true");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
@@ -33,7 +29,7 @@ class DerbyDBManager {
         Boolean exists = false ;
         try {
             Class.forName(DRIVER) ;
-            con = DriverManager.getConnection(URL + dbName);
+            con = DriverManager.getConnection(Path.getPathToDbFile());
             exists = true ;
         } catch(Exception ignore) {
             System.out.println("Can't connect to database");

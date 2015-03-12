@@ -12,22 +12,17 @@ import java.sql.SQLException;
  * @author Konstantin Garkusha
  */
 public class DBCommunication {
-    private static final String DBName = "seekingJob2015";
-    public static String getDBName() {
-        return DBName;
-    }
-
     private DerbyDBManager db;
     private ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
-        this.db = new DerbyDBManager(DBName);
+        this.db = new DerbyDBManager();
         this.positions = positions;
         try {
             try {
                 fillPositionsFromDB();
             } catch (SQLException ignore) {
-                // exception when we haven't data base, or can't find her
+                // exception when we haven't the database, or can't find her
                db.executeUpdate("CREATE TABLE stepOne (" +
                   /*( 1)*/     " id INTEGER NOT NULL PRIMARY KEY," +
                   /*( 2)*/     " result VARCHAR(20) DEFAULT NULL," +
@@ -50,7 +45,6 @@ public class DBCommunication {
     }
 
     private void fillPositionsFromDB() throws SQLException {
-        db = new DerbyDBManager(DBName);
         ResultSet rs = db.executeQuery("SELECT * FROM stepOne");
         while (rs.next()) {
             positions.add(new Position(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),  rs.getString(5),

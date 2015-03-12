@@ -219,18 +219,15 @@ public class TableLayoutController {
             if (pdfFile.exists()) {
 
                 if (Desktop.isDesktopSupported()) {
-                    /*TODO don't work correctly in Linux(make application freezes), need to fix*/
+                    /*TODO don't work correctly in Linux(make application freezes), have to fix*/
                     Desktop.getDesktop().open(pdfFile);
                 } else {
                     System.out.println("Awt Desktop is not supported!");
                 }
 
             } else {
-                System.out.println("File is not exists!");
+                System.out.println("File \"" + absoluteReferenceToJobPDF + "\" is not exists!");
             }
-
-            System.out.println("Done");
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -9,6 +9,7 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
+import cz.garkusha.jobstack.util.PDFConverter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -161,10 +162,18 @@ public class PositionAddEditDialogController {
     private void handleSave() {
         if (isInputValid()) {
             position.setId(Integer.parseInt(idField.getText()));
-            position.setResult(String.valueOf(resultChoiceBox.getValue()));
+            if (null != resultChoiceBox.getValue()) {
+                position.setResult(String.valueOf(resultChoiceBox.getValue()));
+            } else {
+                position.setResult("");
+            }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
+
             position.setJobTitlePDF(pathToThePDFField.getText());
+            // save save web page to pdf from webField to pathToThePDFField
+            new PDFConverter(webField.getText(), pathToThePDFField.getText());
+
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
@@ -174,6 +183,7 @@ public class PositionAddEditDialogController {
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
 
+            // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
             saveClicked = true;
             dialogStage.close();
