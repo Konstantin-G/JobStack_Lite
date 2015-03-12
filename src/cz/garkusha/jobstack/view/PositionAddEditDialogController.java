@@ -10,12 +10,11 @@ import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import org.controlsfx.dialog.Dialogs;
 
 public class PositionAddEditDialogController {
     @FXML
@@ -196,11 +195,12 @@ public class PositionAddEditDialogController {
      * Called when connection to internet in parsing time was lost.
      */
     public static void connectionError() {
-        Dialogs.create()
-                .title("Error")
-                .masthead("Connection to internet was lost")
-                .message("Try again, or fill fields manually")
-                .showError();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Connection to internet was lost.\nTry again later, or fill fields manually");
+
+        alert.showAndWait();
     }
 
     /**
@@ -232,11 +232,12 @@ public class PositionAddEditDialogController {
             return true;
         } else {
             // Show the error message.
-            Dialogs.create()
-                    .title("Invalid Fields")
-                    .masthead("Please correct invalid fields")
-                    .message(errorMessage)
-                    .showError();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
             return false;
         }
     }

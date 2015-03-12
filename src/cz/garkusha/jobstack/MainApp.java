@@ -5,6 +5,7 @@ package cz.garkusha.jobstack;
  * @author Konstantin Garkusha
  */
 import java.io.IOException;
+import java.util.Optional;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
@@ -15,13 +16,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.Dialogs;
 
 public class MainApp extends Application {
     private boolean isDataChanged;
@@ -66,7 +67,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("JobsStack");
+        this.primaryStage.setTitle("JobStack");
 
         initRootLayout();
         showTableLayout();
@@ -74,17 +75,23 @@ public class MainApp extends Application {
         this.primaryStage.setOnCloseRequest(event -> {
             event.consume();
             if (isDataChanged){
-                Action response = Dialogs.create()
-                        .title("Warning!")
-                        .masthead("Information wasn't saved to database!")
-                        .message("Do you want to save information to database?")
-                        .showConfirm();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Warning!");
+                alert.setHeaderText("Information wasn't saved to database!");
+                alert.setContentText("Do you want to save information to database?");
 
-                if (response == Dialog.ACTION_YES) {
+                ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+                ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeYes){
                     saveToDB();
                     primaryStage.close();
                     System.exit(0);
-                } else if (response == Dialog.ACTION_NO) {
+                } else if (result.get() == buttonTypeNo) {
                     primaryStage.close();
                     System.exit(0);
                 }
