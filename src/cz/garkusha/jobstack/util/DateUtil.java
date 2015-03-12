@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public class DateUtil {
 
     /** The date pattern that is used for conversion. */
-    private static final String DATE_PATTERN = "dd.MM.yyyy";
+    public static final String DATE_PATTERN = "dd.MM.yyyy";
 
     /** The date formatter. */
     private static final DateTimeFormatter DATE_FORMATTER =
@@ -27,7 +27,7 @@ public class DateUtil {
      */
     public static String toString(LocalDate date) {
         if (date == null) {
-            return null;
+            return "";
         }else
             return DATE_FORMATTER.format(date);
     }

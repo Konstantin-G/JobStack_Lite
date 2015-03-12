@@ -6,5 +6,5 @@ src/META-INF
 # Maven
 out/
 
-data
+data/
 derby.log
