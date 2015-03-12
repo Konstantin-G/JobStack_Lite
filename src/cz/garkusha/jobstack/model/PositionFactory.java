@@ -16,7 +16,6 @@ public class PositionFactory {
 
     public static Position getNewPosition(int id, String URLToJob){
         HTMLParser htmlParser = new HTMLParser(URLToJob);
-//        PDFConverter pdfConverter = new PDFConverter(URLToJob);
 
         // id - have as parameter
         String result           = null;

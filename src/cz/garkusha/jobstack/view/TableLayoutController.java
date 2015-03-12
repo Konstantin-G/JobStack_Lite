@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.File;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 public class TableLayoutController {
@@ -75,7 +74,7 @@ public class TableLayoutController {
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
 
         resultColumn.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
-        // Custom rendering of the table cell.
+        // Custom rendering of the result cell.
         resultColumn.setCellFactory(column -> {
             return new TableCell<Position, String>() {
                 @Override
@@ -89,6 +88,24 @@ public class TableLayoutController {
                         // Style all dates in March with a different color.
                         setText(item);
                         if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.DARKSLATEGRAY);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: gray");
+                        } else if ("ANSWER_NO".equals(item)) {
                             setTextFill(Color.BLACK);
                             setStyle("-fx-background-color: gray");
                         } else {
