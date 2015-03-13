@@ -86,28 +86,26 @@ public class TableLayoutController {
                         setStyle("");
                     } else {
                         // Style all dates in March with a different color.
+                        //"ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"
                         setText(item);
-                        if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.DARKSLATEGRAY);
-                            setStyle("-fx-background-color: gray");
+                        if ("ANSWER_YES".equals(item)) {
+                            setTextFill(Color.LIGHTCORAL);
+                            setStyle("-fx-background-color: #580000");
                         } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: gray");
+                            setTextFill(Color.LIGHTGRAY);
+                            setStyle("-fx-background-color: #202020");
+                        } else if ("MY_ANSWER_NO".equals(item)) {
+                            setTextFill(Color.DARKRED);
+                            setStyle("-fx-background-color: #FF3300");
+                        } else if ("INTERVIEW".equals(item)) {
+                            setTextFill(Color.DARKMAGENTA);
+                            setStyle("-fx-background-color: #FF9900");
+                        } else if ("NO_ANSWER".equals(item)) {
+                            setTextFill(Color.GRAY);
+                            setStyle("-fx-background-color: #58584F");
+                        } else if ("SMALL_SALARY".equals(item)) {
+                            setTextFill(Color.DARKCYAN);
+                            setStyle("-fx-background-color: #858594");
                         } else {
                             setTextFill(Color.BLACK);
                             setStyle("");
@@ -267,7 +265,7 @@ public class TableLayoutController {
     @FXML
     private void handleNewPerson() {
         Position tempPosition = new Position();
-        boolean okClicked = mainApp.showPositionAddEditDialog(tempPosition);
+        boolean okClicked = mainApp.showPositionAddDialog(tempPosition);
         if (okClicked) {
             mainApp.getPositions().add(tempPosition);
         }
@@ -281,7 +279,7 @@ public class TableLayoutController {
     private void handleEditPerson() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
-            @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionAddEditDialog(selectedPerson);
+            @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);

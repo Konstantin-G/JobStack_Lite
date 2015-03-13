@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionAddEditDialogController">
+<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionEditDialogController">
    <children>
       <GridPane layoutX="38.0" layoutY="50.0" minHeight="345.0" minWidth="690.0" prefHeight="345.0" prefWidth="690.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
@@ -144,7 +144,7 @@
             <ChoiceBox fx:id="resultChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <HBox alignment="CENTER_RIGHT" layoutX="226.0" layoutY="340.0" prefHeight="45.0" prefWidth="690.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="350.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="80.0" text="Save">
                <HBox.margin>
@@ -156,6 +156,15 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="-10.0" layoutY="515.0" prefHeight="45.0" prefWidth="350.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+         <children>
+            <CheckBox fx:id="updatePDFBox" mnemonicParsing="false" text="Update pdf file">
+               <HBox.margin>
+                  <Insets left="15.0" top="15.0" />
+               </HBox.margin>
+            </CheckBox>
          </children>
       </HBox>
    </children>

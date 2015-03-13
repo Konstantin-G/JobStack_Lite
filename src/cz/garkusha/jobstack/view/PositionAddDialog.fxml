@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionAddDialogController">
+   <children>
+      <GridPane layoutX="38.0" layoutY="50.0" minHeight="345.0" minWidth="690.0" prefHeight="345.0" prefWidth="690.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="5000.0" minWidth="580.0" prefWidth="580.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Result" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Company" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Job title" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Path to pdf" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Location" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Contact person" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Application sent" GridPane.rowIndex="10">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Answering date" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Conversation" GridPane.hgrow="NEVER" GridPane.rowIndex="12" GridPane.valignment="BASELINE" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets left="15.0" top="2.5" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="25.0" layoutY="48.0" text="URL">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="webField" maxWidth="5000.0" prefHeight="25.0" prefWidth="516.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets right="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#handleFill" prefHeight="25.0" prefWidth="50.0" text="Fill" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Button>
+            <TextField fx:id="companyField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
+            <TextField fx:id="jobTitleField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
+            <TextField fx:id="pathToThePDFField" layoutX="120.0" layoutY="60.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
+            <TextField fx:id="locationField" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
+            <TextField fx:id="personField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin></TextField>
+            <TextArea fx:id="conversationArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <GridPane.margin>
+                  <Insets right="10.0" top="2.5" />
+               </GridPane.margin>
+            </TextArea>
+            <TextField fx:id="idField" editable="false" maxWidth="50.0" minWidth="50.0" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Label text="Id" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <DatePicker fx:id="requestSentDateField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <DatePicker fx:id="answerDateField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Phone number" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Email" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <ChoiceBox fx:id="resultChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="80.0" text="Save">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -9,7 +9,8 @@ import java.util.Optional;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
-import cz.garkusha.jobstack.view.PositionAddEditDialogController;
+import cz.garkusha.jobstack.view.PositionAddDialogController;
+import cz.garkusha.jobstack.view.PositionEditDialogController;
 import cz.garkusha.jobstack.view.TableLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -154,30 +155,69 @@ public class MainApp extends Application {
     }
 
     /**
-     * Opens a dialog to edit details for the specified position. If the user
+     * Opens a dialog to add details for the specified position. If the user
      * clicks OK, the changes are saved into the provided position object and true
      * is returned.
      *
      * @param position the position object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
-    public boolean showPositionAddEditDialog(Position position) {
+    public boolean showPositionAddDialog(Position position) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PositionAddEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/PositionAddDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Position");
+            dialogStage.setTitle("Add position");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
             // Set the position into the controller.
-            PositionAddEditDialogController controller = loader.getController();
+            PositionAddDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPosition(position);
+            controller.setMainApp(this);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isSaveClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Opens a dialog to add details for the specified position. If the user
+     * clicks OK, the changes are saved into the provided position object and true
+     * is returned.
+     *
+     * @param position the position object to be edited
+     * @return true if the user clicked OK, false otherwise.
+     */
+    public boolean showPositionEditDialog(Position position) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/PositionEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit position");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the position into the controller.
+            PositionEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPosition(position);
             controller.setMainApp(this);

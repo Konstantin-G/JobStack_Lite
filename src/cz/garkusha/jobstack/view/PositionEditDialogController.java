@@ -15,7 +15,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class PositionAddEditDialogController {
+public class PositionEditDialogController {
+
+    @FXML
+    private CheckBox updatePDFBox;
     @FXML
     private TextField idField;
     @FXML
@@ -56,7 +59,7 @@ public class PositionAddEditDialogController {
      */
     @FXML
     private void initialize() {
-        resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "CANCELED", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
+        resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
     }
 
     /**
@@ -171,8 +174,10 @@ public class PositionAddEditDialogController {
             position.setJobTitle(jobTitleField.getText());
 
             position.setJobTitlePDF(pathToThePDFField.getText());
-            // save save web page to pdf from webField to pathToThePDFField
-            new PDFConverter(webField.getText(), pathToThePDFField.getText());
+            // update to pdf from webField to pathToThePDFField if update box is select
+            if (updatePDFBox.isSelected()) {
+                new PDFConverter(webField.getText(), pathToThePDFField.getText());
+            }
 
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
