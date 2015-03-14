@@ -53,7 +53,7 @@ public class DateUtil {
     /**
      * Checks the String whether it is a valid date.
      *
-     * @param dateString
+     * @param dateString String to validate
      * @return true if the String is a valid date
      */
     public static boolean validDate(String dateString) {

@@ -1,7 +1,6 @@
 package cz.garkusha.jobstack.model;
 
 import cz.garkusha.jobstack.util.HTMLParser;
-import cz.garkusha.jobstack.util.PDFConverter;
 import cz.garkusha.jobstack.util.Path;
 
 import java.text.SimpleDateFormat;

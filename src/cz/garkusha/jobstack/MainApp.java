@@ -29,12 +29,12 @@ public class MainApp extends Application {
     private boolean isDataChanged;
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private DBCommunication dbCommunication;
+    private final DBCommunication dbCommunication;
 
     /**
      * The data as an observable list of Positions.
      */
-    private ObservableList<Position> positions = FXCollections.observableArrayList();
+    private final ObservableList<Position> positions = FXCollections.observableArrayList();
 
     public MainApp() {
         this.dbCommunication = new DBCommunication(positions);

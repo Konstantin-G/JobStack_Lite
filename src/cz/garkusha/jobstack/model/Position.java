@@ -1,8 +1,5 @@
 package cz.garkusha.jobstack.model;
 
-/**
- * Created by konstantin on 3/8/15.
- */
 import java.time.LocalDate;
 
 import cz.garkusha.jobstack.util.DateUtil;
@@ -37,14 +34,6 @@ public class Position {
     public Position() {
         this(0, null, null, null, null, null, null, null, null, null, null, null, null);
     }
-
-    /**
-     * Constructor with some initial data.
-     *  @param result
-     * @param company
-     * @param conversation
-     */
-
 
     public Position(int id, String result, String company,
                     String jobTitle, String jobTitlePDF, String location,

@@ -201,18 +201,6 @@ public class PositionAddDialogController {
     }
 
     /**
-     * Called when connection to internet in parsing time was lost.
-     */
-    public static void connectionError() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Connection to internet was lost.\nTry again later, or fill fields manually");
-
-        alert.showAndWait();
-    }
-
-    /**
      * Validates the user input in the text fields.
      *
      * @return true if the input is valid
@@ -228,7 +216,7 @@ public class PositionAddDialogController {
         }
         /** TODO  file checking*/
         if (pathToThePDFField.getText() == null || pathToThePDFField.getText().length() == 0) {
-            errorMessage += "No valid postal code!\n";
+            errorMessage += "No valid path to pdf!\n";
         }
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";
@@ -241,12 +229,7 @@ public class PositionAddDialogController {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Dialogs.invalidFieldsError(errorMessage);
             return false;
         }
     }

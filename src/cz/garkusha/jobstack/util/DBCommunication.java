@@ -12,8 +12,8 @@ import java.sql.SQLException;
  * @author Konstantin Garkusha
  */
 public class DBCommunication {
-    private DerbyDBManager db;
-    private ObservableList<Position> positions;
+    private final DerbyDBManager db;
+    private final ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
         this.db = new DerbyDBManager();

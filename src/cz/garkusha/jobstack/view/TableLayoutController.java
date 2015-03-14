@@ -53,7 +53,7 @@ public class TableLayoutController {
     @FXML
     private TableColumn<Position, String> conversationColumn;
 
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -75,44 +75,42 @@ public class TableLayoutController {
 
         resultColumn.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
         // Custom rendering of the result cell.
-        resultColumn.setCellFactory(column -> {
-            return new TableCell<Position, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
+        resultColumn.setCellFactory(column -> new TableCell<Position, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
 
-                    if (item == null || empty) {
-                        setText(null);
-                        setStyle("");
+                if (item == null || empty) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    // Style all dates in March with a different color.
+                    //"ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"
+                    setText(item);
+                    if ("ANSWER_YES".equals(item)) {
+                        setTextFill(Color.LIGHTCORAL);
+                        setStyle("-fx-background-color: #580000");
+                    } else if ("ANSWER_NO".equals(item)) {
+                        setTextFill(Color.LIGHTGRAY);
+                        setStyle("-fx-background-color: #202020");
+                    } else if ("MY_ANSWER_NO".equals(item)) {
+                        setTextFill(Color.DARKRED);
+                        setStyle("-fx-background-color: #FF3300");
+                    } else if ("INTERVIEW".equals(item)) {
+                        setTextFill(Color.DARKMAGENTA);
+                        setStyle("-fx-background-color: #FF9900");
+                    } else if ("NO_ANSWER".equals(item)) {
+                        setTextFill(Color.GRAY);
+                        setStyle("-fx-background-color: #58584F");
+                    } else if ("SMALL_SALARY".equals(item)) {
+                        setTextFill(Color.DARKCYAN);
+                        setStyle("-fx-background-color: #858594");
                     } else {
-                        // Style all dates in March with a different color.
-                        //"ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"
-                        setText(item);
-                        if ("ANSWER_YES".equals(item)) {
-                            setTextFill(Color.LIGHTCORAL);
-                            setStyle("-fx-background-color: #580000");
-                        } else if ("ANSWER_NO".equals(item)) {
-                            setTextFill(Color.LIGHTGRAY);
-                            setStyle("-fx-background-color: #202020");
-                        } else if ("MY_ANSWER_NO".equals(item)) {
-                            setTextFill(Color.DARKRED);
-                            setStyle("-fx-background-color: #FF3300");
-                        } else if ("INTERVIEW".equals(item)) {
-                            setTextFill(Color.DARKMAGENTA);
-                            setStyle("-fx-background-color: #FF9900");
-                        } else if ("NO_ANSWER".equals(item)) {
-                            setTextFill(Color.GRAY);
-                            setStyle("-fx-background-color: #58584F");
-                        } else if ("SMALL_SALARY".equals(item)) {
-                            setTextFill(Color.DARKCYAN);
-                            setStyle("-fx-background-color: #858594");
-                        } else {
-                            setTextFill(Color.BLACK);
-                            setStyle("");
-                        }
+                        setTextFill(Color.BLACK);
+                        setStyle("");
                     }
                 }
-            };
+            }
         });
 
         companyColumn.setCellValueFactory(cellData -> cellData.getValue().companyProperty());
@@ -126,39 +124,35 @@ public class TableLayoutController {
 
         requestSentDateColumn.setCellValueFactory(cellData -> cellData.getValue().requestSentDateProperty());
         // Custom rendering of the requestSentDate cell.
-        requestSentDateColumn.setCellFactory(column -> {
-            return new TableCell<Position, LocalDate>() {
-                @Override
-                protected void updateItem(LocalDate item, boolean empty) {
-                    super.updateItem(item, empty);
+        requestSentDateColumn.setCellFactory(column -> new TableCell<Position, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
 
-                    if (item == null || empty) {
-                        setText(null);
-                        setStyle("");
-                    } else {
-                        // Format date.
-                        setText(dateTimeFormatter.format(item));
-                    }
+                if (item == null || empty) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    // Format date.
+                    setText(dateTimeFormatter.format(item));
                 }
-            };
+            }
         });
 
         answerDateColumn.setCellValueFactory(cellData -> cellData.getValue().answerDateProperty());
         // Custom rendering of the answerDate cell.
-        answerDateColumn.setCellFactory(column -> {
-            return new TableCell<Position, LocalDate>() {
-                @Override
-                protected void updateItem(LocalDate item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setText(null);
-                        setStyle("");
-                    } else {
-                        // Format date.
-                        setText(dateTimeFormatter.format(item));
-                    }
+        answerDateColumn.setCellFactory(column -> new TableCell<Position, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    // Format date.
+                    setText(dateTimeFormatter.format(item));
                 }
-            };
+            }
         });
         conversationColumn.setCellValueFactory(cellData -> cellData.getValue().conversationProperty());
     }
@@ -212,7 +206,7 @@ public class TableLayoutController {
     /**
      * Is called by the main application to give a reference back to itself.
      *
-     * @param mainApp
+     * @param mainApp instance of main class
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -282,12 +276,7 @@ public class TableLayoutController {
             @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
         } else {
             // Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Position Selected");
-            alert.setContentText("Please select a position in the table.");
-
-            alert.showAndWait();
+           Dialogs.noPositionSelectedError();
         }
     }
 
