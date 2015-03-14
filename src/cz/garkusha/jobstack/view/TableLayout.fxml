@@ -12,9 +12,9 @@
    <children>
       <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="35.0" minHeight="35.0" prefHeight="35.0" prefWidth="800.0" SplitPane.resizableWithParent="false">
+          <AnchorPane maxHeight="35.0" minHeight="40.0" prefHeight="40.0" prefWidth="800.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
                <children>
-                  <HBox alignment="CENTER_RIGHT" layoutX="598.0" maxHeight="35.0" minHeight="35.0" prefHeight="35.0" prefWidth="600.0" spacing="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER_RIGHT" layoutX="598.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Hyperlink onAction="#handleHyperlink" text="Job Description" />
                         <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
@@ -26,7 +26,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
-                  <GridPane layoutX="57.0" layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane layoutX="57.0" layoutY="8.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -35,12 +35,12 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="filterField" layoutX="57.0" layoutY="8.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <TextField fx:id="filterField" layoutX="57.0" layoutY="8.0" maxHeight="25.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                         </TextField>
-                        <Label text="Filter:" />
+                        <Label styleClass="label-filter" text="Filter:" />
                      </children>
                      <padding>
                         <Insets left="10.0" top="5.0" />
@@ -48,9 +48,9 @@
                   </GridPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="365.0" prefHeight="365.0" prefWidth="798.0" SplitPane.resizableWithParent="false">
+          <AnchorPane minHeight="360.0" prefHeight="360.0" prefWidth="798.0" SplitPane.resizableWithParent="false">
                <children>
-                  <TableView fx:id="positionTable" minHeight="365.0" prefHeight="365.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="positionTable" minHeight="365.0" prefHeight="365.0" prefWidth="798.0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
                       <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="100.0" prefWidth="110.0" text="result" />

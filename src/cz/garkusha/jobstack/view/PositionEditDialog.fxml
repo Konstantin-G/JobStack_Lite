@@ -5,26 +5,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionEditDialogController">
+<AnchorPane minHeight="700.0" minWidth="700.0" prefHeight="700.0" prefWidth="700.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionEditDialogController">
    <children>
       <GridPane layoutX="38.0" layoutY="50.0" minHeight="345.0" minWidth="690.0" prefHeight="345.0" prefWidth="690.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="NEVER" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="5000.0" minWidth="580.0" prefWidth="580.0" />
+          <ColumnConstraints hgrow="NEVER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="5000.0" minWidth="542.0" prefWidth="580.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+          <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+          <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+          <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
+            <RowConstraints minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
             <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -78,33 +78,33 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="webField" maxWidth="5000.0" prefHeight="25.0" prefWidth="516.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+            <TextField fx:id="webField" maxHeight="28.0" maxWidth="5000.0" minHeight="28.0" prefHeight="28.0" prefWidth="439.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
                <GridPane.margin>
-                  <Insets right="70.0" />
+                  <Insets right="100.0" />
                </GridPane.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#handleFill" prefHeight="25.0" prefWidth="50.0" text="Fill" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#handleFill" prefHeight="25.0" prefWidth="70.0" text="Fill" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <TextField fx:id="companyField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="companyField" layoutX="120.0" layoutY="35.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="jobTitleField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextField fx:id="jobTitleField" layoutX="120.0" layoutY="35.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="pathToThePDFField" layoutX="120.0" layoutY="60.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="pathToThePDFField" layoutX="120.0" layoutY="60.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="locationField" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <TextField fx:id="locationField" layoutX="10.0" layoutY="10.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="personField" layoutX="120.0" layoutY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <TextField fx:id="personField" layoutX="120.0" layoutY="35.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
@@ -113,15 +113,15 @@
                   <Insets right="10.0" top="2.5" />
                </GridPane.margin>
             </TextArea>
-            <TextField fx:id="idField" editable="false" maxWidth="50.0" minWidth="50.0" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <TextField fx:id="idField" editable="false" maxHeight="28.0" maxWidth="50.0" minHeight="28.0" minWidth="50.0" prefHeight="28.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
             <Label text="Id" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <DatePicker fx:id="requestSentDateField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <DatePicker fx:id="answerDateField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <DatePicker fx:id="requestSentDateField" maxHeight="28.0" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <DatePicker fx:id="answerDateField" maxHeight="28.0" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <TextField fx:id="phoneField" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -136,12 +136,12 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <TextField fx:id="emailField" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <ChoiceBox fx:id="resultChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="resultChoiceBox" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="350.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -151,7 +151,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="80.0" text="Cancel">
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="90.0" text="Cancel">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
