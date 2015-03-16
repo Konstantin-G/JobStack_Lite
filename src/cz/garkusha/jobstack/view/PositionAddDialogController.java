@@ -9,7 +9,6 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
-import cz.garkusha.jobstack.util.DateUtil;
 import cz.garkusha.jobstack.util.PDFConverter;
 import cz.garkusha.jobstack.util.Path;
 import javafx.beans.value.ChangeListener;

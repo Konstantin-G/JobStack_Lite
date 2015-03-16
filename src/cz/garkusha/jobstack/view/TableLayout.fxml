@@ -14,9 +14,10 @@
         <items>
           <AnchorPane maxHeight="35.0" minHeight="40.0" prefHeight="40.0" prefWidth="800.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
                <children>
-                  <HBox alignment="CENTER_RIGHT" layoutX="598.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER_RIGHT" layoutX="598.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="884.0" spacing="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Hyperlink onAction="#handleHyperlink" text="Job Description" />
+                        <Hyperlink onAction="#handleJobOnWebHyperlink" text="Job on the web" />
+                        <Hyperlink onAction="#handleJobDescriptionHyperlink" text="Job Description" />
                         <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
                         <Button mnemonicParsing="false" onAction="#handleNewPerson" text="New..." />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit..." />

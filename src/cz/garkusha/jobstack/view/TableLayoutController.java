@@ -8,6 +8,7 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DateUtil;
+import cz.garkusha.jobstack.util.Path;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -218,12 +219,12 @@ public class TableLayoutController {
     }
 
     /**
-     * Called when the user clicks on the hyperlink button.
+     * Called when the user clicks on the Job Description hyperlink.
      */
     @FXML
-    private void handleHyperlink() {
+    private void handleJobDescriptionHyperlink() {
         try {
-            String absoluteReferenceToJobPDF = System.getProperty("user.dir") + File.separator + positionTable.getFocusModel().getFocusedItem().getJobTitlePDF();
+            String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + positionTable.getFocusModel().getFocusedItem().getJobTitlePDF();
             File pdfFile = new File(absoluteReferenceToJobPDF);
             if (pdfFile.exists()) {
 
@@ -237,8 +238,23 @@ public class TableLayoutController {
             } else {
                 System.out.println("File \"" + absoluteReferenceToJobPDF + "\" is not exists!");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Called when the user clicks on the Job on the web hyperlink.
+     */
+    @FXML
+    private void handleJobOnWebHyperlink() {
+        try {
+            //Set your page url in this string. For eg, I m using URL for Google Search engine
+            String url = positionTable.getFocusModel().getFocusedItem().getWeb();
+            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+        }
+        catch (java.io.IOException e) {
+            e.printStackTrace();
         }
     }
 
