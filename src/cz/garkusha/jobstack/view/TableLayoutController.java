@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.io.File;
+import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -251,7 +252,7 @@ public class TableLayoutController {
         try {
             //Set your page url in this string. For eg, I m using URL for Google Search engine
             String url = positionTable.getFocusModel().getFocusedItem().getWeb();
-            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+            Desktop.getDesktop().browse(URI.create(url));
         }
         catch (java.io.IOException e) {
             e.printStackTrace();
