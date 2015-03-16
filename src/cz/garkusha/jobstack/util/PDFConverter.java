@@ -46,5 +46,8 @@ public class PDFConverter {
         } catch (IHtmlToPdfTransformer.CConvertException | IOException e) {
             e.printStackTrace();
         }
+        // I had a "Exception in thread "AWT-Windows" java.lang.IllegalStateException: Shutdown in progress" when I made 1 pdf file in program,
+        // So i fixed this by create 2 instance of CYaHPConverter class.
+        new CYaHPConverter();
     }
 }
