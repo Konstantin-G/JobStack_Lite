@@ -9,7 +9,11 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
+import cz.garkusha.jobstack.util.DateUtil;
 import cz.garkusha.jobstack.util.PDFConverter;
+import cz.garkusha.jobstack.util.Path;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -87,13 +91,33 @@ public class PositionAddDialogController {
      */
     public void setPosition(Position position) {
         this.position = position;
+
         idField.setText(String.valueOf(position.getId()));
         resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
+        // add listener to automation make changes in path to pdf file, when company name was changed
+        companyField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                position.setCompany(newValue);
+                position.setJobTitlePDF(Path.getRelativeJobDescriptionPath() + PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
+                pathToThePDFField.setText(position.getJobTitlePDF());
+            }
+        });
+        // add listener to automation make changes in path to pdf file, when job title was changed
         jobTitleField.setText(position.getJobTitle());
+        jobTitleField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                position.setJobTitle(newValue);
+                position.setJobTitlePDF(Path.getRelativeJobDescriptionPath() + PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
+                pathToThePDFField.setText(position.getJobTitlePDF());
+            }
+        });
         pathToThePDFField.setText(position.getJobTitlePDF());
         locationField.setText(position.getLocation());
         webField.setText(position.getWeb());
+        webField.setPromptText("Correctly working only with: \"m.jobs.cz\", \"jobdnes.cz\", \"prace.cz\".");
         personField.setText(position.getPerson());
         phoneField.setText(position.getPhone());
         emailField.setText(position.getEmail());

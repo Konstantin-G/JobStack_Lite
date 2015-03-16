@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.TableLayoutController">
    <children>
       <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -16,7 +20,7 @@
                         <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
                         <Button mnemonicParsing="false" onAction="#handleNewPerson" text="New..." />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit..." />
-                        <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                        <Button disable="true" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -33,8 +33,12 @@ public class PositionFactory {
         return new Position(id , result, company, jobTitle, jobTitlePDF,location, URLToJob, person, phone, email, requestSentDate, answerDate, conversation);
     }
 
-    private static String getPDFFileName( String company, String jobTitle) {
+    public static String getPDFFileName( String company, String jobTitle) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+/*        if (null == company)
+            company = "companyName";
+        if (null == jobTitle)
+            company = "jobTitle";*/
         return simpleDateFormat.format(new Date()) + "_" + company + "_" + jobTitle + ".pdf";
     }
 

@@ -16,14 +16,14 @@ import java.util.*;
  */
 public class PDFConverter {
 
-    public PDFConverter(String url, String absoluteReferenceToJobPDF) {
-        File makeDirectory = new File(Path.getAbsoluteProgramPath());
+    public PDFConverter(String url, String relativeReferenceToJobPDF) {
+        File makeDirectory = new File(Path.getAbsoluteJobDescriptionPath());
         if (!makeDirectory.exists()) {
             //noinspection ResultOfMethodCallIgnored
             makeDirectory.mkdir();
         }
         // save pdf in outfile
-        File filePDF = new File(absoluteReferenceToJobPDF);
+        File filePDF = new File(Path.getAbsoluteProgramPath() + File.separator + relativeReferenceToJobPDF);
         // contains configuration properties
         Map<String, String> properties = new HashMap<>();
         // list containing header/footer

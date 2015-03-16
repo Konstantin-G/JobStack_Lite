@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane minHeight="700.0" minWidth="700.0" prefHeight="700.0" prefWidth="700.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.PositionEditDialogController">
    <children>
       <GridPane layoutX="38.0" layoutY="50.0" minHeight="345.0" minWidth="690.0" prefHeight="345.0" prefWidth="690.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -94,7 +96,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="pathToThePDFField" layoutX="120.0" layoutY="60.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="pathToThePDFField" editable="false" layoutX="120.0" layoutY="60.0" maxHeight="28.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>

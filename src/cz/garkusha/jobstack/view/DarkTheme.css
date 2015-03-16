@@ -5,6 +5,15 @@
     -fx-prompt-text-fill: #707070 ;
 }
 
+.dialog-pane {
+    -fx-background-color: #333333;
+}
+
+.dialog-pane:header .header-panel {
+    -fx-background-color: #333333;
+
+}
+
 .choice-box {
     -fx-background-color: #96a4a4;
 }
@@ -135,6 +144,7 @@
  * Metro style Push Button
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ * with some changes by Konstantin Garkusha
  */
 .button {
     -fx-padding: 5 22 5 22;
