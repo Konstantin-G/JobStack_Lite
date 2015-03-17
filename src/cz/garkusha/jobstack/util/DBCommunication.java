@@ -1,6 +1,7 @@
 package cz.garkusha.jobstack.util;
 
 import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.view.Dialogs;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
@@ -41,6 +42,7 @@ public class DBCommunication {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            Dialogs.exceptionDialog(e);
         }
     }
 
@@ -78,6 +80,7 @@ public class DBCommunication {
             System.out.println("Information was saved to DB");
         } catch (SQLException e) {
             e.printStackTrace();
+            Dialogs.exceptionDialog(e);
         }
 
 

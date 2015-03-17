@@ -1,5 +1,7 @@
 package cz.garkusha.jobstack.util;
 
+import cz.garkusha.jobstack.view.Dialogs;
+
 import java.sql.*;
 
 /**
@@ -20,6 +22,7 @@ class DerbyDBManager {
                 con = DriverManager.getConnection(Path.getPathToDbFile() + ";create=true");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
+                Dialogs.exceptionDialog(e);
             }
         }
     }

@@ -1,5 +1,6 @@
 package cz.garkusha.jobstack.util;
 
+import cz.garkusha.jobstack.view.Dialogs;
 import org.allcolor.yahp.converter.CYaHPConverter;
 import org.allcolor.yahp.converter.IHtmlToPdfTransformer;
 
@@ -45,6 +46,7 @@ public class PDFConverter {
             converter.convertToPdf(new URL(url), IHtmlToPdfTransformer.A4P, headerFooterList, out, properties);
         } catch (IHtmlToPdfTransformer.CConvertException | IOException e) {
             e.printStackTrace();
+            Dialogs.exceptionDialog(e);
         }
         // I had a "Exception in thread "AWT-Windows" java.lang.IllegalStateException: Shutdown in progress" when I made 1 pdf file in program,
         // So i fixed this by create 2 instance of CYaHPConverter class.

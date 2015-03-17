@@ -5,10 +5,10 @@ package cz.garkusha.jobstack;
  * @author Konstantin Garkusha
  */
 import java.io.IOException;
-import java.util.Optional;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
+import cz.garkusha.jobstack.view.Dialogs;
 import cz.garkusha.jobstack.view.PositionAddDialogController;
 import cz.garkusha.jobstack.view.PositionEditDialogController;
 import cz.garkusha.jobstack.view.TableLayoutController;
@@ -17,9 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -76,23 +73,12 @@ public class MainApp extends Application {
         this.primaryStage.setOnCloseRequest(event -> {
             event.consume();
             if (isDataChanged){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Warning!");
-                alert.setHeaderText("Information wasn't saved to database!");
-                alert.setContentText("Do you want to save information to database?");
-
-                ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-                ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
-                ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == buttonTypeYes){
+                String result = Dialogs.saveToDBConfirmation();
+                if (result.equals("YES")){
                     saveToDB();
                     primaryStage.close();
                     System.exit(0);
-                } else if (result.get() == buttonTypeNo) {
+                } else if (result.equals("NO")) {
                     primaryStage.close();
                     System.exit(0);
                 }

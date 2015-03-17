@@ -11,7 +11,6 @@
 
 .dialog-pane:header .header-panel {
     -fx-background-color: #333333;
-
 }
 
 .hyperlink,
@@ -92,7 +91,7 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal > .split-pane-divider {
+.split-pane:vertical > .split-pane-divider {
     -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
     -fx-background-color: transparent, derive(#1d1d1d,20%);
 }
@@ -143,6 +142,30 @@
     -fx-font-size: 10pt;
     -fx-text-fill: black;
     -fx-font-family: "Segoe UI Semibold";
+}
+/* The main scrollbar CSS class of ListView */
+    .text-area .scroll-bar:horizontal,
+    .text-area .scroll-bar:vertical {
+    -fx-background-color: #039ed3;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.text-area .increment-button ,.text-area .decrement-button {
+    -fx-background-color: #039ed3;
+}
+
+/* The main scrollbar **track** CSS class  */
+.text-area .scroll-bar:horizontal .track,
+.text-area .scroll-bar:vertical .track{
+	-fx-background-color: #6e6e6e;
+	-fx-border-color: #6e6e6e;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.text-area .scroll-bar:horizontal .thumb,
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;
+	-fx-background-insets: 2, 0, 0;
 }
 
 .prompt-text {

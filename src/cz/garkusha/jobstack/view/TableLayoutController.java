@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -224,23 +225,26 @@ public class TableLayoutController {
      */
     @FXML
     private void handleJobDescriptionHyperlink() {
-        try {
-            String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + positionTable.getFocusModel().getFocusedItem().getJobTitlePDF();
-            File pdfFile = new File(absoluteReferenceToJobPDF);
-            if (pdfFile.exists()) {
 
-                if (Desktop.isDesktopSupported()) {
+        String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + positionTable.getFocusModel().getFocusedItem().getJobTitlePDF();
+        File pdfFile = new File(absoluteReferenceToJobPDF);
+        if (pdfFile.exists()) {
+
+            if (Desktop.isDesktopSupported()) {
                     /*TODO don't work correctly in Linux(make application freezes), have to fix*/
+                try {
                     Desktop.getDesktop().open(pdfFile);
-                } else {
-                    System.out.println("Awt Desktop is not supported!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Dialogs.exceptionDialog(e);
                 }
-
             } else {
-                System.out.println("File \"" + absoluteReferenceToJobPDF + "\" is not exists!");
+                System.out.println("Awt Desktop is not supported!");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        } else {
+            String error = "File \"" + absoluteReferenceToJobPDF + "\" is not exists!";
+            Dialogs.someError(error);
         }
     }
 
@@ -256,6 +260,7 @@ public class TableLayoutController {
         }
         catch (java.io.IOException e) {
             e.printStackTrace();
+            Dialogs.exceptionDialog(e);
         }
     }
 
