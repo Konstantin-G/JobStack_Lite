@@ -77,14 +77,11 @@ public class MainApp extends Application {
                 if (result.equals("YES")){
                     saveToDB();
                     primaryStage.close();
-                    System.exit(0);
                 } else if (result.equals("NO")) {
                     primaryStage.close();
-                    System.exit(0);
                 }
             } else {
                 primaryStage.close();
-                System.exit(0);
             }
         });
     }
