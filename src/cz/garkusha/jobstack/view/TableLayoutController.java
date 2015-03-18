@@ -11,9 +11,12 @@ import cz.garkusha.jobstack.util.DateUtil;
 import cz.garkusha.jobstack.util.Path;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -306,5 +309,17 @@ public class TableLayoutController {
     private void handleSaveToDB() {
        mainApp.saveToDB();
        mainApp.setDataChanged(false);
+    }
+    @FXML
+    private void handleMouseClicked(MouseEvent event) {
+        // handle the event here
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
+            if (event.getClickCount() == 2) {
+                handleEditPerson();
+            }
+//            if (event.getClickCount() == 1) {
+//                System.out.println("Single clicked A_button");
+//            }
+        }
     }
 }
