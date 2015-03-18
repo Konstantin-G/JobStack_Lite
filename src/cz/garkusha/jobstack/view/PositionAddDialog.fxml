@@ -33,22 +33,22 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Company" GridPane.rowIndex="3">
+            <Label text="Company *" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Job title" GridPane.rowIndex="4">
+            <Label text="Job title *" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Path to pdf" GridPane.rowIndex="5">
+            <Label text="Path to pdf *" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Location" GridPane.rowIndex="6">
+            <Label text="Location *" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
@@ -73,7 +73,7 @@
                   <Insets left="15.0" top="2.5" />
                </GridPane.margin>
             </Label>
-            <Label layoutX="25.0" layoutY="48.0" text="URL">
+            <Label layoutX="25.0" layoutY="48.0" text="URL *">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
