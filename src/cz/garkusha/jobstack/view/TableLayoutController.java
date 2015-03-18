@@ -11,7 +11,6 @@ import cz.garkusha.jobstack.util.DateUtil;
 import cz.garkusha.jobstack.util.Path;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -60,7 +59,7 @@ public class TableLayoutController {
     private TableColumn<Position, String> conversationColumn;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
-
+    SortedList<Position> sortedData;
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -200,7 +199,7 @@ public class TableLayoutController {
             });
         });
         // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Position> sortedData = new SortedList<>(filteredData);
+        sortedData = new SortedList<>(filteredData);
 
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(positionTable.comparatorProperty());
@@ -272,8 +271,14 @@ public class TableLayoutController {
      */
     @FXML
     private void handleDeletePerson() {
-        int selectedIndex = positionTable.getSelectionModel().getSelectedIndex();
-        positionTable.getItems().remove(selectedIndex);
+        // The index of the sorted and filtered list.
+        int visibleIndex = positionTable.getSelectionModel().getSelectedIndex();
+
+        // Source index of master data.
+        int sourceIndex = sortedData.getSourceIndexFor(mainApp.getPositions(), visibleIndex);
+
+        // Remove.
+        mainApp.getPositions().remove(sourceIndex);
         mainApp.setDataChanged(true);
     }
 
