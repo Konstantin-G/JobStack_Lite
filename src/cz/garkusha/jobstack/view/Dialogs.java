@@ -82,7 +82,7 @@ public class Dialogs {
     }
 
     /**
-     * Called when at lease one positions field is invalid.
+     * Called when some error.
      */
     public static void someError (String errorMessage){
         Alert alert = new Alert(Alert.AlertType.ERROR);
