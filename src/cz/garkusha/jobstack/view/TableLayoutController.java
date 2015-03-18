@@ -172,12 +172,12 @@ public class TableLayoutController {
         // 2. Set the filter Predicate whenever the filter changes.
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(position -> {
-                // If filter text is empty, display all persons.
+                // If filter text is empty, display all positions.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
-                // Compare first name and last name of every person with filter text.
+                // Compare some fields of every position with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (position.getCompany().toLowerCase().contains(lowerCaseFilter)) {
@@ -270,7 +270,7 @@ public class TableLayoutController {
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeletePosition() {
         // The index of the sorted and filtered list.
         int visibleIndex = positionTable.getSelectionModel().getSelectedIndex();
 
@@ -287,7 +287,7 @@ public class TableLayoutController {
      * details for a new position.
      */
     @FXML
-    private void handleNewPerson() {
+    private void handleNewPosition() {
         Position tempPosition = new Position();
         boolean okClicked = mainApp.showPositionAddDialog(tempPosition);
         if (okClicked) {
@@ -300,7 +300,7 @@ public class TableLayoutController {
      * details for the selected position.
      */
     @FXML
-    private void handleEditPerson() {
+    private void handleEditPosition() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
@@ -327,7 +327,7 @@ public class TableLayoutController {
         // handle the event here
         if (event.getButton().equals(MouseButton.PRIMARY)) {
             if (event.getClickCount() == 2) {
-                handleEditPerson();
+                handleEditPosition();
             }
 //            if (event.getClickCount() == 1) {
 //                System.out.println("Single clicked A_button");

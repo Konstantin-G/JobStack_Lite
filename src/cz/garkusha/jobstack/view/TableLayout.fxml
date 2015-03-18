@@ -19,9 +19,9 @@
                         <Hyperlink onAction="#handleJobOnWebHyperlink" text="Job on the web" />
                         <Hyperlink onAction="#handleJobDescriptionHyperlink" text="Job Description" />
                         <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
-                        <Button mnemonicParsing="false" onAction="#handleNewPerson" text="New..." />
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit..." />
-                        <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
+                        <Button mnemonicParsing="false" onAction="#handleNewPosition" text="New..." />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPosition" text="Edit..." />
+                        <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePosition" text="Delete" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
