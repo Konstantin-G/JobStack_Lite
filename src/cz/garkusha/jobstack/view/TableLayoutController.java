@@ -309,12 +309,19 @@ public class TableLayoutController {
            Dialogs.noPositionSelectedError();
         }
     }
-
+    /**
+     * Called when the user clicks on Save to database button.
+     */
     @FXML
     private void handleSaveToDB() {
        mainApp.saveToDB();
        mainApp.setDataChanged(false);
     }
+
+    /**
+     * Called when the user double mouse clicks on the table. Opens a dialog to edit
+     * details for the selected position.
+     */
     @FXML
     private void handleMouseClicked(MouseEvent event) {
         // handle the event here
