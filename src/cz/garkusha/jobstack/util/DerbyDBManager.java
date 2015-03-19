@@ -20,9 +20,12 @@ class DerbyDBManager {
                 Class.forName(DRIVER) ;
                 // Connect to DB create new DB
                 con = DriverManager.getConnection(Path.getPathToDbFile() + ";create=true");
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 Dialogs.exceptionDialog(e);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Dialogs.someError("Another instance of database have already booted");
             }
         }
     }

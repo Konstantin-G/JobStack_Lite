@@ -226,27 +226,30 @@ public class TableLayoutController {
      * Called when the user clicks on the Job Description hyperlink.
      */
     @FXML
-    private void handleJobDescriptionHyperlink() {
-
-        String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + positionTable.getFocusModel().getFocusedItem().getJobTitlePDF();
-        File pdfFile = new File(absoluteReferenceToJobPDF);
-        if (pdfFile.exists()) {
-
-            if (Desktop.isDesktopSupported()) {
+    void handleJobDescriptionHyperlink() {
+        Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
+        if (null != selectedPerson){
+            String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + selectedPerson.getJobTitlePDF();
+            File pdfFile = new File(absoluteReferenceToJobPDF);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
                     /*TODO don't work correctly in Linux(make application freezes), have to fix*/
-                try {
-                    Desktop.getDesktop().open(pdfFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Dialogs.exceptionDialog(e);
+                    try {
+                        Desktop.getDesktop().open(pdfFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Dialogs.exceptionDialog(e);
+                    }
+                } else {
+                    System.out.println("Awt Desktop is not supported!");
                 }
             } else {
-                System.out.println("Awt Desktop is not supported!");
+                String error = "File \"" + absoluteReferenceToJobPDF + "\" is not exists!";
+                Dialogs.someError(error);
             }
-
-        } else {
-            String error = "File \"" + absoluteReferenceToJobPDF + "\" is not exists!";
-            Dialogs.someError(error);
+        }else{
+            // Nothing selected.
+            Dialogs.noPositionSelectedError();
         }
     }
 
@@ -254,15 +257,20 @@ public class TableLayoutController {
      * Called when the user clicks on the Job on the web hyperlink.
      */
     @FXML
-    private void handleJobOnWebHyperlink() {
-        try {
+    void handleJobOnWebHyperlink() {
+        Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
+        if (null != selectedPerson) {
             //Set your page url in this string. For eg, I m using URL for Google Search engine
-            String url = positionTable.getFocusModel().getFocusedItem().getWeb();
-            Desktop.getDesktop().browse(URI.create(url));
-        }
-        catch (java.io.IOException e) {
-            e.printStackTrace();
-            Dialogs.exceptionDialog(e);
+            String url = selectedPerson.getWeb();
+            try {
+                Desktop.getDesktop().browse(URI.create(url));
+            } catch (IOException e) {
+                e.printStackTrace();
+                Dialogs.exceptionDialog(e);
+            }
+        }else{
+            // Nothing selected.
+            Dialogs.noPositionSelectedError();
         }
     }
 
@@ -270,16 +278,21 @@ public class TableLayoutController {
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePosition() {
+    void handleDeletePosition() {
         // The index of the sorted and filtered list.
         int visibleIndex = positionTable.getSelectionModel().getSelectedIndex();
 
-        // Source index of master data.
-        int sourceIndex = sortedData.getSourceIndexFor(mainApp.getPositions(), visibleIndex);
+        if (-1 != visibleIndex) {
+            // Source index of master data.
+            int sourceIndex = sortedData.getSourceIndexFor(mainApp.getPositions(), visibleIndex);
 
-        // Remove.
-        mainApp.getPositions().remove(sourceIndex);
-        mainApp.setDataChanged(true);
+            // Remove.
+            mainApp.getPositions().remove(sourceIndex);
+            mainApp.setDataChanged(true);
+        }else {
+            // Nothing selected.
+            Dialogs.noPositionSelectedError();
+        }
     }
 
     /**
@@ -287,7 +300,7 @@ public class TableLayoutController {
      * details for a new position.
      */
     @FXML
-    private void handleNewPosition() {
+    void handleNewPosition() {
         Position tempPosition = new Position();
         boolean okClicked = mainApp.showPositionAddDialog(tempPosition);
         if (okClicked) {
@@ -300,9 +313,9 @@ public class TableLayoutController {
      * details for the selected position.
      */
     @FXML
-    private void handleEditPosition() {
+    void handleEditPosition() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
+        if (null != selectedPerson) {
             @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
         } else {
             // Nothing selected.
@@ -313,7 +326,7 @@ public class TableLayoutController {
      * Called when the user clicks on Save to database button.
      */
     @FXML
-    private void handleSaveToDB() {
+    public void handleSaveToDB() {
        mainApp.saveToDB();
        mainApp.setDataChanged(false);
     }

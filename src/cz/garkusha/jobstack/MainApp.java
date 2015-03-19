@@ -8,10 +8,7 @@ import java.io.IOException;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
-import cz.garkusha.jobstack.view.Dialogs;
-import cz.garkusha.jobstack.view.PositionAddDialogController;
-import cz.garkusha.jobstack.view.PositionEditDialogController;
-import cz.garkusha.jobstack.view.TableLayoutController;
+import cz.garkusha.jobstack.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +24,7 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private final DBCommunication dbCommunication;
+    RootLayoutController rootController;
 
     /**
      * The data as an observable list of Positions.
@@ -86,6 +84,11 @@ public class MainApp extends Application {
         });
     }
 
+    @Override
+    public void stop(){
+        primaryStage.close();
+    }
+
     /**
      * Initializes the root layout.
      */
@@ -100,6 +103,9 @@ public class MainApp extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            rootController = loader.getController();
+            rootController.setMainApp(this);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,8 +125,10 @@ public class MainApp extends Application {
             rootLayout.setCenter(tableLayout);
 
             // Give the controller access to the main app.
-            TableLayoutController controller = loader.getController();
-            controller.setMainApp(this);
+            TableLayoutController tableController = loader.getController();
+            tableController.setMainApp(this);
+            // add reference of tableController to rootController
+            rootController.setTableLayoutController(tableController);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -160,16 +168,16 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the position into the controller.
-            PositionAddDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPosition(position);
-            controller.setMainApp(this);
+            // Set the position into the addController.
+            PositionAddDialogController addController = loader.getController();
+            addController.setDialogStage(dialogStage);
+            addController.setPosition(position);
+            addController.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
-            return controller.isSaveClicked();
+            return addController.isSaveClicked();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -199,16 +207,16 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the position into the controller.
-            PositionEditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setPosition(position);
-            controller.setMainApp(this);
+            // Set the position into the editController.
+            PositionEditDialogController editController = loader.getController();
+            editController.setDialogStage(dialogStage);
+            editController.setPosition(position);
+            editController.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
-            return controller.isSaveClicked();
+            return editController.isSaveClicked();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
