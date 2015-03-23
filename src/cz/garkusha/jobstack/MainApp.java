@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
+import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.view.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -49,6 +50,9 @@ public class MainApp extends Application {
     }
 
     public void saveToDB(){
+        // delete pdf file, which were deleted from table
+        DeletePositionsPDF.deletedPDFDelete();
+
         dbCommunication.writePositionsToDB();
     }
 
@@ -76,6 +80,7 @@ public class MainApp extends Application {
                     saveToDB();
                     primaryStage.close();
                 } else if (result.equals("NO")) {
+                    DeletePositionsPDF.unsavedPDFDelete();
                     primaryStage.close();
                 }
             } else {

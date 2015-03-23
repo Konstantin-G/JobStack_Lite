@@ -9,6 +9,7 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
+import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.PDFConverter;
 import cz.garkusha.jobstack.util.Path;
 import javafx.beans.value.ChangeListener;
@@ -198,6 +199,9 @@ public class PositionAddDialogController {
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
             saveClicked = true;
+            // add pdf file to unsavedList to delete, if this position will not be saved to database.
+            DeletePositionsPDF.getUnsavedList().add(pathToThePDFField.getText());
+
             dialogStage.close();
         }
     }

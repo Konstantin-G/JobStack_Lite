@@ -25,15 +25,30 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleNewPosition" text="New" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleEditPosition" text="Edit" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleDeletePosition" text="Delete" />
+            <MenuItem mnemonicParsing="false" onAction="#handleNewPosition" text="New">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#handleEditPosition" text="Edit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#handleDeletePosition" text="Delete">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DELETE" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="View">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleJobOnWebHyperlink" text="On the web" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleJobDescriptionHyperlink" text="From pdf" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleJobOnWebHyperlink" text="On the web">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#handleJobDescriptionHyperlink" text="From pdf">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                </items>
             </Menu>
         <Menu mnemonicParsing="false" text="Help">

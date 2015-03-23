@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
+
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.TableLayoutController">
    <children>
       <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -47,7 +51,7 @@
             </AnchorPane>
           <AnchorPane minHeight="360.0" prefHeight="360.0" prefWidth="798.0" SplitPane.resizableWithParent="false">
                <children>
-                  <TableView fx:id="positionTable" minHeight="365.0" onMouseClicked="#handleMouseClicked" prefHeight="365.0" prefWidth="798.0" stylesheets="@DarkTheme.css" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="positionTable" minHeight="365.0" onMouseClicked="#handleMouseClicked" prefHeight="365.0" prefWidth="798.0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
                       <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="100.0" prefWidth="110.0" text="result" />

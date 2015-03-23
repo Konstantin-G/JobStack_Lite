@@ -8,6 +8,7 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DateUtil;
+import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.Path;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -286,6 +287,10 @@ public class TableLayoutController {
             // Source index of master data.
             int sourceIndex = sortedData.getSourceIndexFor(mainApp.getPositions(), visibleIndex);
 
+            // add deleted pdf file to the list to delete
+            String fileToDelete = mainApp.getPositions().get(sourceIndex).getJobTitlePDF();
+            DeletePositionsPDF.getDeletedList().add(fileToDelete);
+
             // Remove.
             mainApp.getPositions().remove(sourceIndex);
             mainApp.setDataChanged(true);
@@ -327,8 +332,11 @@ public class TableLayoutController {
      */
     @FXML
     public void handleSaveToDB() {
-       mainApp.saveToDB();
-       mainApp.setDataChanged(false);
+        mainApp.saveToDB();
+        mainApp.setDataChanged(false);
+
+        // clear unsavedList with new positions files
+        DeletePositionsPDF.getUnsavedList().clear();
     }
 
     /**
