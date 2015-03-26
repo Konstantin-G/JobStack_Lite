@@ -9,12 +9,17 @@ import java.io.IOException;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
 import cz.garkusha.jobstack.util.DeletePositionsPDF;
+import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
 import cz.garkusha.jobstack.view.*;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -226,5 +231,66 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Shows the Probably The Same Position layout.
+     */
+    public void showProbablyTheSamePositionLayout(Position filledPosition) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/PerhapsTheSamePosition.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            SplitPane splitPane = (SplitPane)page.getChildren().get(1);
+            AnchorPane anchorPane = (AnchorPane)splitPane.getItems().get(1);
+            anchorPane.getChildren().add(SamePositionTabPaneLayout());
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Be careful, you probably already have the same position.");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the position into the addController.
+            PerhapsTheSamePositionController sameController = loader.getController();
+            sameController.setNewPosition(filledPosition);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * create new TabPane and add some Tab to his.
+     */
+    public TabPane SamePositionTabPaneLayout() {
+
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/SamePositionTabPane.fxml"));
+            TabPane page = (TabPane) loader.load();
+
+            //Create tabs for each same positions
+            for (Position samePosition : FindProbablyTheSamePositions.getProbablyTheSamePositionList()) {
+                FXMLLoader tabLoader = new FXMLLoader();
+                tabLoader.setLocation(MainApp.class.getResource("view/SamePositionTab.fxml"));
+                Tab tab = new Tab();
+                tab.setContent(tabLoader.load());
+                // add tabs to TabPane
+                page.getTabs().add(tab);
+                SamePositionTabController samePositionTabController = tabLoader.getController();
+                samePositionTabController.setOldPosition(tab, samePosition);
+            }
+            return page;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       return new TabPane();
     }
 }
