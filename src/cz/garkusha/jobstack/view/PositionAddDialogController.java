@@ -230,7 +230,7 @@ public class PositionAddDialogController {
             setFilledPosition(filledPosition);
             // if filled position is probably the same. Yoy see new window
             if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
-                mainApp.showPerhapsTheSamePositionLayout(filledPosition);
+                mainApp.showProbablyTheSamePositionLayout(filledPosition);
             }
         }
 
