@@ -10,6 +10,7 @@ import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
 import cz.garkusha.jobstack.util.DeletePositionsPDF;
+import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
 import cz.garkusha.jobstack.util.PDFConverter;
 import cz.garkusha.jobstack.util.Path;
 import javafx.beans.value.ChangeListener;
@@ -219,14 +220,20 @@ public class PositionAddDialogController {
      */
     @FXML
     private void handleFill() {
+        Position filledPosition;
         if (isURLAddressValid()) {
             int newId = mainApp.getPositionsMaxId();
             int id = Integer.parseInt(idField.getText());
             id = id != 0 ? id : newId + 1;
             String url = webField.getText();
-            Position filledPosition = PositionFactory.getNewPosition(id, url);
+            filledPosition = PositionFactory.getNewPosition(id, url);
             setFilledPosition(filledPosition);
+            // if filled position is probably the same. Yoy see new window
+            if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
+                mainApp.showPerhapsTheSamePositionLayout(filledPosition);
+            }
         }
+
     }
 
     /**
@@ -283,4 +290,6 @@ public class PositionAddDialogController {
         }
         return isURLAddressValid;
     }
+
+
 }
