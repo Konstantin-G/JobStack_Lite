@@ -91,8 +91,13 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:vertical > .split-pane-divider {
+.split-pane:vertical   > .split-pane-divider{
     -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent transparent transparent transparent;
     -fx-background-color: transparent, derive(#1d1d1d,20%);
 }
 
