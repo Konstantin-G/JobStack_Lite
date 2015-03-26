@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by garkusha on 24.3.2015.
+ * class to search Probably The Same positions.
+ *
+ * @author Konstantin Garkusha
  */
 public class FindProbablyTheSamePositions {
 
