@@ -41,8 +41,6 @@ public class PerhapsTheSamePositionController {
 
     /**
      * Set the position to be watched in the dialog.
-     *
-     * @param position for editing
      */
     public void setNewPosition(Position position) {
         newWebField.setText(position.getWeb());
