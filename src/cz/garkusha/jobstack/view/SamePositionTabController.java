@@ -7,10 +7,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 
 /**
- * Controller class to create new or edit details of a position.
+ * Controller class to create new tab in TabPane.
  *
  * @author Konstantin Garkusha
  */
+
 public class SamePositionTabController {
 
     @FXML
