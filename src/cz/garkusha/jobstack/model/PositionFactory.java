@@ -17,18 +17,18 @@ public class PositionFactory {
         HTMLParser htmlParser = new HTMLParser(URLToJob);
 
         // id - have as parameter
-        String result           = null;
+        String result           = "";
         String company          = htmlParser.getCompany();
         String jobTitle         = htmlParser.getJobTitle();
         String jobTitlePDF      = Path.getRelativeJobDescriptionPath() + getPDFFileName(company, jobTitle);
         String location         = htmlParser.getLocation();
         // web - have as parameter
-        String person           = htmlParser.getPerson();
-        String phone            = htmlParser.getPhone();
-        String email            = htmlParser.getEmail();
+        String person           = null != htmlParser.getPerson() ? htmlParser.getPerson(): "";
+        String phone            = null != htmlParser.getPhone()  ? htmlParser.getPhone():  "";
+        String email            = null != htmlParser.getEmail()  ? htmlParser.getEmail():  "";
         String requestSentDate  = null;
         String answerDate       = null;
-        String conversation     = null;
+        String conversation     = "";
 
         return new Position(id , result, company, jobTitle, jobTitlePDF,location, URLToJob, person, phone, email, requestSentDate, answerDate, conversation);
     }
