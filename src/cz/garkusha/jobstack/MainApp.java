@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     private boolean isDataChanged;
     private Stage primaryStage;
+    private Stage addDialogStage;
     private BorderPane rootLayout;
     private final DBCommunication dbCommunication;
     RootLayoutController rootController;
@@ -171,21 +172,21 @@ public class MainApp extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add position");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+            addDialogStage = new Stage();
+            addDialogStage.setTitle("Add position");
+            addDialogStage.initModality(Modality.WINDOW_MODAL);
+            addDialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            addDialogStage.setScene(scene);
 
             // Set the position into the addController.
             PositionAddDialogController addController = loader.getController();
-            addController.setDialogStage(dialogStage);
+            addController.setDialogStage(addDialogStage);
             addController.setPosition(position);
             addController.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
+            addDialogStage.showAndWait();
 
             return addController.isSaveClicked();
         } catch (IOException e) {
@@ -247,14 +248,15 @@ public class MainApp extends Application {
             anchorPane.getChildren().add(SamePositionTabPaneLayout());
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Be careful, you probably already have the same position.");
+            dialogStage.setTitle("Be careful, you already sent your application to this company.");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+            dialogStage.initOwner(addDialogStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
             // Set the position into the addController.
             PerhapsTheSamePositionController sameController = loader.getController();
+            sameController.setDialogStage(dialogStage);
             sameController.setNewPosition(filledPosition);
 
             // Show the dialog and wait until the user closes it
