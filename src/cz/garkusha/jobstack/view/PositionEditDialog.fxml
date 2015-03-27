@@ -153,7 +153,7 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="90.0" text="Cancel">
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
             </Button>
          </children>
