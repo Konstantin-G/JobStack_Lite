@@ -4,6 +4,7 @@ import cz.garkusha.jobstack.model.Position;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 /**
@@ -31,6 +32,12 @@ public class PerhapsTheSamePositionController {
     @FXML
     private TextField newAnswerDateField;
 
+    private Stage dialogStage;
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -51,5 +58,13 @@ public class PerhapsTheSamePositionController {
         newPersonField.setText(position.getPerson());
         newRequestSentDateField.setText("");
         newAnswerDateField.setText("");
+    }
+
+    /**
+     * Called when the user clicks Ok.
+     */
+    @FXML
+    private void handleOk() {
+        dialogStage.close();
     }
 }
