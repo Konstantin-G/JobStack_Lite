@@ -179,6 +179,35 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: derive(#333333, +20%);
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-color: #333333 #333333 #333333 #333333;
+    -fx-background-color: #333333;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: #333333;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #3a3a3a;
+}
+
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
