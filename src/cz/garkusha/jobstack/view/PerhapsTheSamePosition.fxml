@@ -9,9 +9,9 @@
    <children>
       <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Ok">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="80.0" text="Ok">
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
             </Button>
          </children>
