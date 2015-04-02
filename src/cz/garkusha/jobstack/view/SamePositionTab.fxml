@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="337.0" maxWidth="298.0" minHeight="337.0" minWidth="298.0" prefHeight="337.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.view.SamePositionTabController">
    <children>
-      <GridPane layoutX="-27.0" layoutY="25.0" maxHeight="304.0" maxWidth="288.0" minHeight="304.0" minWidth="200.0" prefHeight="304.0" prefWidth="288.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="11.0">
+      <GridPane layoutX="-27.0" layoutY="25.0" maxHeight="304.0" maxWidth="288.0" minHeight="304.0" minWidth="200.0" prefHeight="304.0" prefWidth="288.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="6.0">
          <children>
             <TextField fx:id="oldResultField" editable="false" GridPane.rowIndex="1" />
             <TextField fx:id="oldPersonField" editable="false" GridPane.rowIndex="5" />
