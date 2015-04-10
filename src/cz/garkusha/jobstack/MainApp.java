@@ -10,6 +10,7 @@ import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
 import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
+import cz.garkusha.jobstack.util.Path;
 import cz.garkusha.jobstack.view.*;
 
 import javafx.application.Application;
@@ -20,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -74,6 +76,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("JobStack");
+        this.primaryStage.getIcons().add(new Image("file:" + Path.RESOURCES_FOLDER +"/icon.png"));
 
         initRootLayout();
         showTableLayout();
