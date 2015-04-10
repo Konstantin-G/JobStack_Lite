@@ -38,7 +38,7 @@ public class PDFConverter {
         properties.put(IHtmlToPdfTransformer.PDF_RENDERER_CLASS, IHtmlToPdfTransformer.FLYINGSAUCER_PDF_RENDERER);
 
         //properties to change font
-        properties.put(IHtmlToPdfTransformer.FOP_TTF_FONT_PATH, Path.getAbsoluteProgramPath());
+        properties.put(IHtmlToPdfTransformer.FOP_TTF_FONT_PATH, Path.getAbsoluteResourcesPath());
 
         // new converter
         CYaHPConverter converter = new CYaHPConverter();
