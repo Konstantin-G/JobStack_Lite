@@ -4,7 +4,8 @@ package cz.garkusha.jobstack;
  *
  * @author Konstantin Garkusha
  */
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.DBCommunication;
@@ -76,7 +77,13 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("JobStack");
-        this.primaryStage.getIcons().add(new Image("file:" + Path.RESOURCES_FOLDER +"/icon.png"));
+        // load icon
+        try ( InputStream is = getClass().getResourceAsStream("/cz/garkusha/jobstack/resources/icon.png")){
+            Image image = new Image(is);
+            this.primaryStage.getIcons().add(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         initRootLayout();
         showTableLayout();
