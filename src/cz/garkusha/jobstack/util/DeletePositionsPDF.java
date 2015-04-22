@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *  The class deletes all pdf file od positions , were deleted or unsaved in database.
+ *  The class deletes all pdf file in positions , were deleted or unsaved in database.
  *
  * @author Konstantin Garkusha
  */
