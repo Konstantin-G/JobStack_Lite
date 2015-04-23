@@ -105,6 +105,13 @@ public class PositionAddDialogController {
                 position.setCompany(newValue);
                 position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
                 pathToThePDFField.setText(position.getJobTitlePDF());
+
+                // if filled position is probably the same. Yoy see new window
+                if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), position)
+                        // to block first after filling compare
+                        && jobTitleField.getText() != null) {
+                    mainApp.showProbablyTheSamePositionLayout(position);
+                }
             }
         });
         // add listener to automation make changes in path to pdf file, when job title was changed
