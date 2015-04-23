@@ -23,7 +23,7 @@ public class FindProbablyTheSamePositions {
     public static boolean isProbablyTheSamePositionExist(ObservableList<Position> positions, Position filledPosition) {
         probablyTheSamePositionList = new ArrayList<>();
         for (Position position : positions) {
-            if (position.getCompany().equals(filledPosition.getCompany())){
+            if (position.getCompany().toLowerCase().equals(filledPosition.getCompany().toLowerCase())){
                 probablyTheSamePositionList.add(position);
             }
         }
