@@ -230,7 +230,8 @@ public class TableLayoutController {
     void handleJobDescriptionHyperlink() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
-            String absoluteReferenceToJobPDF = Path.getAbsoluteProgramPath() + File.separator + selectedPerson.getJobTitlePDF();
+            String absoluteReferenceToJobPDF = Path.getProgramTempFolder() +
+                    "tmp_" + Path.getDbName() + File.separator + "jobsDescription" + File.separator + selectedPerson.getJobTitlePDF();
             File pdfFile = new File(absoluteReferenceToJobPDF);
             if (pdfFile.exists()) {
                 if (Desktop.isDesktopSupported()) {

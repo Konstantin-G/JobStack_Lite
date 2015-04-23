@@ -17,6 +17,9 @@ public class DBCommunication {
     private final ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
+        // unZip database from JobStack *.dat file
+        ZipDB.unCompression();
+
         this.db = new DerbyDBManager();
         this.positions = positions;
         try {
@@ -78,11 +81,10 @@ public class DBCommunication {
                 db.executeUpdate(newRowQuery);
             }
             System.out.println("Information was saved to DB");
+
         } catch (SQLException e) {
             e.printStackTrace();
             Dialogs.exceptionDialog(e);
         }
-
-
     }
 }

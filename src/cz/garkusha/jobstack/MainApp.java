@@ -8,10 +8,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 
 import cz.garkusha.jobstack.model.Position;
-import cz.garkusha.jobstack.util.DBCommunication;
-import cz.garkusha.jobstack.util.DeletePositionsPDF;
-import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
-import cz.garkusha.jobstack.util.Path;
+import cz.garkusha.jobstack.util.*;
 import cz.garkusha.jobstack.view.*;
 
 import javafx.application.Application;
@@ -63,6 +60,8 @@ public class MainApp extends Application {
         DeletePositionsPDF.deletedPDFDelete();
 
         dbCommunication.writePositionsToDB();
+        //Zip database to JobStack *.dat file
+        ZipDB.compression();
     }
 
     public int getPositionsMaxId(){

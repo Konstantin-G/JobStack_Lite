@@ -10,7 +10,7 @@ import java.sql.*;
  * @author Konstantin Garkusha
  */
 
-class DerbyDBManager {
+public class DerbyDBManager {
     private static Connection con = null ;
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver" ;
 
@@ -38,7 +38,7 @@ class DerbyDBManager {
             con = DriverManager.getConnection(Path.getPathToDbFile());
             exists = true ;
         } catch(Exception ignore) {
-            System.out.println("Can't connect to database");
+            Dialogs.someError("Your database not found,\nif you have the DB, check your DB in data folder,\nif you haven't the DB, i'll create it.");
             // Do nothing if database isn't exist
         }
         return exists ;

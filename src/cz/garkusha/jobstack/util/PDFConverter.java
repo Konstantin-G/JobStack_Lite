@@ -24,7 +24,8 @@ public class PDFConverter {
             makeDirectory.mkdir();
         }
         // save pdf in outfile
-        File filePDF = new File(Path.getAbsoluteProgramPath() + File.separator + relativeReferenceToJobPDF);
+        File filePDF = new File(Path.getProgramTempFolder() + "tmp_" + Path.getDbName() + File.separator
+                + "jobsDescription" + File.separator + relativeReferenceToJobPDF);
         // contains configuration properties
         Map<String, String> properties = new HashMap<>();
         // list containing header/footer

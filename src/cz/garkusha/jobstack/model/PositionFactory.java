@@ -20,7 +20,7 @@ public class PositionFactory {
         String result           = "";
         String company          = htmlParser.getCompany();
         String jobTitle         = htmlParser.getJobTitle();
-        String jobTitlePDF      = Path.getRelativeJobDescriptionPath() + getPDFFileName(company, jobTitle);
+        String jobTitlePDF      = getPDFFileName(company, jobTitle);
         String location         = htmlParser.getLocation();
         // web - have as parameter
         String person           = null != htmlParser.getPerson() ? htmlParser.getPerson(): "";
