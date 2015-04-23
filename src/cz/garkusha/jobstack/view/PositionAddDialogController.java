@@ -100,8 +100,10 @@ public class PositionAddDialogController {
         companyField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //delete all bag symbols (witch not allowed in OS file name)
+                newValue = newValue.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ");
                 position.setCompany(newValue);
-                position.setJobTitlePDF(Path.getRelativeJobDescriptionPath() + PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
+                position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
                 pathToThePDFField.setText(position.getJobTitlePDF());
             }
         });
@@ -110,8 +112,10 @@ public class PositionAddDialogController {
         jobTitleField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                //delete all bag symbols (witch not allowed in OS file name)
+                newValue = newValue.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ");
                 position.setJobTitle(newValue);
-                position.setJobTitlePDF(Path.getRelativeJobDescriptionPath() + PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
+                position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
                 pathToThePDFField.setText(position.getJobTitlePDF());
             }
         });

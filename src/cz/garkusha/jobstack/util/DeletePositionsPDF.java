@@ -24,25 +24,39 @@ public class DeletePositionsPDF {
 
     public static void deletedPDFDelete(){
         for (String s : deletedList) {
-            File fileToDelete = new File(Path.getAbsoluteProgramPath() + File.separator + s);
+            File fileToDelete = new File(Path.getProgramTempFolder() + "tmp_" + Path.getDbName() + File.separator
+                    + "jobsDescription" + File.separator + s);
             if (fileToDelete.exists()){
                 boolean isDeleted = fileToDelete.delete();
                 if (!isDeleted){
                     Dialogs.someError("Some file aren't deleted");
-                }
+                } else System.out.println("file \"" + s + "\" was deleted");
             }
         }
     }
 
     public static void unsavedPDFDelete(){
         for (String s : unsavedList) {
-            File fileToDelete = new File(Path.getAbsoluteProgramPath() + File.separator + s);
+            File fileToDelete = new File(Path.getProgramTempFolder() + "tmp_" + Path.getDbName() + File.separator
+                    + "jobsDescription" + File.separator + s);
             if (fileToDelete.exists()){
                 boolean isDeleted = fileToDelete.delete();
                 if (!isDeleted){
                     Dialogs.someError("Some file aren't deleted");
-                }
+                } else System.out.println("file \"" + s + "\" was deleted");
             }
         }
+    }
+
+    public static void clearTempDirectory(File file){
+        if (!file.exists())
+            return;
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                clearTempDirectory(f);
+            }
+        }
+        file.delete();
+        System.out.println("file \"" + file.getName() + "\" was deleted");
     }
 }

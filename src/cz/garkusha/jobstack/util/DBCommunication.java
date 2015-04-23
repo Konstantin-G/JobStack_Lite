@@ -4,6 +4,7 @@ import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.view.Dialogs;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,6 +18,10 @@ public class DBCommunication {
     private final ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
+
+        // clear temp directory
+        DeletePositionsPDF.clearTempDirectory(new File(Path.getProgramTempFolder()));
+
         // unZip database from JobStack *.dat file
         ZipDB.unCompression();
 

@@ -113,6 +113,7 @@ public class MainApp extends Application {
      * Initializes the root layout.
      */
     void initRootLayout() {
+        System.out.println("All it's ok, start working...");
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();

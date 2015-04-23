@@ -31,7 +31,7 @@ public class ZipDB
 
     public static void unCompression(){
         ZipDB unZip = new ZipDB();
-            unZip.unZipIt(ZIP_FILE, TMP_FOLDER);
+        unZip.unZipIt(ZIP_FILE, TMP_FOLDER);
     }
 
     /**
