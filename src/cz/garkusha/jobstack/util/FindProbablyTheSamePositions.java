@@ -21,6 +21,9 @@ public class FindProbablyTheSamePositions {
     }
 
     public static boolean isProbablyTheSamePositionExist(ObservableList<Position> positions, Position filledPosition) {
+        if (filledPosition.getCompany() == null) {
+            return false;
+        }
         probablyTheSamePositionList = new ArrayList<>();
         for (Position position : positions) {
             if (position.getCompany().toLowerCase().equals(filledPosition.getCompany().toLowerCase())){
