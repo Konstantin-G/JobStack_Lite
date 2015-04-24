@@ -12,7 +12,6 @@ import cz.garkusha.jobstack.model.PositionFactory;
 import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
 import cz.garkusha.jobstack.util.PDFConverter;
-import cz.garkusha.jobstack.util.Path;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,7 +26,7 @@ public class PositionAddDialogController {
     @FXML
     private TextField idField;
     @FXML
-    private ChoiceBox resultChoiceBox;
+    private ChoiceBox<String> resultChoiceBox;
     @FXML
     private TextField companyField;
     @FXML
@@ -54,6 +53,7 @@ public class PositionAddDialogController {
     private Stage dialogStage;
     private Position position;
     private boolean saveClicked = false;
+    private boolean isFilledOK = false;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -108,8 +108,8 @@ public class PositionAddDialogController {
 
                 // if filled position is probably the same. Yoy see new window
                 if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), position)
-                        // to block first after filling compare
-                        && jobTitleField.getText() != null) {
+                                 // to block first after filling compare
+                            && !isFilledOK) {
                     mainApp.showProbablyTheSamePositionLayout(position);
                 }
             }
@@ -150,6 +150,8 @@ public class PositionAddDialogController {
     void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
         resultChoiceBox.setValue(filledPosition.getResult());
+
+        isFilledOK = filledPosition.getCompany() != null;
         companyField.setText(filledPosition.getCompany());
         companyField.setPromptText("Can't find company name, need to fill this field manually");
         jobTitleField.setText(filledPosition.getJobTitle());
