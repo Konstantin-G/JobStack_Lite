@@ -45,7 +45,8 @@ public class DBCommunication {
                   /*(10)*/     " email VARCHAR(100) DEFAULT NULL," +
                   /*(11)*/     " requestSent VARCHAR(20) DEFAULT NULL," +
                   /*(12)*/     " answer VARCHAR(20) DEFAULT NULL," +
-                  /*(13)*/     " conversation LONG VARCHAR DEFAULT NULL)"
+                  /*(13)*/     " conversation LONG VARCHAR DEFAULT NULL)" +
+                  /*(14)*/     " country VARCHAR(30) NOT NULL)"
                );
             }
         } catch (SQLException e) {
@@ -58,7 +59,7 @@ public class DBCommunication {
         ResultSet rs = db.executeQuery("SELECT * FROM stepOne");
         while (rs.next()) {
             positions.add(new Position(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),  rs.getString(5),
-                    rs.getString(6), rs.getString(7),  rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13).replaceAll("''","'")));
+                    rs.getString(6), rs.getString(7),  rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13).replaceAll("''","'"), rs.getString(14)));
         }
     }
 
@@ -80,9 +81,10 @@ public class DBCommunication {
                 String requestSentDate  = DateUtil.toString(p.getRequestSentDate()) != null ? DateUtil.toString(p.getRequestSentDate()) : "";
                 String answerDate       = DateUtil.toString(p.getAnswerDate()) != null ? DateUtil.toString(p.getAnswerDate()) : "";
                 String conversation     = p.getConversation() != null ? p.getConversation().replaceAll("'", "''") : ""; // replaceAll("'", "''") need to escapes ' in sql query
+                String country          = p.getCountry() != null ? p.getCountry() : "";
 
-                String newRowQuery = String.format("INSERT INTO stepOne VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                                                    id, result, company, jobTitle, jobTitlePDF, location, web, person, phone, email, requestSentDate, answerDate, conversation);
+                String newRowQuery = String.format("INSERT INTO stepOne VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+                        id, result, company, jobTitle, jobTitlePDF, location, web, person, phone, email, requestSentDate, answerDate, conversation, country);
                 db.executeUpdate(newRowQuery);
             }
             System.out.println("Information was saved to DB");
