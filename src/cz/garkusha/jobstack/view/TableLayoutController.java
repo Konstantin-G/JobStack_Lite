@@ -58,6 +58,8 @@ public class TableLayoutController {
     private TableColumn<Position, LocalDate> answerDateColumn;
     @FXML
     private TableColumn<Position, String> conversationColumn;
+    @FXML
+    private TableColumn<Position, String> countryColumn;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
     SortedList<Position> sortedData;
@@ -161,6 +163,7 @@ public class TableLayoutController {
             }
         });
         conversationColumn.setCellValueFactory(cellData -> cellData.getValue().conversationProperty());
+        countryColumn.setCellValueFactory(cellData -> cellData.getValue().countryProperty());
     }
 
     /**

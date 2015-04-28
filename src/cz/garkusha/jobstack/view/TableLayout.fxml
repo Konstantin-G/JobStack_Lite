@@ -55,6 +55,7 @@
                     <columns>
                       <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
                       <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="100.0" prefWidth="110.0" text="result" />
+                        <TableColumn fx:id="countryColumn" maxWidth="100.0" minWidth="50.0" text="country" />
                         <TableColumn fx:id="companyColumn" maxWidth="300.0" minWidth="200.0" prefWidth="250.0" text="company" />
                         <TableColumn fx:id="jobTitleColumn" maxWidth="500.0" minWidth="200.0" prefWidth="300.0" text="job title" />
                         <TableColumn fx:id="jobTitlePDFColumn" prefWidth="75.0" text="job titlePDF" visible="false" />

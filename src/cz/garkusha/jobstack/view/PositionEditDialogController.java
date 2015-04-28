@@ -22,7 +22,7 @@ public class PositionEditDialogController {
     @FXML
     private TextField idField;
     @FXML
-    private ChoiceBox resultChoiceBox;
+    private ChoiceBox<String> resultChoiceBox;
     @FXML
     private TextField companyField;
     @FXML
@@ -45,6 +45,8 @@ public class PositionEditDialogController {
     private DatePicker answerDateField;
     @FXML
     private TextArea conversationArea;
+    @FXML
+    private ChoiceBox<String> countryChoiceBox;
 
     private Stage dialogStage;
     private Position position;
@@ -60,6 +62,7 @@ public class PositionEditDialogController {
     @FXML
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
+        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine"));
     }
 
     /**
@@ -104,6 +107,7 @@ public class PositionEditDialogController {
         answerDateField.setShowWeekNumbers(false);
         answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(position.getConversation());
+        countryChoiceBox.setValue(position.getCountry());
     }
 
     /**
@@ -187,6 +191,7 @@ public class PositionEditDialogController {
             position.setRequestSentDate(requestSentDateField.getValue());
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
+            position.setCountry(String.valueOf(countryChoiceBox.getValue()));
 
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
@@ -212,7 +217,8 @@ public class PositionEditDialogController {
         int id = Integer.parseInt(idField.getText());
         id = id != 0 ? id : newId + 1;
         String url = webField.getText();
-        Position filledPosition = PositionFactory.getNewPosition(id, url);
+        String country  = String.valueOf(countryChoiceBox.getValue());
+        Position filledPosition = PositionFactory.getNewPosition(id, url, country);
         setFilledPosition(filledPosition);
     }
 

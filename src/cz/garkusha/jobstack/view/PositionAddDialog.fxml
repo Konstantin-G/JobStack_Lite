@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -144,6 +145,11 @@
                </GridPane.margin>
             </TextField>
             <ChoiceBox fx:id="resultChoiceBox" minHeight="28.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="countryChoiceBox" minHeight="28.0" prefHeight="28.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </ChoiceBox>
          </children>
       </GridPane>
       <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">

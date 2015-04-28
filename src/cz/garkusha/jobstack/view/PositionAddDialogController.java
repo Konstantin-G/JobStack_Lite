@@ -49,6 +49,8 @@ public class PositionAddDialogController {
     private DatePicker answerDateField;
     @FXML
     private TextArea conversationArea;
+    @FXML
+    private ChoiceBox<String> countryChoiceBox;
 
     private Stage dialogStage;
     private Position position;
@@ -65,6 +67,9 @@ public class PositionAddDialogController {
     @FXML
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
+        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine"));
+         /*TODO add past choice*/
+        countryChoiceBox.setValue("Czech");
     }
 
     /**
@@ -209,6 +214,7 @@ public class PositionAddDialogController {
             position.setRequestSentDate(requestSentDateField.getValue());
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
+            position.setCountry(String.valueOf(countryChoiceBox.getValue()));
 
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
@@ -239,7 +245,8 @@ public class PositionAddDialogController {
             int id = Integer.parseInt(idField.getText());
             id = id != 0 ? id : newId + 1;
             String url = webField.getText();
-            filledPosition = PositionFactory.getNewPosition(id, url);
+            String country  = String.valueOf(countryChoiceBox.getValue());
+            filledPosition = PositionFactory.getNewPosition(id, url, country);
             setFilledPosition(filledPosition);
             // if filled position is probably the same. Yoy see new window
             if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
