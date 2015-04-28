@@ -248,7 +248,7 @@ public class PositionAddDialogController {
             String country  = String.valueOf(countryChoiceBox.getValue());
             filledPosition = PositionFactory.getNewPosition(id, url, country);
             setFilledPosition(filledPosition);
-            // if filled position is probably the same. Yoy see new window
+            // if filled position is probably the same. You see new window
             if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
                 mainApp.showProbablyTheSamePositionLayout(filledPosition);
             }
