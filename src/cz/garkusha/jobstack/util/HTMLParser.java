@@ -27,8 +27,8 @@ public class HTMLParser {
     private String phone;
     private String email;
 
-    public HTMLParser(String url){
-        readInformationFromWeb(url);
+    public HTMLParser(String url, String country){
+        readInformationFromWeb(url, country);
     }
 
     public String getCompany() {
@@ -55,7 +55,17 @@ public class HTMLParser {
         return email;
     }
 
-    private void readInformationFromWeb(String url) {
+    private void readInformationFromWeb(String url, String country) {
+        /*TODO */
+        switch (country){
+            case "Ukraine":  System.out.println("Ukraine");
+                break;
+            case "Russia": System.out.println("Russia");
+                break;
+            case "Czech": System.out.println("Czech");
+                break;
+            default: System.out.println("none");
+        }
         if (url.contains("m.jobs.cz")) {
             readInformationFrom_M_JODS_CZ(url);
         } else if (url.contains("prace.cz")) {
