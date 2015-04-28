@@ -30,14 +30,15 @@ public class Position {
     private final ObjectProperty<LocalDate> requestSentDate;
     private final ObjectProperty<LocalDate> answerDate;
     private final StringProperty conversation;
+    private final StringProperty country;
 
     public Position() {
-        this(0, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(0, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public Position(int id, String result, String company,
-                    String jobTitle, String jobTitlePDF, String location,
-                    String web, String person, String phone, String email, String requestSentDate, String answerDate, String conversation) {
+    public Position(int id, String result, String company, String jobTitle, String jobTitlePDF,
+                    String location, String web, String person, String phone, String email, String requestSentDate,
+                    String answerDate, String conversation, String country) {
 
         this.id                 = new SimpleIntegerProperty(id);
         this.result             = new SimpleStringProperty(result);
@@ -54,6 +55,7 @@ public class Position {
         this.answerDate         = requestSentDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(answerDate))
                                                             : new SimpleObjectProperty<>();
         this.conversation       = new SimpleStringProperty(conversation);
+        this.country            = new SimpleStringProperty(country);
     }
 
     public int getId() {
@@ -210,5 +212,17 @@ public class Position {
 
     public void setConversation(String conversation) {
         this.conversation.set(conversation);
+    }
+
+    public String getCountry() {
+        return country.get();
+    }
+
+    public StringProperty countryProperty() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country.set(country);
     }
 }
