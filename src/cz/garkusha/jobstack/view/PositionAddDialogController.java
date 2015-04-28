@@ -96,7 +96,7 @@ public class PositionAddDialogController {
         idField.setText(String.valueOf(position.getId()));
         resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
-        // add listener to automation make changes in path to pdf file, when company name was changed
+        // add listener to automation make changes in name to pdf file, when company name was changed
         companyField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -114,7 +114,7 @@ public class PositionAddDialogController {
                 }
             }
         });
-        // add listener to automation make changes in path to pdf file, when job title was changed
+        // add listener to automation make changes in name to pdf file, when job title was changed
         jobTitleField.setText(position.getJobTitle());
         jobTitleField.textProperty().addListener(new ChangeListener<String>() {
             @Override
