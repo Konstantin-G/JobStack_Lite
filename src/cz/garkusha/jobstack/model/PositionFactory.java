@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class PositionFactory {
 
-    public static Position getNewPosition(int id, String URLToJob){
-        HTMLParser htmlParser = new HTMLParser(URLToJob);
+    public static Position getNewPosition(int id, String URLToJob, String country){
+        HTMLParser htmlParser = new HTMLParser(URLToJob, country);
 
         // id - have as parameter
         String result           = "";
@@ -30,7 +30,7 @@ public class PositionFactory {
         String answerDate       = null;
         String conversation     = "";
 
-        return new Position(id , result, company, jobTitle, jobTitlePDF,location, URLToJob, person, phone, email, requestSentDate, answerDate, conversation);
+        return new Position(id , result, company, jobTitle, jobTitlePDF,location, URLToJob, person, phone, email, requestSentDate, answerDate, conversation, country);
     }
 
     public static String getPDFFileName( String company, String jobTitle) {
