@@ -35,11 +35,14 @@ public class PositionFactory {
 
     public static String getPDFFileName( String company, String jobTitle) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd");
-/*        if (null == company)
+        if (null == company)
             company = "companyName";
         if (null == jobTitle)
-            company = "jobTitle";*/
-        return simpleDateFormat.format(new Date()) + "_" + company + "_" + jobTitle + ".pdf";
+            jobTitle = "jobTitle";
+
+        return simpleDateFormat.format(new Date()) + "_" + company.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ")
+                                                   + "_" + jobTitle.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ")
+                                                   + ".pdf";
     }
 
 }
