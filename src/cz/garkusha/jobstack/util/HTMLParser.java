@@ -12,9 +12,15 @@ import java.text.MessageFormat;
  *
  * +--------------------------------------------------------------------+
  * |  Working ONLY with:                                                |
+ * |      Czech Republic->                                              |
  * |                        PRACE.CZ                                    |
  * |                        JOBDNES.CZ                                  |
  * |      mobile version of JOBS.CZ (m.jobs.cz)                         |
+ * |                                                                    |
+ * |        Russia->        SUPERJOB.RU                                 |
+ * |                        RABOTA.RU
+ * |                        CAREERIST.RU
+ *                          http://brainstorage.me/
  * +--------------------------------------------------------------------+
  * @author Konstantin Garkusha
  */
@@ -57,24 +63,42 @@ public class HTMLParser {
 
     private void readInformationFromWeb(String url, String country) {
         /*TODO */
-        switch (country){
-            case "Ukraine":  System.out.println("Ukraine");
+        switch (country) {
+            case "Czech":
+                if (url.contains("m.jobs.cz")) {
+                    readInformationFrom_M_JODS_CZ(url);
+                } else if (url.contains("prace.cz")) {
+                    readInformationFrom_PRACE_CZ(url);
+                } else if (url.contains("jobdnes.cz")) {
+                    readInformationFrom_JOBDNES_CZ(url);
+                }
                 break;
-            case "Russia": System.out.println("Russia");
+            /**/
+            case "Russia":
+                if (url.contains("superjob.ru")) {
+                    readInformationFrom_SUPERJOB_RU(url);
+                } else if (url.contains("rabota.ru")) {
+                    readInformationFrom_RABOTA_RU(url);
+                } else if (url.contains("careerist.ru")) {
+                    readInformationFrom_CAREERIST_RU(url);
+                } else if (url.contains("brainstorage.me")) {
+                    readInformationFrom_BRAINSTORAGE_ME(url);
+                }
                 break;
-            case "Czech": System.out.println("Czech");
+            /*По Украине — думаю будет достаточно этого:
+                jobs.dou.ua/
+                hh.ua/
+                rabota.ua/*/
+            case "Ukraine":
+                System.out.println("Ukraine");
                 break;
-            default: System.out.println("none");
+            default:
+                System.out.println("none");
         }
-        if (url.contains("m.jobs.cz")) {
-            readInformationFrom_M_JODS_CZ(url);
-        } else if (url.contains("prace.cz")) {
-            readInformationFrom_PRACE_CZ(url);
-        }else if (url.contains("jobdnes.cz")) {
-            readInformationFrom_JOBDNES_CZ(url);
-        }
+
     }
 
+    /** Czech Republic*/
     private void readInformationFrom_M_JODS_CZ(String url) {
         Document doc = null;
         try {
@@ -196,13 +220,138 @@ public class HTMLParser {
         } catch (Exception ignore) { }
     }
 
+    /**Russia*/
+    private void readInformationFrom_SUPERJOB_RU(String url) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Dialogs.connectionError();
+        }
+        try {
+            //noinspection ConstantConditions
+            this.company = doc.body().select("a.h_color_gray_dk").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.jobTitle = doc.body().select("h1.VacancyView_title.h_color_gray_dk").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.location = doc.body().select("span.h_color_gray.VacancyView_town").first().text().trim();
+        } catch (NullPointerException ignore) { }
+    }
+
+    private void readInformationFrom_RABOTA_RU(String url) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Dialogs.connectionError();
+        }
+        try {
+            //noinspection ConstantConditions
+            this.company = doc.body().select("a.bold.text_16.no_decore").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.jobTitle = doc.body().select("p.title_30.vac-title").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.location = doc.body().select("div.list_kval.pd_h").first().select("ul").last().text();
+            this.location = location.substring(0, location.indexOf(32));
+        } catch (NullPointerException ignore) { }
+    }
+
+    private void readInformationFrom_BRAINSTORAGE_ME(String url) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Dialogs.connectionError();
+        }
+        try {
+            //noinspection ConstantConditions
+            this.company = doc.body().select("div.company_name").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.jobTitle = doc.body().select("div.title").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.location = doc.body().select("div.location").first().text();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.person = doc.body().select("div.comContact").first().getElementsByTag("span").get(1).text();
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.phone = doc.body().select("div.contact").first().text();
+//            this.phone = phoneFormat(phone);
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.email = doc.body().select("p.c2-em").first().text().trim();
+        } catch (Exception ignore) { }
+    }
+
+    private void readInformationFrom_CAREERIST_RU(String url) {
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Dialogs.connectionError();
+        }
+        try {
+            //noinspection ConstantConditions
+            this.company = doc.body().select("div.comContact").first().getElementsByTag("span").get(0).text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.jobTitle = doc.body().select("div.vacancyPageHeaderNew").first().getElementsByTag("h1").first().text()
+                    .replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.location = doc.body().select("div.vacancyPageHeaderNewRight").first().select("span.searchingtext").first().text();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.person = doc.body().select("div.comContact").first().getElementsByTag("span").get(1).text();
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.phone  = doc.body().select("div.comContact").first().getElementsByTag("span").get(2).text();
+//            this.phone = phoneFormat(phone);
+        } catch (Exception ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.email = doc.body().select("p.c2-em").first().text().trim();
+        } catch (Exception ignore) { }
+    }
+
+
     private String phoneFormat(String phones){
         if (phones == null || phones.length() == 0) {
             return "";
         }
         String[] phoneArray = phones.split(",");
         StringBuilder phoneBuilder = new StringBuilder("");
-        MessageFormat phoneMsgFmt=new java.text.MessageFormat("+{0} {1} {2} {3}");
+        MessageFormat phoneMsgFmt = new MessageFormat("+{0} {1} {2} {3}");
         for (int i = 0; i < phoneArray.length; i++) {
             phoneArray[i] = phoneArray[i].replaceAll("[\\D]", "");
             if (phoneArray[i].length() == 9) {
