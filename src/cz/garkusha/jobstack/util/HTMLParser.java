@@ -351,8 +351,13 @@ public class HTMLParser {
         MessageFormat phoneMsgFmt = new MessageFormat("+{0} {1} {2} {3}");
         for (int i = 0; i < phoneArray.length; i++) {
             phoneArray[i] = phoneArray[i].replaceAll("[\\D]", "");
+            // if phone without state code, like this 123 456 789
             if (phoneArray[i].length() == 9) {
                 phoneArray[i] = STATE_CODE + phoneArray[i];
+            }
+            // if phone with state code and 00 instead + , like this 00420 123 456 789
+            if (phoneArray[i].length() == 14) {
+                phoneArray[i] = phoneArray[i].substring(2);
             }
             String[] phoneNumArr={phoneArray[i].substring(0, 3), phoneArray[i].substring(3, 6), phoneArray[i].substring(6, 9), phoneArray[i].substring(9)};
             phoneArray[i] = phoneMsgFmt.format(phoneNumArr);
