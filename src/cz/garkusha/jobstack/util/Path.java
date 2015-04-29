@@ -47,10 +47,6 @@ public class Path {
         return ABSOLUTE_PROGRAM_PATH;
     }
 
-    public static String getRelativeJobDescriptionPath() {
-        return RELATIVE_JOB_DESCRIPTION_PATH;
-    }
-
     public static String getAbsoluteJobDescriptionPath() {
         return ABSOLUTE_JOB_DESCRIPTION_PATH;
     }
