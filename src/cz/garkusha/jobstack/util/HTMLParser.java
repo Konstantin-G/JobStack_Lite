@@ -65,7 +65,6 @@ public class HTMLParser {
     }
 
     private void readInformationFromWeb(String url, String country) {
-        /*TODO */
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
@@ -101,6 +100,17 @@ public class HTMLParser {
                     readInformationFrom_HH_UA(doc);
                 } else if (url.contains("rabota.ua")) {
                     readInformationFrom_RABOTA_UA(doc);
+                }
+                break;
+            case "USA":
+                if (url.contains("dice.com")) {
+                    readInformationFrom_DICE_COM(doc);
+                } else if (url.contains("careerbuilder.com")) {
+                    readInformationFrom_CAREERBUILDER_COM(doc);
+                } else if (url.contains("monster.com")) {
+                    readInformationFrom_MONSTER_COM(doc);
+                } else if (url.contains("indeed.com")) {
+                    readInformationFrom_INDEED_COM(doc);
                 }
                 break;
             default:
@@ -342,6 +352,12 @@ public class HTMLParser {
         } catch (NullPointerException ignore) { }
     }
 
+    /**USA*/
+    private void readInformationFrom_DICE_COM(Document doc){}
+    private void readInformationFrom_CAREERBUILDER_COM(Document doc){}
+    private void readInformationFrom_MONSTER_COM(Document doc){}
+    private void readInformationFrom_INDEED_COM(Document doc){}
+
     private String phoneFormat(String phones){
         if (phones == null || phones.length() == 0) {
             return "";
@@ -362,6 +378,7 @@ public class HTMLParser {
             String[] phoneNumArr={phoneArray[i].substring(0, 3), phoneArray[i].substring(3, 6), phoneArray[i].substring(6, 9), phoneArray[i].substring(9)};
             phoneArray[i] = phoneMsgFmt.format(phoneNumArr);
             phoneBuilder.append(phoneArray[i]);
+
             if (i !=phoneArray.length - 1) {
                 phoneBuilder.append(", ");
             }
