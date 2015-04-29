@@ -3,9 +3,13 @@ package cz.garkusha.jobstack.util;
 import cz.garkusha.jobstack.view.Dialogs;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Model class for parsing a html file from url.
@@ -189,8 +193,18 @@ public class HTMLParser {
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            /*TODO location for jobdnes.cz*/
-            /*this.location = doc.body().select("p.c2-mi").first().text().trim();*/
+            Elements elements = doc.body().select("div.w2-a.text").first().getElementsByTag("tr");
+
+            Map<String, String> mapOfData = new HashMap<>();
+            for (Element e : elements){
+                mapOfData.put(e.getElementsByTag("th").first().text(), e.getElementsByTag("td").first().text());
+            }
+
+            for (Map.Entry<String, String> pair : mapOfData.entrySet()) {
+                if (pair.getKey().contains("Místo pracoviště") || pair.getKey().contains("Region")) {
+                    this.location = pair.getValue().trim();
+                }
+            }
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
