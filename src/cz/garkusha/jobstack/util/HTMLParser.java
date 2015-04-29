@@ -18,9 +18,9 @@ import java.text.MessageFormat;
  * |      mobile version of JOBS.CZ (m.jobs.cz)                         |
  * |                                                                    |
  * |        Russia->        SUPERJOB.RU                                 |
- * |                        RABOTA.RU
- * |                        CAREERIST.RU
- *                          http://brainstorage.me/
+ * |                        RABOTA.RU                                   |
+ * |                        CAREERIST.RU                                |
+ * |                        BRAINSTORAGE.ME                             |
  * +--------------------------------------------------------------------+
  * @author Konstantin Garkusha
  */
