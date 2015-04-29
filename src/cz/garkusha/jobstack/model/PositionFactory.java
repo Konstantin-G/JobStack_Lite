@@ -40,7 +40,7 @@ public class PositionFactory {
         if (null == jobTitle)
             jobTitle = "jobTitle";
 
-        return simpleDateFormat.format(new Date()) + "_" + company.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ")
+        return simpleDateFormat.format(new Date()) + "_" +  company.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ")
                                                    + "_" + jobTitle.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}"," ")
                                                    + ".pdf";
     }
