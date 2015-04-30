@@ -5,7 +5,6 @@ package cz.garkusha.jobstack;
  * @author Konstantin Garkusha
  */
 import java.io.*;
-import java.net.URISyntaxException;
 
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.util.*;
@@ -31,6 +30,7 @@ public class MainApp extends Application {
     private Stage addDialogStage;
     private BorderPane rootLayout;
     private final DBCommunication dbCommunication;
+    private ProgramProperties programProperties;
     RootLayoutController rootController;
 
     /**
@@ -41,6 +41,8 @@ public class MainApp extends Application {
     public MainApp() {
         this.dbCommunication = new DBCommunication(positions);
         this.isDataChanged = false;
+        // Load properties
+        this.programProperties = ProgramProperties.getInstance();
     }
 
      /**
@@ -101,6 +103,8 @@ public class MainApp extends Application {
             } else {
                 primaryStage.close();
             }
+            programProperties.setMainMaximized(primaryStage.isMaximized());
+            programProperties.saveProperties();
         });
     }
 
@@ -123,6 +127,7 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(programProperties.isMainMaximized());
             primaryStage.show();
             rootController = loader.getController();
             rootController.setMainApp(this);

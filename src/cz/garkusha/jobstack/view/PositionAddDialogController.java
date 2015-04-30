@@ -12,6 +12,7 @@ import cz.garkusha.jobstack.model.PositionFactory;
 import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
 import cz.garkusha.jobstack.util.PDFConverter;
+import cz.garkusha.jobstack.util.ProgramProperties;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -69,7 +70,7 @@ public class PositionAddDialogController {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
         countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
          /*TODO add past choice*/
-        countryChoiceBox.setValue("Czech");
+        countryChoiceBox.setValue(ProgramProperties.getInstance().getCountry());
     }
 
     /**
@@ -211,6 +212,9 @@ public class PositionAddDialogController {
             position.setAnswerDate(answerDateField.getValue());
             position.setConversation(conversationArea.getText());
             position.setCountry(String.valueOf(countryChoiceBox.getValue()));
+
+            //save the past field country to properties
+            ProgramProperties.getInstance().setCountry(String.valueOf(countryChoiceBox.getValue()));
 
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
