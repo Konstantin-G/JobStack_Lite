@@ -24,10 +24,11 @@ import java.util.Map;
  * |        Russia->        SUPERJOB.RU                                 |
  * |                        RABOTA.RU                                   |
  * |                        CAREERIST.RU                                |
- * |                                                                    |
- * |        Ukraine         RABOTA.RU                                   |
- * |                        CAREERIST.RU                                |
  * |                        BRAINSTORAGE.ME                             |
+ * |                                                                    |
+ * |        Ukraine->       HH_UA                                       |
+ * |      mobile version of RABOTA.UA (RABOTA.UA/mobile/)               |
+ * |                        JOBS.DOU.UA                                 |
  * +--------------------------------------------------------------------+
  * @author Konstantin Garkusha
  */
@@ -102,7 +103,7 @@ public class HTMLParser {
                     readInformationFrom_JOBS_DOU_UA(doc);
                 } else if (url.contains("hh.ua")) {
                     readInformationFrom_HH_UA(doc);
-                } else if (url.contains("rabota.ua")) {
+                } else if (url.contains("rabota.ua/mobile")) {
                     readInformationFrom_RABOTA_UA(doc);
                 }
                 break;
@@ -319,19 +320,32 @@ public class HTMLParser {
     private void readInformationFrom_RABOTA_UA(Document doc) {
         try {
             //noinspection ConstantConditions
-            this.company = doc.body().select("li.d-ph-item.d-ph-full#d-company").first().select("span.d-ph-value").text().trim();
+            this.company = doc.body().select("p.loud").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.jobTitle = doc.body().select("div.d_des").first().getElementsByTag("h1").first().text().trim();
+            this.jobTitle = doc.body().select("h1.title").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.location = doc.body().select("li.d-ph-item#d-city").first().select("span.d-ph-value").text().trim();
+            this.location = doc.body().select("span[itemprop = addressLocality]").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.person = doc.body().select("li.d-ph-item#d-person").first().select("span.d-ph-value").text().trim();
+            Elements elements = doc.body().select("ul.unstyled-list").first().select("li.col-50.mob-100");
+            Map<String, String> mapOfData = new HashMap<>();
+            for (Element e : elements){
+                mapOfData.put(e.select("b.col-100.mob-50.muted").first().text(), e.getElementsByTag("span").first().text());
+            }
+
+            for (Map.Entry<String, String> pair : mapOfData.entrySet()) {
+                if (pair.getKey().contains("Контактное лицо")) {
+                    if (pair.getValue().contains("@")) {
+                        this.email = pair.getValue().trim();
+                    } else
+                        this.person = pair.getValue().trim();
+                }
+            }
         } catch (Exception ignore) { }
     }
 
