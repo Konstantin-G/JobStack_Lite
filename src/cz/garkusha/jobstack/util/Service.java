@@ -58,7 +58,7 @@ public class Service {
 //        service.fillPositionsFromDB();
         for (int i = 0; i < service.positions.size(); i++){
             Position position = service.positions.get(i);
-//            position.setCountry("Czech");
+//            position.setLastCountry("Czech");
             String country = position.getCountry();
             System.out.println(country);
             //cut

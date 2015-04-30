@@ -70,7 +70,7 @@ public class PositionAddDialogController {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
         countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
          /*TODO add past choice*/
-        countryChoiceBox.setValue(ProgramProperties.getInstance().getCountry());
+        countryChoiceBox.setValue(ProgramProperties.getInstance().getLastCountry());
     }
 
     /**
@@ -214,7 +214,7 @@ public class PositionAddDialogController {
             position.setCountry(String.valueOf(countryChoiceBox.getValue()));
 
             //save the past field country to properties
-            ProgramProperties.getInstance().setCountry(String.valueOf(countryChoiceBox.getValue()));
+            ProgramProperties.getInstance().setLastCountry(String.valueOf(countryChoiceBox.getValue()));
 
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);

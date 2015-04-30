@@ -12,7 +12,7 @@ public class ProgramProperties {
 
     private static ProgramProperties instance = null;
 
-    private String country;
+    private String lastCountry;
     private boolean isMainMaximized;
 
     private ProgramProperties (){
@@ -26,13 +26,13 @@ public class ProgramProperties {
         return instance;
     }
 
-    public String getCountry() {
-        return country;
+    public String getLastCountry() {
+        return lastCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-        System.out.println(country);
+    public void setLastCountry(String lastCountry) {
+        this.lastCountry = lastCountry;
+        System.out.println(lastCountry);
     }
 
     public boolean isMainMaximized() {
@@ -47,13 +47,13 @@ public class ProgramProperties {
         Properties properties = new Properties();
         try (InputStream input = new FileInputStream("config.properties")) {
             properties.load(input);
-            // web page country
-            this.country = properties.getProperty("country") != null ? properties.getProperty("country") : "Czech";
+            // web page lastCountry
+            this.lastCountry = properties.getProperty("lastCountry") != null ? properties.getProperty("lastCountry") : "Czech";
             // fullscreen main window
             this.isMainMaximized = "1".equals(properties.getProperty("isMainMaximized"));
         } catch (IOException e) {
             System.out.println("Can't find config file, I'll create new");
-            this.country = "Czech";
+            this.lastCountry = "Czech";
         }
     }
 
@@ -62,7 +62,7 @@ public class ProgramProperties {
         String comments = "There will be comments";
         Properties properties = new Properties();
 
-        properties.put("country", this.country);
+        properties.put("lastCountry", this.lastCountry);
         properties.put("isMainMaximized", String.valueOf(this.isMainMaximized ? 1 : 0));
 
         try (OutputStream output = new FileOutputStream("config.properties")){
