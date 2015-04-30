@@ -62,7 +62,7 @@ public class PositionEditDialogController {
     @FXML
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
-        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine"));
+        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
     }
 
     /**
