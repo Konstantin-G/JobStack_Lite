@@ -67,7 +67,7 @@ public class PositionAddDialogController {
     @FXML
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
-        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine"));
+        countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
          /*TODO add past choice*/
         countryChoiceBox.setValue("Czech");
     }
@@ -105,8 +105,6 @@ public class PositionAddDialogController {
         companyField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //delete all bag symbols (witch not allowed in OS file name)
-                newValue = newValue.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ");
                 position.setCompany(newValue);
                 position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
                 pathToThePDFField.setText(position.getJobTitlePDF());
@@ -124,8 +122,6 @@ public class PositionAddDialogController {
         jobTitleField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //delete all bag symbols (witch not allowed in OS file name)
-                newValue = newValue.replaceAll("[\\/]", "-").replaceAll("[*?<>|:\"]", "").replaceAll("[ ]{2,}", " ");
                 position.setJobTitle(newValue);
                 position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
                 pathToThePDFField.setText(position.getJobTitlePDF());
