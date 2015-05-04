@@ -2,6 +2,7 @@ package cz.garkusha.jobstack;
 /**
  *
  * It's lite version of JobStack.
+ * JobStack EE will be working with Google MySQL Cloud ana Hibernate
  *  Main application javaFX class.
  *
  * @author Konstantin Garkusha
