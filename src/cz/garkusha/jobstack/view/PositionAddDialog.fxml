@@ -18,7 +18,6 @@
           <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
             <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
             <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-          <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
             <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
           <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
             <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
@@ -43,32 +42,27 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Path to pdf *" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Label text="Location *" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Location *" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label text="Contact person" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Contact person" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Label text="Application sent" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Application sent" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
+            <Label text="Answering date" GridPane.halignment="RIGHT" GridPane.rowIndex="10" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Answering date" GridPane.halignment="RIGHT" GridPane.rowIndex="11" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="Conversation" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="12" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
+            <Label text="Conversation" GridPane.halignment="RIGHT" GridPane.hgrow="NEVER" GridPane.rowIndex="11" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -96,19 +90,15 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="pathToThePDFField" editable="false" layoutX="120.0" layoutY="60.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="locationField" layoutX="10.0" layoutY="10.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="locationField" layoutX="10.0" layoutY="10.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <TextField fx:id="personField" layoutX="120.0" layoutY="35.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="personField" layoutX="120.0" layoutY="35.0" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></TextField>
-            <TextArea fx:id="conversationArea" prefHeight="200.0" prefWidth="200.0" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="12">
+            <TextArea fx:id="conversationArea" prefHeight="200.0" prefWidth="200.0" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets right="10.0" top="2.5" />
                </GridPane.margin>
@@ -122,24 +112,24 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <DatePicker fx:id="requestSentDateField" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <DatePicker fx:id="answerDateField" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <TextField fx:id="phoneField" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <DatePicker fx:id="requestSentDateField" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <DatePicker fx:id="answerDateField" maxWidth="150.0" minHeight="28.0" minWidth="150.0" prefHeight="28.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <TextField fx:id="phoneField" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label text="Phone number" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+            <Label text="Phone number" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Email" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <Label text="Email" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="emailField" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <TextField fx:id="emailField" minHeight="28.0" prefHeight="28.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>

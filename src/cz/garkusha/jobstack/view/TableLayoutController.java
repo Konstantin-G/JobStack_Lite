@@ -22,7 +22,6 @@ import javafx.scene.paint.Color;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -123,7 +122,7 @@ public class TableLayoutController {
 
         companyColumn.setCellValueFactory(cellData -> cellData.getValue().companyProperty());
         jobTitleColumn.setCellValueFactory(cellData -> cellData.getValue().jobTitleProperty());
-        jobTitlePDFColumn.setCellValueFactory(cellData -> cellData.getValue().jobTitlePDFProperty());
+        jobTitlePDFColumn.setCellValueFactory(cellData -> cellData.getValue().htmlProperty());
         locationColumn.setCellValueFactory(cellData -> cellData.getValue().locationProperty());
         webColumn.setCellValueFactory(cellData -> cellData.getValue().webProperty());
         personColumn.setCellValueFactory(cellData -> cellData.getValue().personProperty());
@@ -233,25 +232,8 @@ public class TableLayoutController {
     void handleJobDescriptionHyperlink() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
-            String absoluteReferenceToJobPDF = Path.getProgramTempFolder() +
-                    "tmp_" + Path.getDbName() + File.separator + "jobsDescription" + File.separator + selectedPerson.getJobTitlePDF();
-            File pdfFile = new File(absoluteReferenceToJobPDF);
-            if (pdfFile.exists()) {
-                if (Desktop.isDesktopSupported()) {
-                    /*TODO don't work correctly in Linux(make application freezes), have to fix*/
-                    try {
-                        Desktop.getDesktop().open(pdfFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Dialogs.exceptionDialog(e);
-                    }
-                } else {
-                    System.out.println("Awt Desktop is not supported!");
-                }
-            } else {
-                String error = "File \"" + absoluteReferenceToJobPDF + "\" is not exists!";
-                Dialogs.someError(error);
-            }
+           String html = selectedPerson.getHtml();
+            mainApp.showInternetBrowser(html);
         }else{
             // Nothing selected.
             Dialogs.noPositionSelectedError();
@@ -267,12 +249,7 @@ public class TableLayoutController {
         if (null != selectedPerson) {
             //Set your page url in this string. For eg, I m using URL for Google Search engine
             String url = selectedPerson.getWeb();
-            try {
-                Desktop.getDesktop().browse(URI.create(url));
-            } catch (IOException e) {
-                e.printStackTrace();
-                Dialogs.exceptionDialog(e);
-            }
+            mainApp.showInternetBrowser(url);
         }else{
             // Nothing selected.
             Dialogs.noPositionSelectedError();
@@ -290,10 +267,6 @@ public class TableLayoutController {
         if (-1 != visibleIndex) {
             // Source index of master data.
             int sourceIndex = sortedData.getSourceIndexFor(mainApp.getPositions(), visibleIndex);
-
-            // add deleted pdf file to the list to delete
-            String fileToDelete = mainApp.getPositions().get(sourceIndex).getJobTitlePDF();
-            DeletePositionsPDF.getDeletedList().add(fileToDelete);
 
             // Remove.
             mainApp.getPositions().remove(sourceIndex);
@@ -338,9 +311,6 @@ public class TableLayoutController {
     public void handleSaveToDB() {
         mainApp.saveToDB();
         mainApp.setDataChanged(false);
-
-        // clear unsavedList with new positions files
-        DeletePositionsPDF.getUnsavedList().clear();
     }
 
     /**

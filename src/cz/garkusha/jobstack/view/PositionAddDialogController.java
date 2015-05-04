@@ -9,12 +9,8 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
-import cz.garkusha.jobstack.util.DeletePositionsPDF;
 import cz.garkusha.jobstack.util.FindProbablyTheSamePositions;
-import cz.garkusha.jobstack.util.PDFConverter;
 import cz.garkusha.jobstack.util.ProgramProperties;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,8 +28,9 @@ public class PositionAddDialogController {
     private TextField companyField;
     @FXML
     private TextField jobTitleField;
-    @FXML
-    private TextField pathToThePDFField;
+
+    // not used in the GUI
+    private String htmlField;
     @FXML
     private TextField locationField;
     @FXML
@@ -102,33 +99,7 @@ public class PositionAddDialogController {
         idField.setText(String.valueOf(position.getId()));
         resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
-        // add listener to automation make changes in name to pdf file, when company name was changed
-        companyField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                position.setCompany(newValue);
-                position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
-                pathToThePDFField.setText(position.getJobTitlePDF());
-
-                // if filled position is probably the same. Yoy see new window
-                if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), position)
-                                 // to block first after filling compare
-                            && !isFilledOK) {
-                    mainApp.showProbablyTheSamePositionLayout(position);
-                }
-            }
-        });
-        // add listener to automation make changes in name to pdf file, when job title was changed
         jobTitleField.setText(position.getJobTitle());
-        jobTitleField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                position.setJobTitle(newValue);
-                position.setJobTitlePDF(PositionFactory.getPDFFileName(position.getCompany(), position.getJobTitle()));
-                pathToThePDFField.setText(position.getJobTitlePDF());
-            }
-        });
-        pathToThePDFField.setText(position.getJobTitlePDF());
         locationField.setText(position.getLocation());
         webField.setText(position.getWeb());
         webField.setPromptText("Correctly working only with: \"m.jobs.cz\", \"jobdnes.cz\", \"prace.cz\".");
@@ -158,7 +129,8 @@ public class PositionAddDialogController {
         companyField.setPromptText("Can't find company name, need to fill this field manually");
         jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
-        pathToThePDFField.setText(filledPosition.getJobTitlePDF());
+        // don't used in GUI
+        htmlField = filledPosition.getHtml();
         locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
         webField.setText(filledPosition.getWeb());
@@ -200,9 +172,7 @@ public class PositionAddDialogController {
             }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
-            position.setJobTitlePDF(pathToThePDFField.getText());
-            // save web page to pdf from webField to pathToThePDFField
-            new PDFConverter(webField.getText(), pathToThePDFField.getText());
+            position.setHtml(htmlField);
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
@@ -219,8 +189,6 @@ public class PositionAddDialogController {
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
             saveClicked = true;
-            // add pdf file to unsavedList to delete, if this position will not be saved to database.
-            DeletePositionsPDF.getUnsavedList().add(pathToThePDFField.getText());
 
             dialogStage.close();
         }
@@ -269,10 +237,6 @@ public class PositionAddDialogController {
         }
         if (jobTitleField.getText() == null || jobTitleField.getText().length() == 0) {
             errorMessage += "No valid jo title!\n";
-        }
-        /** TODO  file checking*/
-        if (pathToThePDFField.getText() == null || pathToThePDFField.getText().length() == 0) {
-            errorMessage += "No valid path to pdf!\n";
         }
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";

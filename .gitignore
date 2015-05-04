@@ -13,3 +13,4 @@ built.properties
 built.xml
 META-INF
 src/cz/garkusha/jobstack/resources/icon.xcf
+config.properties

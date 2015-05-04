@@ -11,7 +11,7 @@ import java.sql.*;
  */
 
 public class DerbyDBManager {
-    private static Connection con = null ;
+    private Connection con = null ;
     private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver" ;
 
     public DerbyDBManager() {
@@ -28,6 +28,10 @@ public class DerbyDBManager {
                 Dialogs.someError("Another instance of database have already booted");
             }
         }
+    }
+
+    public Connection getCon() {
+        return con;
     }
 
     private Boolean dbExists()

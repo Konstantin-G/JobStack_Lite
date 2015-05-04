@@ -4,9 +4,10 @@ import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.view.Dialogs;
 import javafx.collections.ObservableList;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.nio.charset.Charset;
+import java.sql.*;
 
 /**
  * Class for communication with database.
@@ -15,6 +16,7 @@ import java.sql.SQLException;
  */
 public class DBCommunication {
     private final DerbyDBManager db;
+//    private final MySQL_DBManager db;
     private final ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
@@ -26,18 +28,20 @@ public class DBCommunication {
         ZipDB.unCompression();
 
         this.db = new DerbyDBManager();
+//        this.db = new MySQL_DBManager();
         this.positions = positions;
         try {
             try {
                 fillPositionsFromDB();
             } catch (SQLException ignore) {
                 // exception when we haven't the database, or can't find her
+                // Script for Apache Derby DB
                db.executeUpdate("CREATE TABLE stepOne (" +
                   /*( 1)*/     " id INTEGER NOT NULL PRIMARY KEY," +
                   /*( 2)*/     " result VARCHAR(20) DEFAULT NULL," +
                   /*( 3)*/     " company VARCHAR(100) NOT NULL," +
                   /*( 4)*/     " jobTitle VARCHAR(100) NOT NULL," +
-                  /*( 5)*/     " jobTitlePDF VARCHAR(500) NOT NULL," +
+                  /*( 5)*/     " html BLOB(128 K) NOT NULL," +
                   /*( 6)*/     " location VARCHAR(200) NOT NULL," +
                   /*( 7)*/     " web VARCHAR(200) NOT NULL," +
                   /*( 8)*/     " person VARCHAR(40) DEFAULT NULL," +
@@ -45,9 +49,27 @@ public class DBCommunication {
                   /*(10)*/     " email VARCHAR(100) DEFAULT NULL," +
                   /*(11)*/     " requestSent VARCHAR(20) DEFAULT NULL," +
                   /*(12)*/     " answer VARCHAR(20) DEFAULT NULL," +
-                  /*(13)*/     " conversation LONG VARCHAR DEFAULT NULL)" +
+                  /*(13)*/     " conversation LONG VARCHAR DEFAULT NULL," +
                   /*(14)*/     " country VARCHAR(30) NOT NULL)"
                );
+
+                // Script for MySQL
+               /* db.executeUpdate("CREATE TABLE stepOne (" +
+                  *//*( 1)*//*     " id INT NOT NULL PRIMARY KEY," +
+                  *//*( 2)*//*     " result VARCHAR(20) NULL," +
+                  *//*( 3)*//*     " company VARCHAR(100) NOT NULL," +
+                  *//*( 4)*//*     " jobTitle VARCHAR(100) NOT NULL," +
+                  *//*( 5)*//*     " jobTitlePDF VARCHAR(500) NOT NULL," +
+                  *//*( 6)*//*     " location VARCHAR(200) NOT NULL," +
+                  *//*( 7)*//*     " web VARCHAR(200) NOT NULL," +
+                  *//*( 8)*//*     " person VARCHAR(40) NULL," +
+                  *//*( 9)*//*     " phone VARCHAR(40) NULL," +
+                  *//*(10)*//*     " email VARCHAR(100) NULL," +
+                  *//*(11)*//*     " requestSent VARCHAR(20) NULL," +
+                  *//*(12)*//*     " answer VARCHAR(20) NULL," +
+                  *//*(13)*//*     " conversation VARCHAR(30) NULL," +
+                  *//*(14)*//*     " country VARCHAR(30) NOT NULL)"
+                );*/
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,9 +79,16 @@ public class DBCommunication {
 
     private void fillPositionsFromDB() throws SQLException {
         ResultSet rs = db.executeQuery("SELECT * FROM stepOne");
+        Blob c;
+        String html;
         while (rs.next()) {
-            positions.add(new Position(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),  rs.getString(5),
-                    rs.getString(6), rs.getString(7),  rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13).replaceAll("''","'"), rs.getString(14)));
+
+            c = rs.getBlob("html");
+            html = new String(c.getBytes(1, (int)c.length()), Charset.forName("UTF-8"));
+
+            positions.add(new Position(rs.getInt("id"), rs.getString("result"), rs.getString("company"), rs.getString("jobTitle"),  html,
+                    rs.getString("location"), rs.getString("web"),  rs.getString("person"), rs.getString("phone"), rs.getString("email"),
+                    rs.getString("requestSent"), rs.getString("answer"), rs.getString("conversation"), rs.getString("country")));
         }
     }
 
@@ -68,24 +97,27 @@ public class DBCommunication {
             db.executeUpdate("DELETE FROM stepOne");
             System.out.println("DB was cleared");
             for (Position p : positions){
-                String id               = String.valueOf(p.getId());
-                String result           = p.getResult() != null ? p.getResult() : "";
-                String company          = p.getCompany();
-                String jobTitle         = p.getJobTitle();
-                String jobTitlePDF      = p.getJobTitlePDF();
-                String location         = p.getLocation();
-                String web              = p.getWeb();
-                String person           = p.getPerson() != null ? p.getPerson() : "";
-                String phone            = p.getPhone() != null ? p.getPhone() : "";
-                String email            = p.getEmail() != null ? p.getEmail() : "";
-                String requestSentDate  = DateUtil.toString(p.getRequestSentDate()) != null ? DateUtil.toString(p.getRequestSentDate()) : "";
-                String answerDate       = DateUtil.toString(p.getAnswerDate()) != null ? DateUtil.toString(p.getAnswerDate()) : "";
-                String conversation     = p.getConversation() != null ? p.getConversation().replaceAll("'", "''") : ""; // replaceAll("'", "''") need to escapes ' in sql query
-                String country          = p.getCountry() != null ? p.getCountry() : "";
+                PreparedStatement ps = db.getCon().prepareStatement("INSERT INTO stepOne VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                String newRowQuery = String.format("INSERT INTO stepOne VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                        id, result, company, jobTitle, jobTitlePDF, location, web, person, phone, email, requestSentDate, answerDate, conversation, country);
-                db.executeUpdate(newRowQuery);
+                ps.setInt(1, p.getId());
+                ps.setString(2, p.getResult() != null ? p.getResult() : "");
+                ps.setString(3, p.getCompany());
+                ps.setString(4, p.getJobTitle());
+
+                ps.setString(5, p.getLocation());
+                ps.setString(6, p.getWeb());
+                ps.setString(7, p.getPerson() != null ? p.getPerson() : "");
+                ps.setString(8, p.getPhone() != null ? p.getPhone() : "");
+                ps.setString(9, p.getEmail() != null ? p.getEmail() : "");
+                ps.setString(10, DateUtil.toString(p.getRequestSentDate()) != null ? DateUtil.toString(p.getRequestSentDate()) : "");
+                ps.setString(11, DateUtil.toString(p.getAnswerDate()) != null ? DateUtil.toString(p.getAnswerDate()) : "");
+                ps.setString(12, p.getConversation() != null ? p.getConversation() : "");
+                ps.setString(13, p.getCountry());
+
+                ps.setBlob(14, new ByteArrayInputStream(p.getHtml().getBytes(Charset.forName("UTF-8"))));
+
+                ps.execute();
+                db.getCon().commit();
             }
             System.out.println("Information was saved to DB");
 

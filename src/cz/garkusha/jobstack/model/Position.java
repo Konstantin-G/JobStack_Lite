@@ -21,7 +21,7 @@ public class Position {
     private final StringProperty result;
     private final StringProperty company;
     private final StringProperty jobTitle;
-    private final StringProperty jobTitlePDF;
+    private final StringProperty html;
     private final StringProperty location;
     private final StringProperty web;
     private final StringProperty person;
@@ -36,7 +36,7 @@ public class Position {
         this(0, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public Position(int id, String result, String company, String jobTitle, String jobTitlePDF,
+    public Position(int id, String result, String company, String jobTitle, String html,
                     String location, String web, String person, String phone, String email, String requestSentDate,
                     String answerDate, String conversation, String country) {
 
@@ -44,7 +44,7 @@ public class Position {
         this.result             = new SimpleStringProperty(result);
         this.company            = new SimpleStringProperty(company);
         this.jobTitle           = new SimpleStringProperty(jobTitle);
-        this.jobTitlePDF        = new SimpleStringProperty(jobTitlePDF);
+        this.html               = new SimpleStringProperty(html);
         this.location           = new SimpleStringProperty(location);
         this.web                = new SimpleStringProperty(web);
         this.person             = new SimpleStringProperty(person);
@@ -106,16 +106,16 @@ public class Position {
         this.jobTitle.set(jobTitle);
     }
 
-    public String getJobTitlePDF() {
-        return jobTitlePDF.get();
+    public String getHtml() {
+        return html.get();
     }
 
-    public StringProperty jobTitlePDFProperty() {
-        return jobTitlePDF;
+    public StringProperty htmlProperty() {
+        return html;
     }
 
-    public void setJobTitlePDF(String jobTitlePDF) {
-        this.jobTitlePDF.set(jobTitlePDF);
+    public void setHtml(String html) {
+        this.html.set(html);
     }
 
     public String getLocation() {

@@ -9,7 +9,6 @@ package cz.garkusha.jobstack.view;
 import cz.garkusha.jobstack.MainApp;
 import cz.garkusha.jobstack.model.Position;
 import cz.garkusha.jobstack.model.PositionFactory;
-import cz.garkusha.jobstack.util.PDFConverter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,8 +17,6 @@ import javafx.stage.Stage;
 public class PositionEditDialogController {
 
     @FXML
-    private CheckBox updatePDFBox;
-    @FXML
     private TextField idField;
     @FXML
     private ChoiceBox<String> resultChoiceBox;
@@ -27,8 +24,6 @@ public class PositionEditDialogController {
     private TextField companyField;
     @FXML
     private TextField jobTitleField;
-    @FXML
-    private TextField pathToThePDFField;
     @FXML
     private TextField locationField;
     @FXML
@@ -94,7 +89,6 @@ public class PositionEditDialogController {
         resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
         jobTitleField.setText(position.getJobTitle());
-        pathToThePDFField.setText(position.getJobTitlePDF());
         locationField.setText(position.getLocation());
         webField.setText(position.getWeb());
         personField.setText(position.getPerson());
@@ -125,8 +119,6 @@ public class PositionEditDialogController {
         if (null != filledPosition.getJobTitle())
             jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
-        if (null != filledPosition.getJobTitlePDF())
-            pathToThePDFField.setText(filledPosition.getJobTitlePDF());
         if (null != filledPosition.getLocation())
             locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
@@ -176,13 +168,6 @@ public class PositionEditDialogController {
             }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
-
-            position.setJobTitlePDF(pathToThePDFField.getText());
-            // update to pdf from webField to pathToThePDFField if update box is select
-            if (updatePDFBox.isSelected()) {
-                new PDFConverter(webField.getText(), pathToThePDFField.getText());
-            }
-
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
@@ -235,10 +220,6 @@ public class PositionEditDialogController {
         }
         if (jobTitleField.getText() == null || jobTitleField.getText().length() == 0) {
             errorMessage += "No valid job title!\n";
-        }
-        /** TODO  file checking*/
-        if (pathToThePDFField.getText() == null || pathToThePDFField.getText().length() == 0) {
-            errorMessage += "No valid path to pdf!\n";
         }
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";

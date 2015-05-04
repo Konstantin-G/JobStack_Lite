@@ -40,6 +40,7 @@ public class HTMLParser {
     private String person;
     private String phone;
     private String email;
+    private String html;
 
     public HTMLParser(String url, String country){
         readInformationFromWeb(url, country);
@@ -69,14 +70,20 @@ public class HTMLParser {
         return email;
     }
 
+    public String getHtml() {
+        return html;
+    }
+
     private void readInformationFromWeb(String url, String country) {
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
+            this.html = doc.html();
         } catch (IOException e) {
             e.printStackTrace();
-            Dialogs.connectionError();
+//            Dialogs.connectionError();
         }
+
         switch (country) {
             case "Czech":
                 if (url.contains("m.jobs.cz")) {

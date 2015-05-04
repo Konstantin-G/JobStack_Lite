@@ -64,7 +64,7 @@ public class ProgramProperties {
 
         properties.put("lastCountry", this.lastCountry);
         properties.put("isMainMaximized", String.valueOf(this.isMainMaximized ? 1 : 0));
-
+/*TODO*/
         try (OutputStream output = new FileOutputStream("config.properties")){
             properties.store(output, comments);
         } catch (IOException e) {

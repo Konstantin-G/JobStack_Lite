@@ -21,6 +21,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -58,9 +59,6 @@ public class MainApp extends Application {
     }
 
     public void saveToDB(){
-        // delete pdf file, which were deleted from table
-        DeletePositionsPDF.deletedPDFDelete();
-
         dbCommunication.writePositionsToDB();
         //Zip database to JobStack *.dat file
         ZipDB.compression();
@@ -97,7 +95,6 @@ public class MainApp extends Application {
                     saveToDB();
                     primaryStage.close();
                 } else if (result.equals("NO")) {
-                    DeletePositionsPDF.unsavedPDFDelete();
                     primaryStage.close();
                 }
             } else {
@@ -309,5 +306,25 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
        return new TabPane();
+    }
+
+    /**
+     * Shows the Internet Browser.
+     */
+    public void showInternetBrowser(String urlOrHtml) {
+
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+
+        // create the scene
+        dialogStage.setTitle("Web View");
+        System.out.println(urlOrHtml);
+        Scene scene = new Scene(new Browser(urlOrHtml),750,500, Color.web("#666970"));
+        dialogStage.setScene(scene);
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+
     }
 }
