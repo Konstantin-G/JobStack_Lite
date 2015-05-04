@@ -1,5 +1,7 @@
 package cz.garkusha.jobstack;
 /**
+ *
+ * It's lite version of JobStack.
  *  Main application javaFX class.
  *
  * @author Konstantin Garkusha
