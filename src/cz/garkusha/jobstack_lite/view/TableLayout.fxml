@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack_lite.view.TableLayoutController">
+   <children>
+      <SplitPane dividerPositions="0.09558823529411764" orientation="VERTICAL" prefHeight="400.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="1400.0" styleClass="background" stylesheets="@DarkTheme.css" SplitPane.resizableWithParent="false">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" layoutX="598.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="884.0" spacing="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Hyperlink onAction="#handleJobOnWebHyperlink" text="Job on the web" />
+                        <Hyperlink onAction="#handleJobDescriptionHyperlink" text="Job Description" />
+                        <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
+                        <Button mnemonicParsing="false" onAction="#handleNewPosition" text="New..." />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPosition" text="Edit..." />
+                        <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePosition" text="Delete" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <GridPane layoutX="57.0" layoutY="8.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="filterField" layoutX="57.0" layoutY="8.0" maxHeight="25.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <Label styleClass="label-filter" text="Filter:" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="360.0" prefHeight="360.0" prefWidth="1398.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <TableView fx:id="positionTable" minHeight="360.0" onMouseClicked="#handleMouseClicked" prefHeight="360.0" prefWidth="1398.0" stylesheets="@DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
+                      <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="100.0" prefWidth="110.0" text="result" />
+                        <TableColumn fx:id="countryColumn" maxWidth="100.0" minWidth="50.0" text="country" />
+                        <TableColumn fx:id="companyColumn" maxWidth="300.0" minWidth="200.0" prefWidth="250.0" text="company" />
+                        <TableColumn fx:id="jobTitleColumn" maxWidth="500.0" minWidth="200.0" prefWidth="300.0" text="job title" />
+                        <TableColumn fx:id="jobTitlePDFColumn" prefWidth="75.0" text="job titlePDF" visible="false" />
+                        <TableColumn fx:id="locationColumn" maxWidth="300.0" minWidth="100.0" prefWidth="200.0" text="location" />
+                        <TableColumn fx:id="webColumn" maxWidth="300.0" minWidth="100.0" prefWidth="150.0" text="web" />
+                        <TableColumn fx:id="personColumn" maxWidth="300.0" minWidth="150.0" prefWidth="200.0" text="person" />
+                        <TableColumn fx:id="phoneColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="phone" />
+                        <TableColumn fx:id="emailColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="email" />
+                        <TableColumn fx:id="requestSentDateColumn" maxWidth="80.0" minWidth="80.0" text="request sent" />
+                        <TableColumn fx:id="answerDateColumn" maxWidth="80.0" minWidth="80.0" text="answer" />
+                        <TableColumn fx:id="conversationColumn" maxWidth="100.0" minWidth="50.0" text="conversation" visible="false" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleJobOnWebHyperlink" text="Job on the web" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleJobDescriptionHyperlink" text="Job Description" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
