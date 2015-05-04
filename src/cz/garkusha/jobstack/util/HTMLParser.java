@@ -81,7 +81,7 @@ public class HTMLParser {
             this.html = doc.html();
         } catch (IOException e) {
             e.printStackTrace();
-//            Dialogs.connectionError();
+            Dialogs.connectionError();
         }
 
         switch (country) {
