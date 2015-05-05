@@ -16,19 +16,17 @@ import java.sql.*;
  */
 public class DBCommunication {
     private final DerbyDBManager db;
-//    private final MySQL_DBManager db;
     private final ObservableList<Position> positions;
 
     public DBCommunication(ObservableList<Position> positions) {
 
         // clear temp directory
-        DeletePositionsPDF.clearTempDirectory(new File(Path.getProgramTempFolder()));
+        FileSystem.clearTempDirectory(new File(Path.getProgramTempFolder()));
 
         // unZip database from JobStack *.dat file
         ZipDB.unCompression();
 
         this.db = new DerbyDBManager();
-//        this.db = new MySQL_DBManager();
         this.positions = positions;
         try {
             try {
@@ -52,24 +50,6 @@ public class DBCommunication {
                   /*(13)*/     " country VARCHAR(30) NOT NULL," +
                   /*(14)*/     " html BLOB(128 K) NOT NULL)"
                );
-
-                // Script for MySQL
-               /* db.executeUpdate("CREATE TABLE stepOne (" +
-                  *//*( 1)*//*     " id INT NOT NULL PRIMARY KEY," +
-                  *//*( 2)*//*     " result VARCHAR(20) NULL," +
-                  *//*( 3)*//*     " company VARCHAR(100) NOT NULL," +
-                  *//*( 4)*//*     " jobTitle VARCHAR(100) NOT NULL," +
-                  *//*( 5)*//*     " jobTitlePDF VARCHAR(500) NOT NULL," +
-                  *//*( 6)*//*     " location VARCHAR(200) NOT NULL," +
-                  *//*( 7)*//*     " web VARCHAR(200) NOT NULL," +
-                  *//*( 8)*//*     " person VARCHAR(40) NULL," +
-                  *//*( 9)*//*     " phone VARCHAR(40) NULL," +
-                  *//*(10)*//*     " email VARCHAR(100) NULL," +
-                  *//*(11)*//*     " requestSent VARCHAR(20) NULL," +
-                  *//*(12)*//*     " answer VARCHAR(20) NULL," +
-                  *//*(13)*//*     " conversation VARCHAR(30) NULL," +
-                  *//*(14)*//*     " country VARCHAR(30) NOT NULL)"
-                );*/
             }
         } catch (SQLException e) {
             e.printStackTrace();

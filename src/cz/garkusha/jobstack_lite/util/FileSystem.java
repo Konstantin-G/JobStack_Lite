@@ -8,7 +8,7 @@ import java.io.File;
  *
  * @author Konstantin Garkusha
  */
-public class DeletePositionsPDF {
+public class FileSystem {
 
     public static void clearTempDirectory(File file){
         if (!file.exists())
