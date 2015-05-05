@@ -4,7 +4,7 @@ package cz.garkusha.jobstack_lite.util;
 import java.io.File;
 
 /**
- *  The class deletes all pdf file in positions , were deleted or unsaved in database.
+ *  Class to make some thing with file system
  *
  * @author Konstantin Garkusha
  */
