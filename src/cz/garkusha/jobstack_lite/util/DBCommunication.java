@@ -41,16 +41,16 @@ public class DBCommunication {
                   /*( 2)*/     " result VARCHAR(20) DEFAULT NULL," +
                   /*( 3)*/     " company VARCHAR(100) NOT NULL," +
                   /*( 4)*/     " jobTitle VARCHAR(100) NOT NULL," +
-                  /*( 5)*/     " html BLOB(128 K) NOT NULL," +
-                  /*( 6)*/     " location VARCHAR(200) NOT NULL," +
-                  /*( 7)*/     " web VARCHAR(200) NOT NULL," +
-                  /*( 8)*/     " person VARCHAR(40) DEFAULT NULL," +
-                  /*( 9)*/     " phone VARCHAR(40) DEFAULT NULL," +
-                  /*(10)*/     " email VARCHAR(100) DEFAULT NULL," +
-                  /*(11)*/     " requestSent VARCHAR(20) DEFAULT NULL," +
-                  /*(12)*/     " answer VARCHAR(20) DEFAULT NULL," +
-                  /*(13)*/     " conversation LONG VARCHAR DEFAULT NULL," +
-                  /*(14)*/     " country VARCHAR(30) NOT NULL)"
+                  /*( 5)*/     " location VARCHAR(200) NOT NULL," +
+                  /*( 6)*/     " web VARCHAR(200) NOT NULL," +
+                  /*( 7)*/     " person VARCHAR(40) DEFAULT NULL," +
+                  /*( 8)*/     " phone VARCHAR(40) DEFAULT NULL," +
+                  /*(9)*/      " email VARCHAR(100) DEFAULT NULL," +
+                  /*(10)*/     " requestSent VARCHAR(20) DEFAULT NULL," +
+                  /*(11)*/     " answer VARCHAR(20) DEFAULT NULL," +
+                  /*(12)*/     " conversation LONG VARCHAR DEFAULT NULL," +
+                  /*(13)*/     " country VARCHAR(30) NOT NULL," +
+                  /*(14)*/     " html BLOB(128 K) NOT NULL)"
                );
 
                 // Script for MySQL
