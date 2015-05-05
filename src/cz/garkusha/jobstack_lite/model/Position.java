@@ -52,7 +52,7 @@ public class Position {
         this.email              = new SimpleStringProperty(email);
         this.requestSentDate    = requestSentDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(requestSentDate))
                                                             : new SimpleObjectProperty<>();
-        this.answerDate         = requestSentDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(answerDate))
+        this.answerDate         = answerDate != null ? new SimpleObjectProperty<>(DateUtil.fromString(answerDate))
                                                             : new SimpleObjectProperty<>();
         this.conversation       = new SimpleStringProperty(conversation);
         this.country            = new SimpleStringProperty(country);
