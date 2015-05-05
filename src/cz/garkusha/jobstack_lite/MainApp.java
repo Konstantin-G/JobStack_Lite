@@ -322,7 +322,6 @@ public class MainApp extends Application {
 
         // create the scene
         dialogStage.setTitle("Web View");
-        System.out.println(urlOrHtml);
         Scene scene = new Scene(new Browser(urlOrHtml),750,500, Color.web("#666970"));
         dialogStage.setScene(scene);
 
