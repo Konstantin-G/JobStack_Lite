@@ -19,6 +19,7 @@ import java.util.Map;
  * |      Czech Republic->                                              |
  * |                        PRACE.CZ                                    |
  * |                        JOBDNES.CZ                                  |
+ * |                        STARTUPJOBS.CZ                              |
  * |      mobile version of JOBS.CZ (m.jobs.cz)                         |
  * |                                                                    |
  * |        Russia->        SUPERJOB.RU                                 |
