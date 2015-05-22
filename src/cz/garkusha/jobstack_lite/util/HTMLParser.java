@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Model class for parsing a html file from url.
- *
+ * problem with monster.cz, cant parse this web
  * +--------------------------------------------------------------------+
  * |  Working ONLY with:                                                |
  * |      Czech Republic->                                              |
@@ -92,6 +92,8 @@ public class HTMLParser {
                     readInformationFrom_PRACE_CZ(doc);
                 } else if (url.contains("jobdnes.cz")) {
                     readInformationFrom_JOBDNES_CZ(doc);
+                }else if (url.contains("startupjobs.cz")) {
+                    readInformationFrom_STARTUPJOBS_CZ(doc);
                 }
                 break;
             case "Russia":
@@ -234,6 +236,24 @@ public class HTMLParser {
             this.phone = phoneFormat(phoneBuilder.toString());
         } catch (Exception ignore) { }
     }
+
+    private void readInformationFrom_STARTUPJOBS_CZ(Document doc) {
+        try {
+            //noinspection ConstantConditions
+            this.company = doc.body().select("span.startupName.mobile-only").first().text().trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            String positionCol = doc.body().select("td.positionCol").first().select("h1").text();
+            String positionCol_span = doc.body().select("td.positionCol").first().tagName("h1").select("span.desktop-only.new-sticker").text();
+            this.jobTitle = positionCol.replace(positionCol_span, "").trim();
+        } catch (NullPointerException ignore) { }
+        try {
+            //noinspection ConstantConditions
+            this.location = doc.body().select("div.details.center > div").first().text().trim();
+        } catch (NullPointerException ignore) { }
+    }
+
 
     /**Russia*/
     private void readInformationFrom_SUPERJOB_RU(Document doc) {
