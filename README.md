@@ -4,7 +4,7 @@ The program is made for store and managing database of jobs positions which I ha
 It’s a JavaFX software which uses Apache Derby SQL database for storing jobs positions,
 Jsoup library for parsing web page and many other Java libraries.
 
-  +--------------------------------------------------------------------+
+  |--------------------------------------------------------------------|
   |  Working ONLY with:                                                |
   |      Czech Republic->                                              |
   |                        PRACE.CZ                                    |
@@ -19,4 +19,4 @@ Jsoup library for parsing web page and many other Java libraries.
   |        Ukraine->       HH_UA                                       |
   |      mobile version of RABOTA.UA (RABOTA.UA/mobile/)               |
   |                        JOBS.DOU.UA                                 |
-  +--------------------------------------------------------------------+
+  |--------------------------------------------------------------------|
