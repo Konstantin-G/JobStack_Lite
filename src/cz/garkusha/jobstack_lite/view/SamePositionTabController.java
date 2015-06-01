@@ -39,17 +39,38 @@ public class SamePositionTabController {
     private void initialize() {}
 
     /**
-     * Set the position to be watched in the dialog.
+     * Set the samePosition to be watched in the dialog.
      */
-    public void setOldPosition(Tab tab, Position position) {
-        tab.setText("id = " + position.getId());
-        oldWebField.setText(position.getWeb());
-        oldResultField.setText(position.getResult());
-        oldCompanyField.setText(position.getCompany());
-        oldJobTitleField.setText(position.getJobTitle());
-        oldLocationField.setText(position.getLocation());
-        oldPersonField.setText(position.getPerson());
-        oldRequestSentDateField.setText(DateUtil.toString(position.getRequestSentDate()));
-        oldAnswerDateField.setText(DateUtil.toString(position.getAnswerDate()));
+    public void setOldPosition(Tab tab, Position filledPosition, Position samePosition) {
+        final String STYLE = "-fx-background-color: #039ed3";
+        tab.setText("id = " + samePosition.getId());
+
+        oldWebField.setText(samePosition.getWeb());
+        if (filledPosition.getWeb().toLowerCase().equals(samePosition.getWeb().toLowerCase())) {
+            oldWebField.setStyle(STYLE);
+        }
+
+        oldResultField.setText(samePosition.getResult());
+
+        oldCompanyField.setText(samePosition.getCompany());
+        oldCompanyField.setStyle(STYLE);
+
+        oldJobTitleField.setText(samePosition.getJobTitle());
+        if (filledPosition.getJobTitle().toLowerCase().equals(samePosition.getJobTitle().toLowerCase())) {
+            oldJobTitleField.setStyle(STYLE);
+        }
+
+        oldLocationField.setText(samePosition.getLocation());
+        if (filledPosition.getLocation().toLowerCase().equals(samePosition.getLocation().toLowerCase())) {
+            oldLocationField.setStyle(STYLE);
+        }
+
+        oldPersonField.setText(samePosition.getPerson());
+        if (filledPosition.getPerson().toLowerCase().equals(samePosition.getPerson().toLowerCase())) {
+            oldPersonField.setStyle(STYLE);
+        }
+
+        oldRequestSentDateField.setText(DateUtil.toString(samePosition.getRequestSentDate()));
+        oldAnswerDateField.setText(DateUtil.toString(samePosition.getAnswerDate()));
     }
 }
