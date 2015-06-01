@@ -260,7 +260,7 @@ public class MainApp extends Application {
             AnchorPane page = (AnchorPane) loader.load();
             SplitPane splitPane = (SplitPane)page.getChildren().get(1);
             AnchorPane anchorPane = (AnchorPane)splitPane.getItems().get(1);
-            anchorPane.getChildren().add(SamePositionTabPaneLayout());
+            anchorPane.getChildren().add(SamePositionTabPaneLayout(filledPosition));
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Be careful, you already sent your application to this company.");
@@ -285,7 +285,7 @@ public class MainApp extends Application {
     /**
      * create new TabPane and add some Tab to his.
      */
-    public TabPane SamePositionTabPaneLayout() {
+    public TabPane SamePositionTabPaneLayout(Position filledPosition) {
 
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -302,7 +302,7 @@ public class MainApp extends Application {
                 // add tabs to TabPane
                 page.getTabs().add(tab);
                 SamePositionTabController samePositionTabController = tabLoader.getController();
-                samePositionTabController.setOldPosition(tab, samePosition);
+                samePositionTabController.setOldPosition(tab, filledPosition, samePosition);
             }
             return page;
         } catch (IOException e) {
