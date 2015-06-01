@@ -21,3 +21,7 @@ Jsoup library for parsing web page and many other Java libraries.
   |      mobile version of RABOTA.UA (RABOTA.UA/mobile/)               |
   |                        JOBS.DOU.UA                                 |
   |--------------------------------------------------------------------|
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
