@@ -14,7 +14,7 @@ Can parse only next webs:
       * RABOTA.RU
       * CAREERIST.RU
       * BRAINSTORAGE.ME
-  23. Ukrain
+  23. Ukraine
       * HH_UA
       * mobile version of RABOTA.UA (RABOTA.UA/mobile/)
       * JOBS.DOU.UA
