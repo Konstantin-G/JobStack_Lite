@@ -7,6 +7,7 @@ package cz.garkusha.jobstack_lite;
  *
  * @author Konstantin Garkusha
  */
+import java.awt.*;
 import java.io.*;
 
 import cz.garkusha.jobstack_lite.model.Position;
@@ -79,6 +80,12 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("JobStack");
+        //Set size from properties
+        this.primaryStage.setX(programProperties.getRootLayout().getX());
+        this.primaryStage.setY(programProperties.getRootLayout().getY());
+        this.primaryStage.setWidth(programProperties.getRootLayout().getWidth());
+        this.primaryStage.setHeight(programProperties.getRootLayout().getHeight());
+
         // load icon
         try ( InputStream is = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon.png")){
             Image image = new Image(is);
@@ -104,6 +111,8 @@ public class MainApp extends Application {
                 primaryStage.close();
             }
             programProperties.setMainMaximized(primaryStage.isMaximized());
+            programProperties.setRootLayout(new Rectangle( (int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
+                                                (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
             programProperties.saveProperties();
         });
     }
@@ -149,6 +158,7 @@ public class MainApp extends Application {
 
             // Set table layout into the center of root layout.
             rootLayout.setCenter(tableLayout);
+
 
             // Give the controller access to the main app.
             TableLayoutController tableController = loader.getController();
