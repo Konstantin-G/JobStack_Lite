@@ -227,8 +227,9 @@ public class TableLayoutController {
     void handleJobDescriptionHyperlink() {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
-           String html = selectedPerson.getHtml();
-            mainApp.showInternetBrowser(html);
+            String html = selectedPerson.getHtml();
+            String title = selectedPerson.getCompany() + " | " + selectedPerson.getJobTitle();
+            mainApp.showInternetBrowser(html, title);
         }else{
             // Nothing selected.
             Dialogs.noPositionSelectedError();
@@ -244,7 +245,8 @@ public class TableLayoutController {
         if (null != selectedPerson) {
             //Set your page url in this string. For eg, I m using URL for Google Search engine
             String url = selectedPerson.getWeb();
-            mainApp.showInternetBrowser(url);
+            String title = selectedPerson.getCompany() + " | " + selectedPerson.getJobTitle();
+            mainApp.showInternetBrowser(url, title);
         }else{
             // Nothing selected.
             Dialogs.noPositionSelectedError();
@@ -320,7 +322,7 @@ public class TableLayoutController {
                 handleEditPosition();
             }
 //            if (event.getClickCount() == 1) {
-//                System.out.println("Single clicked A_button");
+//                System.out.println("Single clicked button");
 //            }
         }
     }
