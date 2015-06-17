@@ -32,7 +32,9 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     private boolean isDataChanged;
     private Stage primaryStage;
-    private Stage addDialogStage;
+    private Stage addStage;
+    private Stage editStage;
+    private Stage browserStage;
     private BorderPane rootLayout;
     private final DBCommunication dbCommunication;
     private ProgramProperties programProperties;
@@ -110,6 +112,7 @@ public class MainApp extends Application {
             } else {
                 primaryStage.close();
             }
+            /** Save properties*/
             programProperties.setMainMaximized(primaryStage.isMaximized());
             programProperties.setRootLayout(new Rectangle( (int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
                                                 (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
@@ -197,21 +200,28 @@ public class MainApp extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
-            addDialogStage = new Stage();
-            addDialogStage.setTitle("Add position");
-            addDialogStage.initModality(Modality.WINDOW_MODAL);
-            addDialogStage.initOwner(primaryStage);
+            addStage = new Stage();
+            addStage.setTitle("Add position");
+            addStage.initModality(Modality.WINDOW_MODAL);
+            addStage.initOwner(primaryStage);
+            addStage.setX(programProperties.getAddLayout().getX());
+            addStage.setY(programProperties.getAddLayout().getY());
+            addStage.setWidth(programProperties.getAddLayout().getWidth());
+            addStage.setHeight(programProperties.getAddLayout().getHeight());
             Scene scene = new Scene(page);
-            addDialogStage.setScene(scene);
+            addStage.setScene(scene);
 
             // Set the position into the addController.
             PositionAddDialogController addController = loader.getController();
-            addController.setDialogStage(addDialogStage);
+            addController.setDialogStage(addStage);
             addController.setPosition(position);
             addController.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
-            addDialogStage.showAndWait();
+            addStage.showAndWait();
+
+            programProperties.setAddLayout(new Rectangle((int) addStage.getX(), (int) addStage.getY(),
+                    (int) addStage.getWidth(), (int) addStage.getHeight()));
 
             return addController.isSaveClicked();
         } catch (IOException e) {
@@ -236,21 +246,28 @@ public class MainApp extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit position");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
+            editStage = new Stage();
+            editStage.setTitle("Edit position");
+            editStage.initModality(Modality.WINDOW_MODAL);
+            editStage.initOwner(primaryStage);
+            editStage.setX(programProperties.getEditLayout().getX());
+            editStage.setY(programProperties.getEditLayout().getY());
+            editStage.setWidth(programProperties.getEditLayout().getWidth());
+            editStage.setHeight(programProperties.getEditLayout().getHeight());
             Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            editStage.setScene(scene);
 
             // Set the position into the editController.
             PositionEditDialogController editController = loader.getController();
-            editController.setDialogStage(dialogStage);
+            editController.setDialogStage(editStage);
             editController.setPosition(position);
             editController.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
+            editStage.showAndWait();
+
+            programProperties.setEditLayout(new Rectangle((int) editStage.getX(), (int) editStage.getY(),
+                    (int) editStage.getWidth(), (int) editStage.getHeight()));
 
             return editController.isSaveClicked();
         } catch (IOException e) {
@@ -275,7 +292,7 @@ public class MainApp extends Application {
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Be careful, you already sent your application to this company.");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(addDialogStage);
+            dialogStage.initOwner(addStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
@@ -324,19 +341,27 @@ public class MainApp extends Application {
     /**
      * Shows the Internet Browser.
      */
-    public void showInternetBrowser(String urlOrHtml) {
+    public void showInternetBrowser(String urlOrHtml, String title) {
 
         // Create the dialog Stage.
-        Stage dialogStage = new Stage();
-        dialogStage.initModality(Modality.WINDOW_MODAL);
+        browserStage = new Stage();
+        browserStage.initModality(Modality.WINDOW_MODAL);
 
         // create the scene
-        dialogStage.setTitle("Web View");
+        browserStage.setTitle(title);
+        browserStage.setX(programProperties.getBrowserLayout().getX());
+        browserStage.setY(programProperties.getBrowserLayout().getY());
+        browserStage.setWidth(programProperties.getBrowserLayout().getWidth());
+        browserStage.setHeight(programProperties.getBrowserLayout().getHeight());
+
         Scene scene = new Scene(new Browser(urlOrHtml),750,500, Color.web("#666970"));
-        dialogStage.setScene(scene);
+        browserStage.setScene(scene);
 
         // Show the dialog and wait until the user closes it
-        dialogStage.showAndWait();
+        browserStage.showAndWait();
+
+        programProperties.setBrowserLayout(new Rectangle((int) browserStage.getX(), (int) browserStage.getY(),
+                (int) browserStage.getWidth(), (int) browserStage.getHeight()));
 
     }
 }
