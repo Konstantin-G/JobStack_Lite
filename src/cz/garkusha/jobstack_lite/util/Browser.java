@@ -10,7 +10,9 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
- * Created by John Constantine on 5/3/2015.
+ * Browser class
+ *
+ * @author Konstantin Garkusha
  */
 public class Browser  extends Region {
 
@@ -29,7 +31,6 @@ public class Browser  extends Region {
             // then we're thinking, that it's html content
             webEngine.loadContent(urlOrHtml);
         }
-
         //add the web view to the scene
         getChildren().add(browser);
 
