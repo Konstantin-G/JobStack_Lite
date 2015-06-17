@@ -77,7 +77,7 @@
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#handleJobOnWebHyperlink" text="Job on the web" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleJobOnWebHyperlink" text="Job on the web" />
                               <MenuItem mnemonicParsing="false" onAction="#handleJobDescriptionHyperlink" text="Job Description" />
                           </items>
                         </ContextMenu>
