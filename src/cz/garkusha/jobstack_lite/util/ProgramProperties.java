@@ -16,7 +16,11 @@ public class ProgramProperties {
     private String lastCountry;
     private boolean isMainMaximized;
     private Rectangle rootLayout;
+    private Rectangle addLayout;
+    private Rectangle editLayout;
+    private Rectangle browserLayout;
 
+    // constructor
     private ProgramProperties (){
         loadProperties();
     }
@@ -37,6 +41,14 @@ public class ProgramProperties {
         System.out.println(lastCountry);
     }
 
+    public boolean isMainMaximized() {
+        return isMainMaximized;
+    }
+
+    public void setMainMaximized(boolean mainMaximized) {
+        this.isMainMaximized = mainMaximized;
+    }
+
     public Rectangle getRootLayout() {
         return rootLayout;
     }
@@ -45,12 +57,28 @@ public class ProgramProperties {
         this.rootLayout = rootLayout;
     }
 
-    public boolean isMainMaximized() {
-        return isMainMaximized;
+    public Rectangle getAddLayout() {
+        return addLayout;
     }
 
-    public void setMainMaximized(boolean mainMaximized) {
-        this.isMainMaximized = mainMaximized;
+    public void setAddLayout(Rectangle addLayout) {
+        this.addLayout = addLayout;
+    }
+
+    public Rectangle getEditLayout() {
+        return editLayout;
+    }
+
+    public void setEditLayout(Rectangle editLayout) {
+        this.editLayout = editLayout;
+    }
+
+    public Rectangle getBrowserLayout() {
+        return browserLayout;
+    }
+
+    public void setBrowserLayout(Rectangle browserLayout) {
+        this.browserLayout = browserLayout;
     }
 
     private void loadProperties(){
@@ -82,6 +110,33 @@ public class ProgramProperties {
                     Integer.parseInt(properties.getProperty("primaryStageHeight")));
         } else this.rootLayout = new Rectangle(100, 100, 1400, 400);
 
+        if (properties.containsKey("addStageX") && properties.containsKey("addStageY") &&
+                properties.containsKey("addStageWidth") && properties.containsKey("addStageHeight")){
+            // Add windows size and location
+            this.addLayout = new Rectangle(Integer.parseInt(properties.getProperty("addStageX")),
+                    Integer.parseInt(properties.getProperty("addStageY")),
+                    Integer.parseInt(properties.getProperty("addStageWidth")),
+                    Integer.parseInt(properties.getProperty("addStageHeight")));
+        } else this.addLayout = new Rectangle(100, 100, 700, 700);
+
+        if (properties.containsKey("editStageX") && properties.containsKey("editStageY") &&
+                properties.containsKey("editStageWidth") && properties.containsKey("editStageHeight")){
+            // Edit windows size and location
+            this.editLayout = new Rectangle(Integer.parseInt(properties.getProperty("editStageX")),
+                    Integer.parseInt(properties.getProperty("editStageY")),
+                    Integer.parseInt(properties.getProperty("editStageWidth")),
+                    Integer.parseInt(properties.getProperty("editStageHeight")));
+        } else this.editLayout = new Rectangle(100, 100, 700, 700);
+
+        if (properties.containsKey("browserStageX") && properties.containsKey("browserStageY") &&
+                properties.containsKey("browserStageWidth") && properties.containsKey("browserStageHeight")){
+            // Edit windows size and location
+            this.browserLayout = new Rectangle(Integer.parseInt(properties.getProperty("browserStageX")),
+                    Integer.parseInt(properties.getProperty("browserStageY")),
+                    Integer.parseInt(properties.getProperty("browserStageWidth")),
+                    Integer.parseInt(properties.getProperty("browserStageHeight")));
+        } else this.browserLayout = new Rectangle(300, 300, 500, 750);
+
     }
 
     public void saveProperties(){
@@ -91,12 +146,27 @@ public class ProgramProperties {
 
         properties.put("lastCountry", this.lastCountry);
         properties.put("isMainMaximized", String.valueOf(this.isMainMaximized ? 1 : 0));
+
         properties.put("primaryStageX", String.valueOf((int)this.rootLayout.getX()));
         properties.put("primaryStageY", String.valueOf((int)this.rootLayout.getY()));
         properties.put("primaryStageWidth", String.valueOf((int)this.rootLayout.getWidth()));
         properties.put("primaryStageHeight", String.valueOf((int)this.rootLayout.getHeight()));
 
-/*TODO*/
+        properties.put("addStageX", String.valueOf((int)this.addLayout.getX()));
+        properties.put("addStageY", String.valueOf((int)this.addLayout.getY()));
+        properties.put("addStageWidth", String.valueOf((int)this.addLayout.getWidth()));
+        properties.put("addStageHeight", String.valueOf((int)this.addLayout.getHeight()));
+
+        properties.put("editStageX", String.valueOf((int)this.editLayout.getX()));
+        properties.put("editStageY", String.valueOf((int)this.editLayout.getY()));
+        properties.put("editStageWidth", String.valueOf((int)this.editLayout.getWidth()));
+        properties.put("editStageHeight", String.valueOf((int)this.editLayout.getHeight()));
+
+        properties.put("browserStageX", String.valueOf((int)this.browserLayout.getX()));
+        properties.put("browserStageY", String.valueOf((int)this.browserLayout.getY()));
+        properties.put("browserStageWidth", String.valueOf((int)this.browserLayout.getWidth()));
+        properties.put("browserStageHeight", String.valueOf((int)this.browserLayout.getHeight()));
+
         try (OutputStream output = new FileOutputStream("config.properties")){
             properties.store(output, comments);
         } catch (IOException e) {
