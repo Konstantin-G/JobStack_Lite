@@ -94,9 +94,9 @@ public class ZipDB
     /**
      * Unzip it
      * @param zipFile input zip file
-     * @param outputFolder zip file output folder
+     * @param tmpFolder zip file output folder
      */
-    public void unZipIt(String zipFile, String outputFolder){
+    public void unZipIt(String zipFile, String tmpFolder){
 
         byte[] buffer = new byte[1024];
 
@@ -115,7 +115,12 @@ public class ZipDB
             while(ze!= null){
 
                 String fileName = ze.getName();
-                File newFile = new File(outputFolder + File.separator + fileName);
+                //linux
+                if (TMP_FOLDER.startsWith("/var")){
+                    fileName = fileName.substring(1, fileName.length());
+                    fileName = fileName.replace("\\", "/");
+                }
+                File newFile = new File(tmpFolder + File.separator + fileName);
 
                 System.out.println("file unzip : "+ newFile.getAbsoluteFile());
 
