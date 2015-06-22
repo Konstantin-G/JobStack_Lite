@@ -28,7 +28,8 @@ public class Path {
 
 
     public static String getProgramTempFolder() {
-        return TEMP_FOLDER + "JobStack" + File.separator;
+        String tempPath = TEMP_FOLDER.endsWith("/tmp")? "/var/tmp/" : TEMP_FOLDER;
+        return tempPath + "JobStack" + File.separator;
     }
 
     public static String getDbName() {
