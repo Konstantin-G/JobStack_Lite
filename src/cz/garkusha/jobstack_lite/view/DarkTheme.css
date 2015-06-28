@@ -68,7 +68,7 @@
 }
 
 .table-view .column-header, .table-view .filler {
-    -fx-size: 15;
+    -fx-size: 13;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
@@ -80,7 +80,8 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
+    -fx-font-weight: normal;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: #039ed3;
     -fx-alignment: center-left;
@@ -221,7 +222,7 @@
     -fx-background-radius: 0;
     -fx-background-color: #333333;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 10pt;
+    -fx-font-size: 9pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
