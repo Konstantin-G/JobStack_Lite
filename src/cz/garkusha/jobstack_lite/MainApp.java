@@ -88,10 +88,18 @@ public class MainApp extends Application {
         this.primaryStage.setWidth(programProperties.getRootLayout().getWidth());
         this.primaryStage.setHeight(programProperties.getRootLayout().getHeight());
 
-        // load icon
-        try ( InputStream is = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon.png")){
-            Image image = new Image(is);
-            this.primaryStage.getIcons().add(image);
+        // load icons
+        try ( InputStream is_32  = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon_32.png");
+              InputStream is_64  = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon_64.png");
+              InputStream is_128 = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon_128.png");
+              InputStream is_256 = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon_256.png");
+              InputStream is_640 = getClass().getResourceAsStream("/cz/garkusha/jobstack_lite/resources/icon_640.png")
+        ){
+            this.primaryStage.getIcons().add(new Image(is_32));
+            this.primaryStage.getIcons().add(new Image(is_64));
+            this.primaryStage.getIcons().add(new Image(is_128));
+            this.primaryStage.getIcons().add(new Image(is_256));
+            this.primaryStage.getIcons().add(new Image(is_640));
         } catch (Exception e) {
             e.printStackTrace();
         }
