@@ -26,23 +26,22 @@ public class ZipDB
         ZipDB appZip = new ZipDB();
         appZip.fileList = new ArrayList<>();
         appZip.generateFileList(new File(TMP_FOLDER));
-        appZip.zipIt(ZIP_FILE);
+        appZip.zipIt();
     }
 
     public static void unCompression(){
         ZipDB unZip = new ZipDB();
-        unZip.unZipIt(ZIP_FILE, TMP_FOLDER);
+        unZip.unZipIt();
     }
 
     /**
      * Zip it
-     * @param zipFile output ZIP file location
      */
-    public void zipIt(String zipFile){
+    public void zipIt(){
 
         byte[] buffer = new byte[1024];
 
-        try(FileOutputStream fos = new FileOutputStream(zipFile);
+        try(FileOutputStream fos = new FileOutputStream(ZIP_FILE);
             ZipOutputStream zos = new ZipOutputStream(fos, Charset.forName("UTF-8"))
             ){
             for(String file : this.fileList){
@@ -93,14 +92,12 @@ public class ZipDB
 
     /**
      * Unzip it
-     * @param zipFile input zip file
-     * @param tmpFolder zip file output folder
      */
-    public void unZipIt(String zipFile, String tmpFolder){
+    public void unZipIt(){
 
         byte[] buffer = new byte[1024];
 
-        try(ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile))
+        try(ZipInputStream zis = new ZipInputStream(new FileInputStream(ZIP_FILE))
         ){
 
             //create output directory is not exists
@@ -120,7 +117,7 @@ public class ZipDB
                     fileName = fileName.substring(1, fileName.length());
                     fileName = fileName.replace("\\", "/");
                 }
-                File newFile = new File(tmpFolder + File.separator + fileName);
+                File newFile = new File(TMP_FOLDER + File.separator + fileName);
 
                 System.out.println("file unzip : "+ newFile.getAbsoluteFile());
 
