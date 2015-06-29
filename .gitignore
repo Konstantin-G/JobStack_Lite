@@ -9,10 +9,7 @@ out/
 data/
 derby.log
 JobStack.jpg
-built.properties
-built.xml
 META-INF
-icons/icon.xcf
 config.properties
 jobstack.ipr
 jobstack.iws
