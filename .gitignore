@@ -12,5 +12,8 @@ JobStack.jpg
 built.properties
 built.xml
 META-INF
-src/cz/garkusha/jobstack_lite/resources/icon.xcf
+icons/icon.xcf
 config.properties
+jobstack.ipr
+jobstack.iws
+src/main/resources/icons/icon.xcf

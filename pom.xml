@@ -16,6 +16,7 @@
         <junit.version>4.12</junit.version>
         <jsoup.version>1.8.2</jsoup.version>
         <derby.version>10.11.1.1</derby.version>
+        <zenjava.version>8.1.2</zenjava.version>
     </properties>
 
     <dependencies>
@@ -51,7 +52,7 @@
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>2.0</version>
+                <version>${zenjava.version}</version>
                 <configuration>
                     <mainClass>cz.garkusha.jobstack_lite.MainApp</mainClass>
                 </configuration>
