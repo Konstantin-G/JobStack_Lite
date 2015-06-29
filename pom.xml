@@ -1,30 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.garkusha.jobstack</groupId>
     <artifactId>jobstack</artifactId>
+    <name>jobstack</name>
+
     <packaging>jar</packaging>
     <version>1</version>
-    <name>JobStack</name>
-    <url>http://maven.apache.org</url>
+    
+    <organization>
+        <!-- Used as the 'Vendor' for JNLP generation -->
+        <name>Konstantin Garkusha</name>
+    </organization>
 
     <properties>
-        <log4j.version>1.2.17</log4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>1.6.1</slf4j.version>
+		<log4j.version>2.3</log4j.version>
         <junit.version>4.12</junit.version>
         <jsoup.version>1.8.2</jsoup.version>
         <derby.version>10.11.1.1</derby.version>
         <zenjava.version>8.1.2</zenjava.version>
     </properties>
 
+    <build>
+
+        <finalName>jobstack</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${zenjava.version}</version>
+                <configuration>
+
+                    <mainClass>cz.garkusha.jobstack_lite.MainApp</mainClass>
+
+                    <!-- only required if signing the jar file -->
+                    <keyStoreAlias>example-user</keyStoreAlias>
+                    <keyStorePassword>example-password</keyStorePassword>
+                    <allPermissions>true</allPermissions>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
     <dependencies>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+	
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
 
         <dependency>
             <groupId>junit</groupId>
@@ -44,19 +78,46 @@
             <artifactId>derby</artifactId>
             <version>${derby.version}</version>
         </dependency>
+    
+        <!-- MigLayout -->
+
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-javafx</artifactId>
+            <version>4.2</version>
+        </dependency>
+
+        <!-- Apache Commons -->
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- Logging  -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>${zenjava.version}</version>
-                <configuration>
-                    <mainClass>cz.garkusha.jobstack_lite.MainApp</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

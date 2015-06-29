@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Konstantin Garkusha
  */
 public class Dialogs {
-    private static final String CSS_LOCATION = "/fxml/DarkTheme.css";
+    private static final String CSS_LOCATION = "/styles/DarkTheme.css";
     /**
      * Called when we have any exception.
      */
