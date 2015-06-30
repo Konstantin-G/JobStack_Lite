@@ -5,6 +5,8 @@ import cz.garkusha.jobstack_lite.model.Position;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -14,6 +16,8 @@ import javafx.stage.Stage;
  */
 
 public class PerhapsTheSamePositionController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PerhapsTheSamePositionController.class);
 
     @FXML
     private TextField newWebField;
@@ -44,6 +48,7 @@ public class PerhapsTheSamePositionController {
      */
     @FXML
     private void initialize() {
+        LOG.info("controller initialisation");
     }
 
     /**
@@ -58,6 +63,7 @@ public class PerhapsTheSamePositionController {
         newPersonField.setText(position.getPerson());
         newRequestSentDateField.setText("");
         newAnswerDateField.setText("");
+        LOG.debug("new position was set");
     }
 
     /**
@@ -65,6 +71,7 @@ public class PerhapsTheSamePositionController {
      */
     @FXML
     private void handleOk() {
+        LOG.debug("OK button was pressed");
         dialogStage.close();
     }
 }
