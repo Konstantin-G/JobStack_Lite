@@ -13,8 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PositionEditDialogController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PositionEditDialogController.class);
 
     @FXML
     private TextField idField;
@@ -58,6 +62,7 @@ public class PositionEditDialogController {
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
         countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
+        LOG.info("Controller initialisation");
     }
 
     /**
@@ -102,6 +107,7 @@ public class PositionEditDialogController {
         answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(position.getConversation());
         countryChoiceBox.setValue(position.getCountry());
+        LOG.debug("Position for editing was set");
     }
 
     /**
@@ -142,6 +148,7 @@ public class PositionEditDialogController {
         if (null != filledPosition.getConversation())
             conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");
+        LOG.debug("Filled position was set");
     }
 
 
@@ -181,6 +188,7 @@ public class PositionEditDialogController {
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
             saveClicked = true;
+            LOG.debug("Save button was pressed");
             dialogStage.close();
         }
     }
@@ -190,6 +198,7 @@ public class PositionEditDialogController {
      */
     @FXML
     private void handleCancel() {
+        LOG.debug("Cancel button was pressed");
         dialogStage.close();
     }
 
@@ -198,6 +207,7 @@ public class PositionEditDialogController {
      */
     @FXML
     private void handleFill() {
+        LOG.debug("Fill button was pressed");
         int newId = mainApp.getPositionsMaxId();
         int id = Integer.parseInt(idField.getText());
         id = id != 0 ? id : newId + 1;
@@ -224,13 +234,13 @@ public class PositionEditDialogController {
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";
         }
-        if (webField.getText() == null || webField.getText().length() == 0) {
-            errorMessage += "No valid url!\n";
-        }
+
         /**TODO phone checking*/
         if (errorMessage.length() == 0) {
+            LOG.debug("All input fields are valid");
             return true;
         } else {
+            LOG.debug("Some fields are invalid: " + errorMessage);
             // Show the error message.
             Dialogs.invalidFieldsError(errorMessage);
             return false;
