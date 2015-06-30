@@ -1,6 +1,9 @@
 package cz.garkusha.jobstack_lite.util;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 
 /**
@@ -10,15 +13,25 @@ import java.io.File;
  */
 public class FileSystem {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FileSystem.class);
+
     public static void clearTempDirectory(File file){
+        LOG.debug("Clearing temporary directory");
+        clearDirectory(file);
+        LOG.debug("Temporary directory was cleared");
+    }
+
+    private static void clearDirectory(File file) {
         if (!file.exists())
             return;
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
-                clearTempDirectory(f);
+                clearDirectory(f);
             }
         }
-        file.delete();
-        System.out.println("file \"" + file.getName() + "\" was deleted");
+        if (!file.delete()){
+            LOG.debug("Can't delete file: " + file.getName());
+        }
     }
+
 }

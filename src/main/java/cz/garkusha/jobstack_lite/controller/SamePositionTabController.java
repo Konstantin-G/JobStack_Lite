@@ -5,6 +5,8 @@ import cz.garkusha.jobstack_lite.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Controller class to create new tab in TabPane.
@@ -13,6 +15,8 @@ import javafx.scene.control.TextField;
  */
 
 public class SamePositionTabController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SamePositionTabController.class);
 
     @FXML
     private TextField oldWebField;
@@ -36,7 +40,7 @@ public class SamePositionTabController {
      * after the fxml file has been loaded.
      */
     @FXML
-    private void initialize() {}
+    private void initialize() {LOG.info("Controller initialisation");}
 
     /**
      * Set the samePosition to be watched in the dialog.
@@ -72,5 +76,6 @@ public class SamePositionTabController {
 
         oldRequestSentDateField.setText(DateUtil.toString(samePosition.getRequestSentDate()));
         oldAnswerDateField.setText(DateUtil.toString(samePosition.getAnswerDate()));
+        LOG.debug("Old position was set");
     }
 }

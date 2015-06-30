@@ -16,11 +16,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TableLayoutController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(TableLayoutController.class);
 
     @FXML
     private TextField filterField;
@@ -73,6 +77,9 @@ public class TableLayoutController {
      */
     @FXML
     private void initialize() {
+
+        LOG.info("Start table initialisation");
+
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
 
         resultColumn.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
@@ -158,12 +165,15 @@ public class TableLayoutController {
         });
         conversationColumn.setCellValueFactory(cellData -> cellData.getValue().conversationProperty());
         countryColumn.setCellValueFactory(cellData -> cellData.getValue().countryProperty());
+        LOG.debug("Finish table initialisation");
     }
 
     /**
      * Is called by the setMainApp method to make ability to use String filter.
      */
     private void initializeFilter() {
+        LOG.debug("Start table filter initialisation");
+
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Position> filteredData = new FilteredList<>(mainApp.getPositions(), p -> true);
 
@@ -204,6 +214,8 @@ public class TableLayoutController {
 
         // 5. Add sorted (and filtered) data to the table.
         positionTable.setItems(sortedData);
+
+        LOG.debug("Finish filter initialisation");
     }
 
     /**
@@ -225,6 +237,7 @@ public class TableLayoutController {
      */
     @FXML
     void handleJobDescriptionHyperlink() {
+        LOG.debug("JobDescription was pressed");
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
             String html = selectedPerson.getHtml();
@@ -241,6 +254,7 @@ public class TableLayoutController {
      */
     @FXML
     void handleJobOnWebHyperlink() {
+        LOG.debug("Job On the Web was pressed");
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson) {
             //Set your page url in this string. For eg, I m using URL for Google Search engine
@@ -258,6 +272,8 @@ public class TableLayoutController {
      */
     @FXML
     void handleDeletePosition() {
+        LOG.debug("DeletePosition button was pressed");
+
         // The index of the sorted and filtered list.
         int visibleIndex = positionTable.getSelectionModel().getSelectedIndex();
 
@@ -280,6 +296,7 @@ public class TableLayoutController {
      */
     @FXML
     void handleNewPosition() {
+        LOG.debug("NewPosition button was pressed");
         Position tempPosition = new Position();
         boolean okClicked = mainApp.showPositionAddDialog(tempPosition);
         if (okClicked) {
@@ -293,6 +310,7 @@ public class TableLayoutController {
      */
     @FXML
     void handleEditPosition() {
+        LOG.debug("EditPosition button was pressed");
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson) {
             @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
@@ -306,6 +324,7 @@ public class TableLayoutController {
      */
     @FXML
     public void handleSaveToDB() {
+        LOG.debug("SaveToDB button was pressed");
         mainApp.saveToDB();
         mainApp.setDataChanged(false);
     }

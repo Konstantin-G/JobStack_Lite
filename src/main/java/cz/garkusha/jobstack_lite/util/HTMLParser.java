@@ -5,6 +5,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -34,6 +36,9 @@ import java.util.Map;
  * @author Konstantin Garkusha
  */
 public class HTMLParser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(HTMLParser.class);
+
     private static final int STATE_CODE = 420;
     private String company;
     private String jobTitle;
@@ -44,6 +49,7 @@ public class HTMLParser {
     private String html;
 
     public HTMLParser(String url, String country){
+        LOG.info("Start parsing web page: " + url);
         readInformationFromWeb(url, country);
     }
 
@@ -78,9 +84,12 @@ public class HTMLParser {
     private void readInformationFromWeb(String url, String country) {
         Document doc = null;
         try {
+            LOG.debug("Trying to establish connection to: " + url);
             doc = Jsoup.connect(url).get();
             this.html = doc.html();
+            LOG.debug("Successfully connected");
         } catch (IOException e) {
+            LOG.debug("Can't connect to: " + url);
             e.printStackTrace();
             Dialogs.connectionError();
         }

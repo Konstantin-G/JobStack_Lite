@@ -3,6 +3,8 @@ package cz.garkusha.jobstack_lite.util;
 import cz.garkusha.jobstack_lite.model.Position;
 import cz.garkusha.jobstack_lite.controller.Dialogs;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -15,6 +17,9 @@ import java.sql.*;
  * @author Konstantin Garkusha
  */
 public class DBCommunication {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DBCommunication.class);
+
     private final DerbyDBManager db;
     private final ObservableList<Position> positions;
 
@@ -30,7 +35,9 @@ public class DBCommunication {
         this.positions = positions;
         try {
             try {
+                LOG.info("Read positions from database");
                 fillPositionsFromDB();
+                LOG.debug("Positions from database was read");
             } catch (SQLException ignore) {
                 // exception when we haven't the database, or can't find her
                 // Script for Apache Derby DB
@@ -43,7 +50,7 @@ public class DBCommunication {
                   /*( 6)*/     " web VARCHAR(200) NOT NULL," +
                   /*( 7)*/     " person VARCHAR(40) DEFAULT NULL," +
                   /*( 8)*/     " phone VARCHAR(40) DEFAULT NULL," +
-                  /*(9)*/      " email VARCHAR(100) DEFAULT NULL," +
+                  /*( 9)*/     " email VARCHAR(100) DEFAULT NULL," +
                   /*(10)*/     " requestSent VARCHAR(20) DEFAULT NULL," +
                   /*(11)*/     " answer VARCHAR(20) DEFAULT NULL," +
                   /*(12)*/     " conversation LONG VARCHAR DEFAULT NULL," +
@@ -75,7 +82,7 @@ public class DBCommunication {
     public void writePositionsToDB(){
         try {
             db.executeUpdate("DELETE FROM stepOne");
-            System.out.println("DB was cleared");
+            LOG.debug("Database was cleared");
             for (Position p : positions){
                 PreparedStatement ps = db.getCon().prepareStatement("INSERT INTO stepOne VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -99,7 +106,7 @@ public class DBCommunication {
                 ps.execute();
                 db.getCon().commit();
             }
-            System.out.println("Information was saved to DB");
+            LOG.debug("Information was saved to database");
 
         } catch (SQLException e) {
             e.printStackTrace();

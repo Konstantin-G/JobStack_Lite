@@ -8,6 +8,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Browser class
@@ -16,18 +18,23 @@ import javafx.scene.web.WebView;
  */
 public class Browser  extends Region {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Browser.class);
+
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
 
     public Browser(String urlOrHtml) {
+        LOG.info("Web browser initialisation");
         //apply the styles
         getStyleClass().add("browser");
 
         // load the web page
         if (urlOrHtml.length() < 500){
             // then we're thinking, that it's url
+            LOG.debug("Load URL to Browser");
             webEngine.load(urlOrHtml);
         } else {
+            LOG.debug("Load content to Browser");
             // then we're thinking, that it's html content
             webEngine.loadContent(urlOrHtml);
         }

@@ -5,6 +5,9 @@ package cz.garkusha.jobstack_lite.util;
  *
  * @author Konstantin Garkusha
  */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,8 +19,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class ZipDB
-{
+public class ZipDB {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ZipDB.class);
+
     private List<String> fileList;
     private static final String ZIP_FILE = Path.getAbsoluteDataPath() + Path.getDbName() + ".dat";
     private static final String TMP_FOLDER = Path.getProgramTempFolder() + "tmp_" + Path.getDbName();
@@ -38,7 +43,7 @@ public class ZipDB
      * Zip it
      */
     public void zipIt(){
-
+        LOG.info("Start compression database to zip");
         byte[] buffer = new byte[1024];
 
         //if dataDirectory is not exist
@@ -54,7 +59,6 @@ public class ZipDB
             ){
             for(String file : this.fileList){
 
-                System.out.println("File Added : " + file);
                 ZipEntry ze= new ZipEntry(file);
                 zos.putNextEntry(ze);
 
@@ -63,9 +67,15 @@ public class ZipDB
                     while ((readBytes = in.read(buffer)) > 0) {
                         zos.write(buffer, 0, readBytes);
                     }
-                } catch (IOException e) { e.printStackTrace(); }
+                } catch (IOException e) {
+                    LOG.error("Error Database wasn't compressed successfully");
+                    e.printStackTrace();
+                }
             }
-        }catch(IOException ex){ ex.printStackTrace(); }
+            LOG.debug("Database was compressed");
+        }catch(IOException ex){
+            LOG.error("Error Database wasn't compressed successfully");
+            ex.printStackTrace(); }
     }
 
     /**
@@ -102,7 +112,7 @@ public class ZipDB
      * Unzip it
      */
     public void unZipIt(){
-
+        LOG.info("Start extraction database from zip");
         byte[] buffer = new byte[1024];
 
         try(ZipInputStream zis = new ZipInputStream(new FileInputStream(ZIP_FILE))
@@ -126,9 +136,6 @@ public class ZipDB
                     fileName = fileName.replace("\\", "/");
                 }
                 File newFile = new File(TMP_FOLDER + File.separator + fileName);
-
-                System.out.println("file unzip : "+ newFile.getAbsoluteFile());
-
                 //create all non exists folders
                 //else we will hit FileNotFoundException for compressed folder
                 new File(newFile.getParent()).mkdirs();
@@ -139,10 +146,14 @@ public class ZipDB
                         fos.write(buffer, 0, len);
                     }
                 } catch (IOException e) {
+                    LOG.error("Error Database wasn't extracted successfully");
                     e.printStackTrace();
                 }
                 ze = zis.getNextEntry();
             }
-        }catch(IOException ex){ ex.printStackTrace(); }
+            LOG.debug("Database was extracted");
+        }catch(IOException ex){
+            LOG.error("Error Database wasn't extracted successfully");
+            ex.printStackTrace(); }
     }
 }

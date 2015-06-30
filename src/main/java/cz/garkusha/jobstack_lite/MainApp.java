@@ -28,8 +28,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainApp extends Application {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MainApp.class);
+
     private boolean isDataChanged;
     private Stage primaryStage;
     private Stage addStage;
@@ -46,6 +51,7 @@ public class MainApp extends Application {
     private final ObservableList<Position> positions = FXCollections.observableArrayList();
 
     public MainApp() {
+        LOG.info("Main constructor");
         this.dbCommunication = new DBCommunication(positions);
         this.isDataChanged = false;
         // Load properties
@@ -60,6 +66,17 @@ public class MainApp extends Application {
         return positions;
     }
 
+    /**
+     * @return the main stage.
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     public void setDataChanged(boolean isDataChanged) {
         this.isDataChanged = isDataChanged;
     }
@@ -68,6 +85,7 @@ public class MainApp extends Application {
         dbCommunication.writePositionsToDB();
         //Zip database to JobStack *.dat file
         ZipDB.compression();
+        LOG.debug("Data base was saved to file");
     }
 
     public int getPositionsMaxId(){
@@ -80,6 +98,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        LOG.debug("Setting properties to main window");
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("JobStack");
         //Set size from properties
@@ -103,7 +122,7 @@ public class MainApp extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        LOG.debug("Properties to main window was set");
         initRootLayout();
         showTableLayout();
         // Dialog when you press close button
@@ -122,14 +141,16 @@ public class MainApp extends Application {
             }
             /** Save properties*/
             programProperties.setMainMaximized(primaryStage.isMaximized());
-            programProperties.setRootLayout(new Rectangle( (int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
-                                                (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
+            programProperties.setRootLayout(new Rectangle((int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
+                    (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
             programProperties.saveProperties();
+            LOG.debug("All properties was saved");
         });
     }
 
     @Override
     public void stop(){
+        LOG.debug("Main window was closed");
         primaryStage.close();
     }
 
@@ -137,7 +158,7 @@ public class MainApp extends Application {
      * Initializes the root layout.
      */
     void initRootLayout() {
-        System.out.println("All it's ok, start working...");
+        LOG.info("InitRootLayout starts");
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -161,6 +182,7 @@ public class MainApp extends Application {
      * Shows the table layout inside the root layout.
      */
     void showTableLayout() {
+        LOG.info("TableLayout starts");
         try {
             // Load table layout.
             FXMLLoader loader = new FXMLLoader();
@@ -182,17 +204,6 @@ public class MainApp extends Application {
     }
 
     /**
-     * @return the main stage.
-     */
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    /**
      * Opens a dialog to add details for the specified position. If the user
      * clicks OK, the changes are saved into the provided position object and true
      * is returned.
@@ -201,6 +212,7 @@ public class MainApp extends Application {
      * @return true if the user clicked OK, false otherwise.
      */
     public boolean showPositionAddDialog(Position position) {
+        LOG.info("PositionAddDialog starts");
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -247,6 +259,7 @@ public class MainApp extends Application {
      * @return true if the user clicked OK, false otherwise.
      */
     public boolean showPositionEditDialog(Position position) {
+        LOG.info("PositionEditDialo starts");
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -288,6 +301,7 @@ public class MainApp extends Application {
      * Shows the Probably The Same Position layout.
      */
     public void showProbablyTheSamePositionLayout(Position filledPosition) {
+        LOG.info("ProbablyTheSamePositionLayout starts");
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -321,6 +335,7 @@ public class MainApp extends Application {
      * create new TabPane and add some Tab to his.
      */
     public TabPane SamePositionTabPaneLayout(Position filledPosition) {
+        LOG.info("SamePositionTabPaneLayout starts");
 
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -350,6 +365,7 @@ public class MainApp extends Application {
      * Shows the Internet Browser.
      */
     public void showInternetBrowser(String urlOrHtml, String title) {
+        LOG.info("Internet Browser starts");
 
         // Create the dialog Stage.
         browserStage = new Stage();
