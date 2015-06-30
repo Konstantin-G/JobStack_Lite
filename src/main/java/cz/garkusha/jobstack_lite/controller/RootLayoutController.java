@@ -2,6 +2,8 @@ package cz.garkusha.jobstack_lite.controller;
 
 import cz.garkusha.jobstack_lite.MainApp;
 import javafx.fxml.FXML;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  * Controller class show details of a positions.
@@ -9,11 +11,15 @@ import javafx.fxml.FXML;
  * @author Konstantin Garkusha
  */
 public class RootLayoutController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RootLayoutController.class);
+
     private MainApp mainApp;
     private TableLayoutController tableLayoutController;
 
     @FXML
     private void stop(){
+        LOG.info("Controller was stopped");
         mainApp.stop();
     }
 
@@ -89,6 +95,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleAbout() {
+        LOG.debug("About button was pressed");
         Dialogs.someError("Here will be some about program");
     }
 }
