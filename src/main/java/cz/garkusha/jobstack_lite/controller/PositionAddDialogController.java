@@ -217,11 +217,14 @@ public class PositionAddDialogController {
     @FXML
     private void handleFill() {
         Position filledPosition;
+        String url = webField.getText();
+        if (url.length() == 0 || url.length() == 0) {
+            return;
+        }
         if (isURLAddressValid()) {
             int newId = mainApp.getPositionsMaxId();
             int id = Integer.parseInt(idField.getText());
             id = id != 0 ? id : newId + 1;
-            String url = webField.getText();
             String country  = String.valueOf(countryChoiceBox.getValue());
             filledPosition = PositionFactory.getNewPosition(id, url, country);
             setFilledPosition(filledPosition);
@@ -274,10 +277,7 @@ public class PositionAddDialogController {
      */
     private boolean isURLAddressValid() {
         String url = webField.getText();
-        if (null == url || url.length() == 0){
-            Dialogs.invalidFieldsError("Enter url address");
-            return false;
-        }
+
         String urlPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*.+\\/?$";
 
         return url.matches(urlPattern);
