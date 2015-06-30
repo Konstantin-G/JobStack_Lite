@@ -15,8 +15,12 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PositionAddDialogController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PositionAddDialogController.class);
 
     @FXML
     private CheckBox updatePDFBox;
@@ -66,8 +70,9 @@ public class PositionAddDialogController {
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
         countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
-         /*TODO add past choice*/
         countryChoiceBox.setValue(ProgramProperties.getInstance().getLastCountry());
+
+        LOG.info("Controller initialisation");
     }
 
     /**
@@ -113,6 +118,7 @@ public class PositionAddDialogController {
         answerDateField.setShowWeekNumbers(false);
         answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(position.getConversation());
+        LOG.debug("Empty position was set");
     }
 
     /**
@@ -146,6 +152,7 @@ public class PositionAddDialogController {
         answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");
+        LOG.debug("Filled position was set");
     }
 
 
@@ -190,6 +197,7 @@ public class PositionAddDialogController {
             mainApp.setDataChanged(true);
             saveClicked = true;
 
+            LOG.debug("New position was saved to table");
             dialogStage.close();
         }
     }
@@ -199,6 +207,7 @@ public class PositionAddDialogController {
      */
     @FXML
     private void handleCancel() {
+        LOG.debug("Cancel button was pressed");
         dialogStage.close();
     }
 
@@ -216,10 +225,14 @@ public class PositionAddDialogController {
             String country  = String.valueOf(countryChoiceBox.getValue());
             filledPosition = PositionFactory.getNewPosition(id, url, country);
             setFilledPosition(filledPosition);
-            // if filled position is probably the same. You see new window
+            // if filled position is probably the same. we'll see new window
             if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
                 mainApp.showProbablyTheSamePositionLayout(filledPosition);
             }
+            LOG.debug("User typed valid URL address and pressed fill button");
+        } else {
+            LOG.debug("User typed invalid URL address");
+            Dialogs.invalidFieldsError("Please type a valid URL address and pressed fill button");
         }
 
     }
@@ -241,13 +254,13 @@ public class PositionAddDialogController {
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";
         }
-        if (webField.getText() == null || webField.getText().length() == 0) {
-            errorMessage += "No valid url!\n";
-        }
+
         /**TODO phone checking*/
         if (errorMessage.length() == 0) {
+            LOG.debug("All input fields are valid");
             return true;
         } else {
+            LOG.debug("Some fields are invalid: " + errorMessage);
             // Show the error message.
             Dialogs.invalidFieldsError(errorMessage);
             return false;
@@ -267,13 +280,6 @@ public class PositionAddDialogController {
         }
         String urlPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*.+\\/?$";
 
-        boolean isURLAddressValid = url.matches(urlPattern);
-
-        if (!isURLAddressValid) {
-            Dialogs.invalidFieldsError("URL address isn't valid!");
-        }
-        return isURLAddressValid;
+        return url.matches(urlPattern);
     }
-
-
 }
