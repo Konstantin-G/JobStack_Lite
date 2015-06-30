@@ -104,6 +104,9 @@ public class HTMLParser {
                     readInformationFrom_JOBDNES_CZ(doc);
                 }else if (url.contains("startupjobs.cz")) {
                     readInformationFrom_STARTUPJOBS_CZ(doc);
+                } else {
+                    Dialogs.someError("Can't parse: " + url);
+                    LOG.debug("Can't parse: " + url);
                 }
                 break;
             case "Russia":
@@ -115,6 +118,9 @@ public class HTMLParser {
                     readInformationFrom_CAREERIST_RU(doc);
                 } else if (url.contains("brainstorage.me")) {
                     readInformationFrom_BRAINSTORAGE_ME(doc);
+                } else {
+                    Dialogs.someError("Can't parse: " + url);
+                    LOG.debug("Can't parse: " + url);
                 }
                 break;
             case "Ukraine":
@@ -124,6 +130,9 @@ public class HTMLParser {
                     readInformationFrom_HH_UA(doc);
                 } else if (url.contains("rabota.ua/mobile")) {
                     readInformationFrom_RABOTA_UA(doc);
+                } else {
+                    Dialogs.someError("Can't parse: " + url);
+                    LOG.debug("Can't parse: " + url);
                 }
                 break;
             case "USA":
@@ -135,10 +144,13 @@ public class HTMLParser {
                     readInformationFrom_MONSTER_COM(doc);
                 } else if (url.contains("indeed.com")) {
                     readInformationFrom_INDEED_COM(doc);
+                } else {
+                    Dialogs.someError("Can't parse: " + url);
+                    LOG.debug("Can't parse: " + url);
                 }
                 break;
             default:
-                System.out.println("none");
+                LOG.debug("You'll never see this ");
         }
 
     }

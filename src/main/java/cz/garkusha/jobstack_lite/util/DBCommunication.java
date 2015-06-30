@@ -26,7 +26,7 @@ public class DBCommunication {
     public DBCommunication(ObservableList<Position> positions) {
 
         // clear temp directory
-        FileSystem.clearTempDirectory(new File(Path.getProgramTempFolder()));
+        FileSystem.clearTempDirectory();
 
         // unZip database from JobStack *.dat file
         ZipDB.unCompression();
@@ -39,6 +39,7 @@ public class DBCommunication {
                 fillPositionsFromDB();
                 LOG.debug("Positions from database was read");
             } catch (SQLException ignore) {
+                LOG.debug("Creating database");
                 // exception when we haven't the database, or can't find her
                 // Script for Apache Derby DB
                db.executeUpdate("CREATE TABLE stepOne (" +
@@ -59,6 +60,7 @@ public class DBCommunication {
                );
             }
         } catch (SQLException e) {
+            LOG.error(e.getMessage());
             e.printStackTrace();
             Dialogs.exceptionDialog(e);
         }
@@ -109,6 +111,7 @@ public class DBCommunication {
             LOG.debug("Information was saved to database");
 
         } catch (SQLException e) {
+            LOG.error(e.getMessage());
             e.printStackTrace();
             Dialogs.exceptionDialog(e);
         }

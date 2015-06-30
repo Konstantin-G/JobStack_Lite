@@ -74,7 +74,7 @@ public class DerbyDBManager {
     // Query to update information in database  (INSERT, UPDATE, CREATE TABLE ...)
     public void executeUpdate(String sql) throws SQLException {
         Statement stmt = con.createStatement() ;
-        @SuppressWarnings("UnusedAssignment") int count = stmt.executeUpdate(sql) ;
+        stmt.executeUpdate(sql) ;
         stmt.close() ;
     }
 

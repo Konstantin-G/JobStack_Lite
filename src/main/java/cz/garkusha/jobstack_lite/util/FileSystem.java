@@ -15,14 +15,15 @@ public class FileSystem {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileSystem.class);
 
-    public static void clearTempDirectory(File file){
+    public static void clearTempDirectory(){
+        File tempDirectory = new File(Path.getProgramTempFolder());
         LOG.debug("Clearing temporary directory");
-        clearDirectory(file);
+        clearDirectory(tempDirectory);
         LOG.debug("Temporary directory was cleared");
     }
 
     private static void clearDirectory(File file) {
-        if (!file.exists())
+        if (!file.exists() && file.listFiles() == null)
             return;
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {

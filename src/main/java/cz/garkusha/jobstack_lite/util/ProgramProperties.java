@@ -86,7 +86,7 @@ public class ProgramProperties {
         try (InputStream input = new FileInputStream("config.properties")) {
             properties.load(input);
         } catch (IOException e) {
-            System.out.println("Can't find config file, I'll create new");
+            System.out.println("Can't find config file, I'll create one");
             this.lastCountry = "Czech";
             this.rootLayout = new Rectangle(100, 100, 1400, 400);
         }

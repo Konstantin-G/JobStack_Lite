@@ -218,7 +218,7 @@ public class PositionAddDialogController {
     private void handleFill() {
         Position filledPosition;
         String url = webField.getText();
-        if (url.length() == 0 || url.length() == 0) {
+        if (url == null || url.length() == 0 ) {
             return;
         }
         if (isURLAddressValid()) {
@@ -235,7 +235,7 @@ public class PositionAddDialogController {
             LOG.debug("User typed valid URL address and pressed fill button");
         } else {
             LOG.debug("User typed invalid URL address");
-            Dialogs.invalidFieldsError("Please type a valid URL address and pressed fill button");
+            Dialogs.invalidFieldsError("Please type a valid URL address (use http://)\nand pressed fill button");
         }
 
     }
@@ -278,7 +278,7 @@ public class PositionAddDialogController {
     private boolean isURLAddressValid() {
         String url = webField.getText();
 
-        String urlPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*.+\\/?$";
+        String urlPattern = "^(https?:\\/\\/)([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*.+\\/?$";
 
         return url.matches(urlPattern);
     }
