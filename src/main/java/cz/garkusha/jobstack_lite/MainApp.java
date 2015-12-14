@@ -144,7 +144,7 @@ public class MainApp extends Application {
             programProperties.setRootLayout(new Rectangle((int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
                     (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
             programProperties.saveProperties();
-            LOG.debug("All properties was saved");
+            LOG.debug("All properties was save");
         });
     }
 
@@ -259,7 +259,7 @@ public class MainApp extends Application {
      * @return true if the user clicked OK, false otherwise.
      */
     public boolean showPositionEditDialog(Position position) {
-        LOG.info("PositionEditDialo starts");
+        LOG.info("PositionEditDialog starts");
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();

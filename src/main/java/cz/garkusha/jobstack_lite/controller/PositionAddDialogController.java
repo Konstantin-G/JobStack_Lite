@@ -136,7 +136,7 @@ public class PositionAddDialogController {
         jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
         // don't used in GUI
-        htmlField = filledPosition.getHtml();
+        htmlField = filledPosition.htmlAsString();
         locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
         webField.setText(filledPosition.getWeb());
@@ -179,7 +179,7 @@ public class PositionAddDialogController {
             }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
-            position.setHtml(htmlField);
+            position.Html(htmlField);
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());

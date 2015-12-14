@@ -86,6 +86,7 @@ public class DBCommunication {
             db.executeUpdate("DELETE FROM stepOne");
             LOG.debug("Database was cleared");
             for (Position p : positions){
+
                 PreparedStatement ps = db.getCon().prepareStatement("INSERT INTO stepOne VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 ps.setInt(1, p.getId());
@@ -103,7 +104,7 @@ public class DBCommunication {
                 ps.setString(12, p.getConversation() != null ? p.getConversation() : "");
                 ps.setString(13, p.getCountry());
 
-                ps.setBlob(14, new ByteArrayInputStream(p.getHtml().getBytes(Charset.forName("UTF-8"))));
+                ps.setBlob(14, new ByteArrayInputStream(p.getHtml().getBytes(1, (int) p.getHtml().length() /*Charset.forName("UTF-8")*/)));
 
                 ps.execute();
                 db.getCon().commit();

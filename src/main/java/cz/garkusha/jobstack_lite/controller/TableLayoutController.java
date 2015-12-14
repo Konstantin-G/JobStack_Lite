@@ -240,7 +240,7 @@ public class TableLayoutController {
         LOG.debug("JobDescription was pressed");
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
-            String html = selectedPerson.getHtml();
+            String html = selectedPerson.htmlAsString();
             String title = selectedPerson.getCompany() + " | " + selectedPerson.getJobTitle();
             mainApp.showInternetBrowser(html, title);
         }else{
