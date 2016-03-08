@@ -113,7 +113,7 @@ public class PositionEditDialogController {
      *
      * @param filledPosition new position with filled from web page
      */
-    void setFilledPosition(Position filledPosition) {
+    private void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
         if (null != filledPosition.getResult())
             resultChoiceBox.setValue(filledPosition.getResult());

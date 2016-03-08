@@ -43,11 +43,9 @@ public class MainApp extends Application {
     private boolean isDataChanged;
     private Stage primaryStage;
     private Stage addStage;
-    private Stage editStage;
-    private Stage browserStage;
     private BorderPane rootLayout;
     private ProgramProperties programProperties;
-    RootLayoutController rootController;
+    private RootLayoutController rootController;
     private File openedFile;
 
     /**
@@ -172,7 +170,7 @@ public class MainApp extends Application {
     /**
      * Initializes the root layout.
      */
-    void initRootLayout() {
+    private void initRootLayout() {
         LOG.info("InitRootLayout starts");
         try {
             // Load root layout from fxml file.
@@ -196,7 +194,7 @@ public class MainApp extends Application {
     /**
      * Shows the table layout inside the root layout.
      */
-    void showTableLayout() {
+    private void showTableLayout() {
         LOG.info("TableLayout starts");
         try {
             // Load table layout.
@@ -282,7 +280,7 @@ public class MainApp extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
-            editStage = new Stage();
+            Stage editStage = new Stage();
             editStage.setTitle("Edit position");
             editStage.initModality(Modality.WINDOW_MODAL);
             editStage.initOwner(primaryStage);
@@ -349,7 +347,7 @@ public class MainApp extends Application {
     /**
      * create new TabPane and add some Tab to his.
      */
-    public TabPane SamePositionTabPaneLayout(Position filledPosition) {
+    private TabPane SamePositionTabPaneLayout(Position filledPosition) {
         LOG.info("SamePositionTabPaneLayout starts");
 
         try {
@@ -383,7 +381,7 @@ public class MainApp extends Application {
         LOG.info("Internet Browser starts");
 
         // Create the dialog Stage.
-        browserStage = new Stage();
+        Stage browserStage = new Stage();
         browserStage.initModality(Modality.WINDOW_MODAL);
 
         // create the scene
@@ -410,7 +408,7 @@ public class MainApp extends Application {
      * Loads person data from the specified file. The current person data will
      * be replaced.
      *
-     * @param file
+     * @param file to load
      */
     public void loadPositionDataFromFile(File file) {
         try {
@@ -435,7 +433,7 @@ public class MainApp extends Application {
     /**
      * Saves the current person data to the specified file.
      *
-     * @param file
+     * @param file to save
      */
     public void savePositionDataToFile(File file) {
         try {

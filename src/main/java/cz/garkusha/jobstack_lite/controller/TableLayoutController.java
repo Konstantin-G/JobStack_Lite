@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -60,7 +59,7 @@ public class TableLayoutController {
     private TableColumn<Position, String> countryColumn;
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateUtil.DATE_PATTERN);
-    SortedList<Position> sortedData;
+    private SortedList<Position> sortedData;
     // Reference to the main application.
     private MainApp mainApp;
 

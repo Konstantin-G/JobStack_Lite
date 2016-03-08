@@ -57,7 +57,6 @@ public class PositionAddDialogController {
     private Stage dialogStage;
     private Position position;
     private boolean saveClicked = false;
-    private boolean isFilledOK = false;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -124,11 +123,11 @@ public class PositionAddDialogController {
      *
      * @param filledPosition new position with filled from web page
      */
-    void setFilledPosition(Position filledPosition) {
+    private void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
         resultChoiceBox.setValue(filledPosition.getResult());
 
-        isFilledOK = filledPosition.getCompany() != null;
+        boolean isFilledOK = filledPosition.getCompany() != null;
         companyField.setText(filledPosition.getCompany());
         companyField.setPromptText("Can't find company name, need to fill this field manually");
         jobTitleField.setText(filledPosition.getJobTitle());
