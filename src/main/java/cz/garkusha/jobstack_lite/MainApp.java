@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.*;
 
 import cz.garkusha.jobstack_lite.model.Position;
+import cz.garkusha.jobstack_lite.model.PositionListWrapper;
 import cz.garkusha.jobstack_lite.util.*;
 import cz.garkusha.jobstack_lite.controller.*;
 
@@ -31,6 +32,10 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
 public class MainApp extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(MainApp.class);
@@ -41,9 +46,9 @@ public class MainApp extends Application {
     private Stage editStage;
     private Stage browserStage;
     private BorderPane rootLayout;
-    private final DBCommunication dbCommunication;
     private ProgramProperties programProperties;
     RootLayoutController rootController;
+    private File openedFile;
 
     /**
      * The data as an observable list of Positions.
@@ -52,10 +57,15 @@ public class MainApp extends Application {
 
     public MainApp() {
         LOG.info("Main constructor");
-        this.dbCommunication = new DBCommunication(positions);
-        this.isDataChanged = false;
+
         // Load properties
         this.programProperties = ProgramProperties.getInstance();
+        this.openedFile = new File(programProperties.getlastPathToDB());
+
+        loadPositionDataFromFile(openedFile);
+        this.isDataChanged = false;
+
+
     }
 
      /**
@@ -73,6 +83,10 @@ public class MainApp extends Application {
         return primaryStage;
     }
 
+    public File getOpenedFile() {
+        return openedFile;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -82,9 +96,8 @@ public class MainApp extends Application {
     }
 
     public void saveToDB(){
-        dbCommunication.writePositionsToDB();
-        //Zip database to JobStack *.dat file
-        ZipDB.compression();
+        savePositionDataToFile(openedFile);
+
         LOG.debug("Data base was saved to file");
     }
 
@@ -143,6 +156,8 @@ public class MainApp extends Application {
             programProperties.setMainMaximized(primaryStage.isMaximized());
             programProperties.setRootLayout(new Rectangle((int) this.primaryStage.getX(), (int) this.primaryStage.getY(),
                     (int) this.primaryStage.getWidth(), (int) this.primaryStage.getHeight()));
+            programProperties.setlastPathToDB(openedFile.getAbsolutePath());
+
             programProperties.saveProperties();
             LOG.debug("All properties was save");
         });
@@ -387,5 +402,60 @@ public class MainApp extends Application {
         programProperties.setBrowserLayout(new Rectangle((int) browserStage.getX(), (int) browserStage.getY(),
                 (int) browserStage.getWidth(), (int) browserStage.getHeight()));
 
+    }
+
+
+
+    /**
+     * Loads person data from the specified file. The current person data will
+     * be replaced.
+     *
+     * @param file
+     */
+    public void loadPositionDataFromFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(PositionListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Reading XML from the file and unmarshalling.
+            PositionListWrapper wrapper = (PositionListWrapper) um.unmarshal(file);
+
+            positions.clear();
+            positions.addAll(wrapper.getPositions());
+
+            // Save the file path to the registry.
+            this.openedFile = file;
+
+        } catch (Exception e) { // catches ANY exception
+            Dialogs.someError("Could not load data from file:\n" + file.getPath());
+        }
+    }
+
+    /**
+     * Saves the current person data to the specified file.
+     *
+     * @param file
+     */
+    public void savePositionDataToFile(File file) {
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(PositionListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Wrapping our person data.
+            PositionListWrapper wrapper = new PositionListWrapper();
+            wrapper.setPositions(positions);
+
+            // Marshalling and saving XML to the file.
+            m.marshal(wrapper, file);
+
+            // Save the file path to the registry.
+            this.openedFile = file;
+        } catch (Exception e) { // catches ANY exception
+            System.out.println(e.getMessage());
+            Dialogs.someError("Could not save data to file:\n" + file.getPath());
+        }
     }
 }

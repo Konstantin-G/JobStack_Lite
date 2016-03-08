@@ -113,10 +113,8 @@ public class PositionAddDialogController {
         emailField.setText(position.getEmail());
         requestSentDateField.setValue(position.getRequestSentDate());
         requestSentDateField.setShowWeekNumbers(false);
-        requestSentDateField.setPromptText("dd.mm.yyyy");
         answerDateField.setValue(position.getAnswerDate());
         answerDateField.setShowWeekNumbers(false);
-        answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(position.getConversation());
         LOG.debug("Empty position was set");
     }
@@ -136,7 +134,7 @@ public class PositionAddDialogController {
         jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
         // don't used in GUI
-        htmlField = filledPosition.htmlAsString();
+        htmlField = filledPosition.getHtml();
         locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
         webField.setText(filledPosition.getWeb());
@@ -147,9 +145,7 @@ public class PositionAddDialogController {
         emailField.setText(filledPosition.getEmail());
         emailField.setPromptText("Can't find persons email, You can to fill this field manually");
         requestSentDateField.setValue(filledPosition.getRequestSentDate());
-        requestSentDateField.setPromptText("dd.mm.yyyy");
         answerDateField.setValue(filledPosition.getAnswerDate());
-        answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");
         LOG.debug("Filled position was set");
@@ -179,7 +175,7 @@ public class PositionAddDialogController {
             }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
-            position.Html(htmlField);
+            position.setHtml(htmlField);
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());

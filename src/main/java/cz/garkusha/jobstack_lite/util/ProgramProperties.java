@@ -19,6 +19,7 @@ public class ProgramProperties {
     private Rectangle addLayout;
     private Rectangle editLayout;
     private Rectangle browserLayout;
+    private String lastPathToDB;
 
     // constructor
     private ProgramProperties (){
@@ -38,7 +39,6 @@ public class ProgramProperties {
 
     public void setLastCountry(String lastCountry) {
         this.lastCountry = lastCountry;
-        System.out.println(lastCountry);
     }
 
     public boolean isMainMaximized() {
@@ -79,6 +79,14 @@ public class ProgramProperties {
 
     public void setBrowserLayout(Rectangle browserLayout) {
         this.browserLayout = browserLayout;
+    }
+
+    public String getlastPathToDB() {
+        return lastPathToDB;
+    }
+
+    public void setlastPathToDB(String lastPathToDB) {
+        this.lastPathToDB = lastPathToDB;
     }
 
     private void loadProperties(){
@@ -137,6 +145,11 @@ public class ProgramProperties {
                     Integer.parseInt(properties.getProperty("browserStageHeight")));
         } else this.browserLayout = new Rectangle(300, 300, 500, 750);
 
+        if (properties.containsKey("lastPathToDB")) {
+            // last save-load path
+            this.lastPathToDB = properties.getProperty("lastPathToDB");
+        } else this.lastPathToDB = "";
+
     }
 
     public void saveProperties(){
@@ -166,6 +179,8 @@ public class ProgramProperties {
         properties.put("browserStageY", String.valueOf((int)this.browserLayout.getY()));
         properties.put("browserStageWidth", String.valueOf((int)this.browserLayout.getWidth()));
         properties.put("browserStageHeight", String.valueOf((int)this.browserLayout.getHeight()));
+
+        properties.put("lastPathToDB", this.lastPathToDB);
 
         try (OutputStream output = new FileOutputStream("config.properties")){
             properties.store(output, comments);

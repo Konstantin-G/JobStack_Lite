@@ -124,7 +124,7 @@ public class TableLayoutController {
 
         companyColumn.setCellValueFactory(cellData -> cellData.getValue().companyProperty());
         jobTitleColumn.setCellValueFactory(cellData -> cellData.getValue().jobTitleProperty());
-        jobTitlePDFColumn.setCellValueFactory(cellData -> cellData.getValue().htmlProperty());
+        jobTitlePDFColumn.setCellValueFactory(cellData -> cellData.getValue().HTMLProperty());
         locationColumn.setCellValueFactory(cellData -> cellData.getValue().locationProperty());
         webColumn.setCellValueFactory(cellData -> cellData.getValue().webProperty());
         personColumn.setCellValueFactory(cellData -> cellData.getValue().personProperty());
@@ -240,7 +240,7 @@ public class TableLayoutController {
         LOG.debug("JobDescription was pressed");
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson){
-            String html = selectedPerson.htmlAsString();
+            String html = selectedPerson.getHtml();
             String title = selectedPerson.getCompany() + " | " + selectedPerson.getJobTitle();
             mainApp.showInternetBrowser(html, title);
         }else{
@@ -314,6 +314,8 @@ public class TableLayoutController {
         Position selectedPerson = positionTable.getSelectionModel().getSelectedItem();
         if (null != selectedPerson) {
             @SuppressWarnings("UnusedAssignment") boolean okClicked = mainApp.showPositionEditDialog(selectedPerson);
+            positionTable.getColumns().get(0).setVisible(false);
+            positionTable.getColumns().get(0).setVisible(true);
         } else {
             // Nothing selected.
            Dialogs.noPositionSelectedError();

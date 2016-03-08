@@ -101,10 +101,8 @@ public class PositionEditDialogController {
         emailField.setText(position.getEmail());
         requestSentDateField.setValue(position.getRequestSentDate());
         requestSentDateField.setShowWeekNumbers(false);
-        requestSentDateField.setPromptText("dd.mm.yyyy");
         answerDateField.setValue(position.getAnswerDate());
         answerDateField.setShowWeekNumbers(false);
-        answerDateField.setPromptText("dd.mm.yyyy");
         conversationArea.setText(position.getConversation());
         countryChoiceBox.setValue(position.getCountry());
         LOG.debug("Position for editing was set");
@@ -141,10 +139,8 @@ public class PositionEditDialogController {
         emailField.setPromptText("Can't find persons email, You can to fill this field manually");
         if (null != filledPosition.getRequestSentDate())
             requestSentDateField.setValue(filledPosition.getRequestSentDate());
-        requestSentDateField.setPromptText("dd.mm.yyyy");
         if (null != filledPosition.getAnswerDate())
             answerDateField.setValue(filledPosition.getAnswerDate());
-        answerDateField.setPromptText("dd.mm.yyyy");
         if (null != filledPosition.getConversation())
             conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");

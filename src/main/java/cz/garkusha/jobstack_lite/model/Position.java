@@ -1,23 +1,11 @@
 package cz.garkusha.jobstack_lite.model;
 
-import java.io.Serializable;
-import java.nio.charset.Charset;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.time.LocalDate;
-
 import cz.garkusha.jobstack_lite.util.DateUtil;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import org.hibernate.Hibernate;
-
-import javax.persistence.*;
-import javax.persistence.metamodel.Type;
-import javax.sql.rowset.serial.SerialBlob;
+import cz.garkusha.jobstack_lite.util.LocalDateAdapter;
+import javafx.beans.property.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Model class for a Position.
@@ -25,8 +13,7 @@ import javax.sql.rowset.serial.SerialBlob;
  * @author Konstantin Garkusha
  */
 
-@Entity
-@Table(name = "STEP_ONE")
+
 public class Position implements Serializable{
 
     private static final long serialVersionUID = -5527566248002296042L;
@@ -35,7 +22,7 @@ public class Position implements Serializable{
     private String result;
     private String company;
     private String jobTitle;
-    private Blob html;
+    private String html;
     private String location;
     private String web;
     private String person;
@@ -50,7 +37,7 @@ public class Position implements Serializable{
         this(0, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public Position(int id, String result, String company, String jobTitle, Object html,
+    public Position(int id, String result, String company, String jobTitle, String html,
                     String location, String web, String person, String phone, String email, String requestSentDate,
                     String answerDate, String conversation, String country) {
 
@@ -58,20 +45,7 @@ public class Position implements Serializable{
         this.result             = result;
         this.company            = company;
         this.jobTitle           = jobTitle;
-
-        // Blob if we're creating position from database, and String - from Position factory
-        Blob blob = null;
-        if (html instanceof Blob) {
-            blob = (Blob) html;
-        } else if (html instanceof String) {
-            try {
-                blob = new SerialBlob( ((String)html).getBytes(Charset.forName("UTF-8")));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        this.html               = blob;
-
+        this.html               = html;
         this.location           = location;
         this.web                =  web;
         this.person             = person;
@@ -83,8 +57,7 @@ public class Position implements Serializable{
         this.country            = country;
     }
 
-    @Id
-    @Column(name = "ID", unique = true, nullable = false, precision = 5, scale = 0)
+
     public int getId() {
         return id;
     }
@@ -97,7 +70,6 @@ public class Position implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "RESULT", nullable = true, length = 20)
     public String getResult() {
         return result;
     }
@@ -110,7 +82,6 @@ public class Position implements Serializable{
         this.result = result;
     }
 
-    @Column(name = "COMPANY", nullable = false, length = 100)
     public String getCompany() {
         return company;
     }
@@ -123,7 +94,6 @@ public class Position implements Serializable{
         this.company = company;
     }
 
-    @Column(name = "JOB_TITLE", nullable = false, length = 100)
     public String getJobTitle() {
         return jobTitle;
     }
@@ -136,49 +106,18 @@ public class Position implements Serializable{
         this.jobTitle = jobTitle;
     }
 
-    @Lob
-    @Column(name = "HTML", nullable = false)
-    public Blob getHtml() {
-        return this.html;
+    public String getHtml() {
+        return html;
     }
 
-    public void setHtml(Blob html) {
+    public StringProperty HTMLProperty() {
+        return new SimpleStringProperty(html);
+    }
+
+    public void setHtml(String html) {
         this.html = html;
     }
-    public String htmlAsString() {
-        String s = "";
-        try {
-            byte[] htmlArray = this.html.getBytes(1, (int) this.html.length());
-            s = new String(htmlArray, Charset.forName("UTF-8"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return s;
-    }
 
-    public StringProperty htmlProperty() {
-        String s = "";
-        try {
-            byte[] htmlArray = this.html.getBytes(1, (int) this.html.length());
-            s = new String(htmlArray, Charset.forName("UTF-8"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new SimpleStringProperty(s);
-    }
-
-    public void Html(String html) {
-        Blob blob = null;
-        try {
-            blob = new SerialBlob( html.getBytes(Charset.forName("UTF-8")));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        this.html = blob;
-    }
-
-
-    @Column(name = "LOCATION", nullable = false, length = 200)
     public String getLocation() {
         return location;
     }
@@ -191,7 +130,6 @@ public class Position implements Serializable{
         this.location = location;
     }
 
-    @Column(name = "WEB", nullable = false, length = 200)
     public String getWeb() {
         return web;
     }
@@ -204,7 +142,6 @@ public class Position implements Serializable{
         this.web = web;
     }
 
-    @Column(name = "PERSON", nullable = true, length = 40)
     public String getPerson() {
         return person;
     }
@@ -217,7 +154,6 @@ public class Position implements Serializable{
         this.person = person;
     }
 
-    @Column(name = "PHONE", nullable = true, length = 100)
     public String getPhone() {
         return phone;
     }
@@ -230,7 +166,6 @@ public class Position implements Serializable{
         this.phone = phone;
     }
 
-    @Column(name = "EMAIL", nullable = true, length = 100)
     public String getEmail() {
         return email;
     }
@@ -243,7 +178,7 @@ public class Position implements Serializable{
         this.email = email;
     }
 
-    @Column(name = "REQUEST_SENT", nullable = true, length = 20)
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getRequestSentDate() {
         return requestSentDate;
     }
@@ -256,7 +191,7 @@ public class Position implements Serializable{
         this.requestSentDate = requestSentDate;
     }
 
-    @Column(name = "ANSWER", nullable = true, length = 20)
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getAnswerDate() {
         return answerDate;
     }
@@ -269,7 +204,6 @@ public class Position implements Serializable{
         this.answerDate = answerDate;
     }
 
-    @Column(name = "CONVERSATION", nullable = true, length = 20000)
     public String getConversation() {
         return conversation;
     }
@@ -282,7 +216,6 @@ public class Position implements Serializable{
         this.conversation = conversation;
     }
 
-    @Column(name = "COUNTRY", nullable = false, length = 30)
     public String getCountry() {
         return country;
     }

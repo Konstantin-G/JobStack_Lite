@@ -7,7 +7,6 @@ src/META-INF
 out/
 
 data/
-derby.log
 JobStack.jpg
 META-INF
 config.properties
