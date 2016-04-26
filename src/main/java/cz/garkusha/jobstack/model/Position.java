@@ -135,7 +135,20 @@ public class Position implements Serializable{
     }
 
     public StringProperty webProperty() {
-        return new SimpleStringProperty(web);
+        int start = web.indexOf("http://");
+        if (start != -1) {
+            start += 7;
+            start = web.contains("www")? start + 4 : start;
+        } else {
+            start = web.indexOf("https://");
+            if (start != -1) {
+                start += 8;
+                start = web.contains("www")? start + 4 : start;
+            } else start = 0;
+        }
+
+        int end = web.indexOf("/", 14);
+        return new SimpleStringProperty(web.substring(start, end));
     }
 
     public void setWeb(String web) {

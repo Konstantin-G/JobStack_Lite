@@ -106,7 +106,6 @@ public class RootLayoutController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         File directory = new File(System.getProperty("user.dir"));
-        System.out.println(directory);
         fileChooser.setInitialDirectory(directory);
 
         // Show save file dialog
