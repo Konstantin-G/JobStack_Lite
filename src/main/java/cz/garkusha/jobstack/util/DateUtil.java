@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.util;
+package cz.garkusha.jobstack.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

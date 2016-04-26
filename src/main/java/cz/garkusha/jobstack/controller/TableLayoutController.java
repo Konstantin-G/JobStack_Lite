@@ -1,13 +1,13 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
 /**
  *  * Controller class show details of a positions.
  *
  * @author Konstantin Garkusha
  */
-import cz.garkusha.jobstack_lite.MainApp;
-import cz.garkusha.jobstack_lite.model.Position;
-import cz.garkusha.jobstack_lite.util.DateUtil;
+import cz.garkusha.jobstack.MainApp;
+import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.util.DateUtil;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;

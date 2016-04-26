@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite;
+package cz.garkusha.jobstack;
 /**
  *
  * It's lite version of JobStack.
@@ -10,10 +10,10 @@ package cz.garkusha.jobstack_lite;
 import java.awt.*;
 import java.io.*;
 
-import cz.garkusha.jobstack_lite.model.Position;
-import cz.garkusha.jobstack_lite.model.PositionListWrapper;
-import cz.garkusha.jobstack_lite.util.*;
-import cz.garkusha.jobstack_lite.controller.*;
+import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.model.PositionListWrapper;
+import cz.garkusha.jobstack.util.*;
+import cz.garkusha.jobstack.controller.*;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -425,8 +425,8 @@ public class MainApp extends Application {
             // Save the file path to the registry.
             this.openedFile = file;
 
-        } catch (Exception e) { // catches ANY exception
-            Dialogs.someError("Could not load data from file:\n" + file.getPath());
+        } catch (Exception ignore) { // catches ANY exception
+           /* load empty table*/
         }
     }
 

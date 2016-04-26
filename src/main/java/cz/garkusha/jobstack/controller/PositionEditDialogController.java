@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
 /**
  * Controller class to create new or edit details of a position.
@@ -6,11 +6,9 @@ package cz.garkusha.jobstack_lite.controller;
  * @author Konstantin Garkusha
  */
 
-import cz.garkusha.jobstack_lite.MainApp;
-import cz.garkusha.jobstack_lite.model.Position;
-import cz.garkusha.jobstack_lite.model.PositionFactory;
-import cz.garkusha.jobstack_lite.util.FindProbablyTheSamePositions;
-import cz.garkusha.jobstack_lite.util.ProgramProperties;
+import cz.garkusha.jobstack.MainApp;
+import cz.garkusha.jobstack.model.Position;
+import cz.garkusha.jobstack.model.PositionFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,12 +16,10 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PositionAddDialogController {
+public class PositionEditDialogController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PositionAddDialogController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PositionEditDialogController.class);
 
-    @FXML
-    private CheckBox updatePDFBox;
     @FXML
     private TextField idField;
     @FXML
@@ -32,9 +28,6 @@ public class PositionAddDialogController {
     private TextField companyField;
     @FXML
     private TextField jobTitleField;
-
-    // not used in the GUI
-    private String htmlField;
     @FXML
     private TextField locationField;
     @FXML
@@ -69,8 +62,6 @@ public class PositionAddDialogController {
     private void initialize() {
         resultChoiceBox.setItems(FXCollections.observableArrayList("ANSWER_YES", "ANSWER_NO", "MY_ANSWER_NO", "INTERVIEW", "NO_ANSWER", "SMALL_SALARY"));
         countryChoiceBox.setItems(FXCollections.observableArrayList("Czech", "Russia", "Ukraine", "USA"));
-        countryChoiceBox.setValue(ProgramProperties.getInstance().getLastCountry());
-
         LOG.info("Controller initialisation");
     }
 
@@ -99,14 +90,12 @@ public class PositionAddDialogController {
      */
     public void setPosition(Position position) {
         this.position = position;
-
         idField.setText(String.valueOf(position.getId()));
         resultChoiceBox.setValue(position.getResult());
         companyField.setText(position.getCompany());
         jobTitleField.setText(position.getJobTitle());
         locationField.setText(position.getLocation());
         webField.setText(position.getWeb());
-        webField.setPromptText("Correctly working only with: \"m.jobs.cz\", \"jobdnes.cz\", \"prace.cz\".");
         personField.setText(position.getPerson());
         phoneField.setText(position.getPhone());
         emailField.setText(position.getEmail());
@@ -115,7 +104,8 @@ public class PositionAddDialogController {
         answerDateField.setValue(position.getAnswerDate());
         answerDateField.setShowWeekNumbers(false);
         conversationArea.setText(position.getConversation());
-        LOG.debug("Empty position was set");
+        countryChoiceBox.setValue(position.getCountry());
+        LOG.debug("Position for editing was set");
     }
 
     /**
@@ -125,27 +115,34 @@ public class PositionAddDialogController {
      */
     private void setFilledPosition(Position filledPosition) {
         idField.setText(String.valueOf(filledPosition.getId()));
-        resultChoiceBox.setValue(filledPosition.getResult());
-
-        boolean isFilledOK = filledPosition.getCompany() != null;
-        companyField.setText(filledPosition.getCompany());
+        if (null != filledPosition.getResult())
+            resultChoiceBox.setValue(filledPosition.getResult());
+        if (null != filledPosition.getCompany())
+            companyField.setText(filledPosition.getCompany());
         companyField.setPromptText("Can't find company name, need to fill this field manually");
-        jobTitleField.setText(filledPosition.getJobTitle());
+        if (null != filledPosition.getJobTitle())
+            jobTitleField.setText(filledPosition.getJobTitle());
         jobTitleField.setPromptText("Can't find job title, need to fill this field manually");
-        // don't used in GUI
-        htmlField = filledPosition.getHtml();
-        locationField.setText(filledPosition.getLocation());
+        if (null != filledPosition.getLocation())
+            locationField.setText(filledPosition.getLocation());
         locationField.setPromptText("Can't find jobs location, need to fill this field manually");
-        webField.setText(filledPosition.getWeb());
-        personField.setText(filledPosition.getPerson());
+        if (null != filledPosition.getWeb())
+            webField.setText(filledPosition.getWeb());
+        if (null != filledPosition.getPerson())
+            personField.setText(filledPosition.getPerson());
         personField.setPromptText("Can't find contact person, You can to fill this field manually");
-        phoneField.setText(filledPosition.getPhone());
+        if (null != filledPosition.getPhone())
+            phoneField.setText(filledPosition.getPhone());
         phoneField.setPromptText("Can't find persons phone, You can to fill this field manually");
-        emailField.setText(filledPosition.getEmail());
+        if (null != filledPosition.getEmail())
+            emailField.setText(filledPosition.getEmail());
         emailField.setPromptText("Can't find persons email, You can to fill this field manually");
-        requestSentDateField.setValue(filledPosition.getRequestSentDate());
-        answerDateField.setValue(filledPosition.getAnswerDate());
-        conversationArea.setText(filledPosition.getConversation());
+        if (null != filledPosition.getRequestSentDate())
+            requestSentDateField.setValue(filledPosition.getRequestSentDate());
+        if (null != filledPosition.getAnswerDate())
+            answerDateField.setValue(filledPosition.getAnswerDate());
+        if (null != filledPosition.getConversation())
+            conversationArea.setText(filledPosition.getConversation());
         conversationArea.setPromptText("Here you can type all conversation with contact person");
         LOG.debug("Filled position was set");
     }
@@ -174,7 +171,6 @@ public class PositionAddDialogController {
             }
             position.setCompany(companyField.getText());
             position.setJobTitle(jobTitleField.getText());
-            position.setHtml(htmlField);
             position.setLocation(locationField.getText());
             position.setWeb(webField.getText());
             position.setPerson(personField.getText());
@@ -185,14 +181,10 @@ public class PositionAddDialogController {
             position.setConversation(conversationArea.getText());
             position.setCountry(String.valueOf(countryChoiceBox.getValue()));
 
-            //save the past field country to properties
-            ProgramProperties.getInstance().setLastCountry(String.valueOf(countryChoiceBox.getValue()));
-
             // data was changed and when you click close you going to have dialog to save data to DB
             mainApp.setDataChanged(true);
             saveClicked = true;
-
-            LOG.debug("New position was saved to table");
+            LOG.debug("Save button was pressed");
             dialogStage.close();
         }
     }
@@ -211,28 +203,14 @@ public class PositionAddDialogController {
      */
     @FXML
     private void handleFill() {
-        Position filledPosition;
+        LOG.debug("Fill button was pressed");
+        int newId = mainApp.getPositionsMaxId();
+        int id = Integer.parseInt(idField.getText());
+        id = id != 0 ? id : newId + 1;
         String url = webField.getText();
-        if (url == null || url.length() == 0 ) {
-            return;
-        }
-        if (isURLAddressValid()) {
-            int newId = mainApp.getPositionsMaxId();
-            int id = Integer.parseInt(idField.getText());
-            id = id != 0 ? id : newId + 1;
-            String country  = String.valueOf(countryChoiceBox.getValue());
-            filledPosition = PositionFactory.getNewPosition(id, url, country);
-            setFilledPosition(filledPosition);
-            // if filled position is probably the same. we'll see new window
-            if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), filledPosition)) {
-                mainApp.showProbablyTheSamePositionLayout(filledPosition);
-            }
-            LOG.debug("User typed valid URL address and pressed fill button");
-        } else {
-            LOG.debug("User typed invalid URL address");
-            Dialogs.invalidFieldsError("Please type a valid URL address (use http://)\nand pressed fill button");
-        }
-
+        String country  = String.valueOf(countryChoiceBox.getValue());
+        Position filledPosition = PositionFactory.getNewPosition(id, url, country);
+        setFilledPosition(filledPosition);
     }
 
     /**
@@ -247,7 +225,7 @@ public class PositionAddDialogController {
             errorMessage += "No valid company name!\n";
         }
         if (jobTitleField.getText() == null || jobTitleField.getText().length() == 0) {
-            errorMessage += "No valid jo title!\n";
+            errorMessage += "No valid job title!\n";
         }
         if (locationField.getText() == null || locationField.getText().length() == 0) {
             errorMessage += "No valid location!\n";
@@ -263,18 +241,5 @@ public class PositionAddDialogController {
             Dialogs.invalidFieldsError(errorMessage);
             return false;
         }
-    }
-
-    /**
-     * Validates the user input in the URL field.
-     *
-     * @return true if the input is valid
-     */
-    private boolean isURLAddressValid() {
-        String url = webField.getText();
-
-        String urlPattern = "^(https?:\\/\\/)([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*.+\\/?$";
-
-        return url.matches(urlPattern);
     }
 }

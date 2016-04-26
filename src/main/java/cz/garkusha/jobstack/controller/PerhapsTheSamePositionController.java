@@ -1,6 +1,6 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
-import cz.garkusha.jobstack_lite.model.Position;
+import cz.garkusha.jobstack.model.Position;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

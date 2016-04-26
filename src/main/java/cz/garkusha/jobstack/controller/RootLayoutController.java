@@ -1,6 +1,6 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
-import cz.garkusha.jobstack_lite.MainApp;
+import cz.garkusha.jobstack.MainApp;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import org.slf4j.Logger;
@@ -97,13 +97,17 @@ public class RootLayoutController {
      * Opens a FileChooser to let the user select an datafile to load.
      */
     @FXML
-    private void handleOpen() {
+    public void handleOpen() {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
+
+        File directory = new File(System.getProperty("user.dir"));
+        System.out.println(directory);
+        fileChooser.setInitialDirectory(directory);
 
         // Show save file dialog
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="337.0" maxWidth="298.0" minHeight="337.0" minWidth="298.0" prefHeight="337.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack_lite.controller.SamePositionTabController">
+<AnchorPane maxHeight="337.0" maxWidth="298.0" minHeight="337.0" minWidth="298.0" prefHeight="337.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.garkusha.jobstack.controller.SamePositionTabController">
    <children>
       <GridPane layoutX="-27.0" layoutY="25.0" maxHeight="304.0" maxWidth="288.0" minHeight="304.0" minWidth="200.0" prefHeight="304.0" prefWidth="288.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="6.0">
          <children>

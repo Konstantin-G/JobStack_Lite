@@ -1,7 +1,7 @@
-package cz.garkusha.jobstack_lite.model;
+package cz.garkusha.jobstack.model;
 
-import cz.garkusha.jobstack_lite.util.DateUtil;
-import cz.garkusha.jobstack_lite.util.LocalDateAdapter;
+import cz.garkusha.jobstack.util.DateUtil;
+import cz.garkusha.jobstack.util.LocalDateAdapter;
 import javafx.beans.property.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;

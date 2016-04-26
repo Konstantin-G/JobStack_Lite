@@ -1,6 +1,6 @@
-package cz.garkusha.jobstack_lite.model;
+package cz.garkusha.jobstack.model;
 
-import cz.garkusha.jobstack_lite.util.HTMLParser;
+import cz.garkusha.jobstack.util.HTMLParser;
 
 /**
  * Model class for new Position.

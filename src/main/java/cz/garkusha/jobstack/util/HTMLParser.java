@@ -1,6 +1,6 @@
-package cz.garkusha.jobstack_lite.util;
+package cz.garkusha.jobstack.util;
 
-import cz.garkusha.jobstack_lite.controller.Dialogs;
+import cz.garkusha.jobstack.controller.Dialogs;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,17 +20,17 @@ import java.util.Map;
  * |  Working ONLY with:                                                |
  * |      Czech Republic->                                              |
  * |                        PRACE.CZ                                    |
- * |                        JOBDNES.CZ                                  |
- * |                        STARTUPJOBS.CZ                              |
- * |      mobile version of JOBS.CZ (m.jobs.cz)                         |
+ * |                        JOBDNES.CZ        changed                   |
+ * |                        STARTUPJOBS.CZ                connection    |
+ * |                        JOBS.CZ (only non firm pages)               |
  * |                                                                    |
- * |        Russia->        SUPERJOB.RU                                 |
+ * |        Russia->        SUPERJOB.RU     changed                     |
  * |                        RABOTA.RU                                   |
  * |                        CAREERIST.RU                                |
- * |                        BRAINSTORAGE.ME                             |
+ * |                        MOIKRUG_RU                                  |
  * |                                                                    |
  * |        Ukraine->       HH_UA                                       |
- * |      mobile version of RABOTA.UA (RABOTA.UA/mobile/)               |
+ * |      mobile version of M.RABOTA.UA changed                         |
  * |                        JOBS.DOU.UA                                 |
  * +--------------------------------------------------------------------+
  * @author Konstantin Garkusha
@@ -96,8 +96,8 @@ public class HTMLParser {
 
         switch (country) {
             case "Czech":
-                if (url.contains("m.jobs.cz")) {
-                    readInformationFrom_M_JODS_CZ(doc);
+                if (url.contains("jobs.cz")) {
+                    readInformationFrom_JODS_CZ(doc);
                 } else if (url.contains("prace.cz")) {
                     readInformationFrom_PRACE_CZ(doc);
                 } else if (url.contains("jobdnes.cz")) {
@@ -116,8 +116,8 @@ public class HTMLParser {
                     readInformationFrom_RABOTA_RU(doc);
                 } else if (url.contains("careerist.ru")) {
                     readInformationFrom_CAREERIST_RU(doc);
-                } else if (url.contains("brainstorage.me")) {
-                    readInformationFrom_BRAINSTORAGE_ME(doc);
+                } else if (url.contains("moikrug.ru")) {
+                    readInformationFrom_MOIKRUG_RU(doc);
                 } else {
                     Dialogs.someError("Can't parse: " + url);
                     LOG.debug("Can't parse: " + url);
@@ -156,31 +156,29 @@ public class HTMLParser {
     }
 
     /** Czech Republic*/
-    private void readInformationFrom_M_JODS_CZ(Document doc) {
+    /* fix this */
+    private void readInformationFrom_JODS_CZ(Document doc) {
         try {
             //noinspection ConstantConditions
-            this.company = doc.body().select("p.c2-za").first().text().trim();
+            this.company = doc.body().select("dl.icon-description").select("strong").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.jobTitle = doc.body().select("h1.job-title").first().text().trim();
+            this.jobTitle = doc.body().select("div.grid__item").select("h1").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.location = doc.body().select("p.c2-mi").first().text().trim();
+            this.location = doc.body().select("dl.icon-description").select("a[href]").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.person = doc.body().select("p.c2-ko").first().text().trim();
+            this.person = doc.body().select("div.standalone").select("a[data-track-event=JD.Reply]").first().text().trim();
         } catch (Exception ignore) { }
         try {
             //noinspection ConstantConditions
-            this.phone = doc.body().select("p.c2-te").first().text().trim();
+            this.phone = doc.body().select("div.grid__item.e-16").select("div:nth-child(8)").text().trim();
+            this.phone = this.phone.substring(phone.length() - 11);
             this.phone = phoneFormat(phone);
-        } catch (Exception ignore) { }
-        try {
-            //noinspection ConstantConditions
-            this.email = doc.body().select("p.c2-em").first().text().trim();
         } catch (Exception ignore) { }
     }
 
@@ -278,6 +276,7 @@ public class HTMLParser {
 
 
     /**Russia*/
+    /*changed*/
     private void readInformationFrom_SUPERJOB_RU(Document doc) {
         try {
             //noinspection ConstantConditions
@@ -305,22 +304,21 @@ public class HTMLParser {
         try {
             //noinspection ConstantConditions
             this.location = doc.body().select("div.list_kval.pd_h").first().select("ul").last().text();
-            this.location = location.substring(0, location.indexOf(32));
         } catch (NullPointerException ignore) { }
     }
 
-    private void readInformationFrom_BRAINSTORAGE_ME(Document doc) {
+    private void readInformationFrom_MOIKRUG_RU(Document doc) {
         try {
             //noinspection ConstantConditions
             this.company = doc.body().select("div.company_name").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.jobTitle = doc.body().select("div.title").first().text().trim();
+            this.jobTitle = doc.body().select("h1.title").first().text().trim();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
-            this.location = doc.body().select("div.location").first().text();
+            this.location = doc.body().select("span.location").first().text();
         } catch (NullPointerException ignore) { }
         try {
             //noinspection ConstantConditions
@@ -358,10 +356,6 @@ public class HTMLParser {
             //noinspection ConstantConditions
             this.phone  = doc.body().select("div.comContact").first().getElementsByTag("span").get(2).text();
 //            this.phone = phoneFormat(phone);
-        } catch (Exception ignore) { }
-        try {
-            //noinspection ConstantConditions
-            this.email = doc.body().select("p.c2-em").first().text().trim();
         } catch (Exception ignore) { }
     }
 

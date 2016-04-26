@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
 import javafx.fxml.FXML;
 import org.slf4j.Logger;

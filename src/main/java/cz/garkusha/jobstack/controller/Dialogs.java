@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.controller;
+package cz.garkusha.jobstack.controller;
 
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;

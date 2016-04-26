@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.model;
+package cz.garkusha.jobstack.model;
 
 /**
  * Helper class to wrap a list of persons. This is used for saving the

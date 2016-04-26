@@ -1,4 +1,4 @@
-package cz.garkusha.jobstack_lite.util;
+package cz.garkusha.jobstack.util;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;

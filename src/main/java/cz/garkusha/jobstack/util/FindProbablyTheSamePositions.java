@@ -1,7 +1,7 @@
-package cz.garkusha.jobstack_lite.util;
+package cz.garkusha.jobstack.util;
 
 
-import cz.garkusha.jobstack_lite.model.Position;
+import cz.garkusha.jobstack.model.Position;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
