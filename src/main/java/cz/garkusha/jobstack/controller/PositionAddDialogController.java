@@ -275,4 +275,29 @@ public class PositionAddDialogController {
 
         return url.matches(urlPattern);
     }
+
+    /**
+     * Called when the user clicks check.
+     */
+    @FXML
+    private void handleCheckPosition() {
+        Position manualFilledPosition = new Position();
+
+        manualFilledPosition.setCompany(companyField.getText());
+        manualFilledPosition.setJobTitle(jobTitleField.getText());
+        manualFilledPosition.setHtml(htmlField);
+        manualFilledPosition.setLocation(locationField.getText());
+        manualFilledPosition.setWeb(webField.getText());
+        manualFilledPosition.setPerson(personField.getText());
+        manualFilledPosition.setPhone(phoneField.getText());
+        manualFilledPosition.setEmail(emailField.getText());
+        manualFilledPosition.setRequestSentDate(requestSentDateField.getValue());
+        manualFilledPosition.setAnswerDate(answerDateField.getValue());
+        manualFilledPosition.setConversation(conversationArea.getText());
+        manualFilledPosition.setCountry(String.valueOf(countryChoiceBox.getValue()));
+
+        if (FindProbablyTheSamePositions.isProbablyTheSamePositionExist(mainApp.getPositions(), manualFilledPosition)) {
+            mainApp.showProbablyTheSamePositionLayout(manualFilledPosition);
+        }
+    }
 }

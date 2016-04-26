@@ -144,6 +144,14 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" layoutX="358.0" layoutY="340.0" prefHeight="45.0" prefWidth="700.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCheckPosition" prefHeight="25.0" prefWidth="90.0" text="Check" textAlignment="CENTER" textOverrun="CLIP">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
             <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="80.0" text="Save">
                <HBox.margin>
                   <Insets right="20.0" />

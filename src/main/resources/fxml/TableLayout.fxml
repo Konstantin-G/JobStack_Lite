@@ -18,7 +18,7 @@
                      <children>
                         <Hyperlink onAction="#handleJobOnWebHyperlink" text="Job on the web" />
                         <Hyperlink onAction="#handleJobDescriptionHyperlink" text="Job Description" />
-                        <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save to database" />
+                        <Button mnemonicParsing="false" onAction="#handleSaveToDB" text="Save..." />
                         <Button mnemonicParsing="false" onAction="#handleNewPosition" text="New..." />
                         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditPosition" text="Edit..." />
                         <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDeletePosition" text="Delete" />
@@ -53,17 +53,17 @@
                <children>
                   <TableView fx:id="positionTable" minHeight="360.0" onMouseClicked="#handleMouseClicked" prefHeight="360.0" prefWidth="1398.0" stylesheets="@../styles/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="id" />
-                      <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="100.0" prefWidth="110.0" text="result" />
+                      <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="40.0" prefWidth="50.0" text="id" />
+                      <TableColumn fx:id="resultColumn" maxWidth="130.0" minWidth="50.0" prefWidth="110.0" text="result" />
                         <TableColumn fx:id="countryColumn" maxWidth="100.0" minWidth="50.0" text="country" />
-                        <TableColumn fx:id="companyColumn" maxWidth="300.0" minWidth="200.0" prefWidth="250.0" text="company" />
-                        <TableColumn fx:id="jobTitleColumn" maxWidth="500.0" minWidth="200.0" prefWidth="300.0" text="job title" />
+                        <TableColumn fx:id="companyColumn" maxWidth="300.0" minWidth="150.0" prefWidth="250.0" text="company" />
+                        <TableColumn fx:id="jobTitleColumn" maxWidth="500.0" minWidth="150.0" prefWidth="300.0" text="job title" />
                         <TableColumn fx:id="jobTitlePDFColumn" prefWidth="75.0" text="job titlePDF" visible="false" />
                         <TableColumn fx:id="locationColumn" maxWidth="300.0" minWidth="100.0" prefWidth="200.0" text="location" />
                         <TableColumn fx:id="webColumn" maxWidth="300.0" minWidth="100.0" prefWidth="150.0" text="web" />
                         <TableColumn fx:id="personColumn" maxWidth="300.0" minWidth="150.0" prefWidth="200.0" text="person" />
                         <TableColumn fx:id="phoneColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="phone" />
-                        <TableColumn fx:id="emailColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="email" />
+                        <TableColumn fx:id="emailColumn" maxWidth="150.0" minWidth="100.0" prefWidth="150.0" text="email" />
                         <TableColumn fx:id="requestSentDateColumn" maxWidth="80.0" minWidth="80.0" text="request sent" />
                         <TableColumn fx:id="answerDateColumn" maxWidth="80.0" minWidth="80.0" text="answer" />
                         <TableColumn fx:id="conversationColumn" maxWidth="100.0" minWidth="50.0" text="conversation" visible="false" />
