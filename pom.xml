@@ -18,7 +18,7 @@
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>1.6.1</slf4j.version>
-		<log4j.version>2.13.2</log4j.version>
+		<log4j.version>2.17.1</log4j.version>
         <junit.version>4.13.1</junit.version>
         <jsoup.version>1.8.2</jsoup.version>
         <zenjava.version>8.1.2</zenjava.version>
